@@ -8,6 +8,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #D0D6EB;
+    
 }
 
 header {
@@ -211,4 +212,283 @@ header {
     .menu-toggle {
         display: block;
     }
+}
+
+
+/* formulaire login  */
+main {
+    flex-grow: 1; /* Permet de prendre l'espace disponible */
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    padding-top: 100px; /* Un espace sous le header si nécessaire */
+}
+
+/* Formulaire */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #b4c6e7;
+    text-align: left;
+}
+
+/* Titre */
+.login-form h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center; /* Centrer le titre */
+    color: #5a6fa8; /* Bleu plus foncé */
+    margin-bottom: 20px;
+}
+
+/* Champs d'entrée */
+.login-form .form-group {
+    display: flex;
+    flex-direction: column; /* Aligne les labels et inputs verticalement */
+    margin-bottom: 15px;
+}
+
+.login-form label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #5a6fa8; /* Bleu doux */
+}
+
+.login-form .form-control {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #d1d5db; /* Bordure gris clair */
+    border-radius: 5px;
+    background-color: #f9f9ff; /* Fond doux */
+    color: #5a6fa8; /* Texte bleu doux */
+    transition: border-color 0.3s ease;
+}
+
+.login-form .form-control:focus {
+    border-color: #b4c6e7; /* Accentuation bleue */
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(180, 198, 231, 0.5);
+}
+
+/* Bouton principal */
+.login-form .btn-primary {
+    background-color: #b4c6e7; /* Bleu pastel */
+    color: white;
+    font-size: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Largeur totale du bouton */
+}
+
+.login-form .btn-primary:hover {
+    background-color: #e6bccf; /* Rose pastel pour le survol */
+}
+
+/* Liens */
+.login-form a {
+    color: #b4c6e7; /* Bleu pastel */
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+}
+
+.login-form a:hover {
+    color: #e6bccf; /* Rose pastel */
+    text-decoration: underline;
+}
+
+/* Checkbox */
+.login-form .checkbox {
+    display: flex;
+    align-items: center; /* Aligne la case à cocher et le texte */
+    margin-bottom: 15px;
+}
+
+.login-form .checkbox label {
+    margin-left: 8px;
+    font-size: 14px;
+    color: #5a6fa8; /* Bleu doux */
+}
+
+/* Messages d'erreur */
+.alert {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #721c24;
+    background-color: #f8d7da; /* Rouge clair pour les erreurs */
+    border: 1px solid #f5c6cb;
+}
+
+/* Conteneur du formulaire d'inscription */
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #b4c6e7;
+    text-align: left;
+}
+
+/* Titre */
+.register-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5a6fa8;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Champs du formulaire */
+.register-container .form-group {
+    margin-bottom: 15px;
+}
+
+.register-container label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #5a6fa8;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.register-container .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    background-color: #f9f9ff;
+    color: #5a6fa8;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.register-container .form-control:focus {
+    border-color: #b4c6e7;
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(180, 198, 231, 0.5);
+}
+
+/* Bouton principal */
+.register-container .btn {
+    background-color: #b4c6e7;
+    color: white;
+    font-size: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.register-container .btn:hover {
+    background-color: #e6bccf;
+}
+
+/* Liens */
+.register-container a {
+    color: #b4c6e7;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.register-container a:hover {
+    color: #e6bccf;
+    text-decoration: underline;
+}
+
+/* Messages d'erreur */
+.alert {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+
+
+/* Conteneur du formulaire */
+.reset-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #b4c6e7;
+    text-align: left;
+}
+
+/* Titre */
+.reset-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5a6fa8;
+    margin-bottom: 20px;
+}
+
+/* Champs du formulaire */
+.reset-container .form-group {
+    margin-bottom: 15px;
+}
+.reset-container label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #5a6fa8;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.reset-container .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    background-color: #f9f9ff;
+    color: #5a6fa8;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.reset-container .form-control:focus {
+    border-color: #b4c6e7;
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(180, 198, 231, 0.5);
+}
+/* Bouton principal */
+.reset-container button {
+    background-color: #b4c6e7;
+    color: white;
+    font-size: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.reset-container button:hover {
+    background-color: #e6bccf;
 }
