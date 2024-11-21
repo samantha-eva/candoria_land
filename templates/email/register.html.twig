@@ -2,5 +2,8 @@
 <h1>Welcome {{ user.username }}</h1>
 <h1>Activation cde votre compte</h1>
 <p>Pour activer votre compte
-    <a href="#">Activate your account</a>
+    <a href="{{ absolute_url(path('verify_user', {token:token} )) }}">Activate your account</a>
 </p>
+
+<p>Merci</p>
+{{ token }}
