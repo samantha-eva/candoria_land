@@ -50,7 +50,7 @@
                         <ion-icon name="person-outline"></ion-icon>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profil</a></li>
+                        <li><a href="{{ path('user_edit', { 'id': app.user.id }) }}">Profil</a></li>
                         <li><a href="{{ path('app_logout') }}">Déco</a></li>
                     </ul>
                 </div>
