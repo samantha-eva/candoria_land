@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Users;
+use App\Service\JWTService;
+use App\Service\SendEmailService;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -12,16 +14,25 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UsersCrudController extends AbstractCrudController
 {
 
     private UserPasswordHasherInterface $passwordHasher;
+    private SendEmailService $sendEmailService;
+    private UrlGeneratorInterface $urlGenerator;
+    private JWTService $jwt;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher, SendEmailService $sendEmailService, UrlGeneratorInterface $urlGenerator, JWTService $jwt)
     {
         $this->passwordHasher = $passwordHasher;
+        $this->sendEmailService = $sendEmailService;
+        $this->urlGenerator = $urlGenerator;
+        $this->jwt =$jwt;
     }
+        
 
     public static function getEntityFqcn(): string
     {
@@ -36,7 +47,7 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('email', 'Email'),
             // Affiche uniquement le rôle principal dans le listing
             TextField::new('mainRole', 'Rôles')->onlyOnIndex(),
-           BooleanField::new('isVerfified')->renderAsSwitch(false),
+           BooleanField::new('isVerified')->renderAsSwitch(false),
         ];
         //Ce bloc de code s'assure que les champs pour les rôles et le mot de passe sont ajoutés seulement lors de la création ou modification de lentité.
 
@@ -67,16 +78,49 @@ class UsersCrudController extends AbstractCrudController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof Users) { // Vérifie si l'entité passée est une instance de la classe Users.
+        if ($entityInstance instanceof Users) { 
             // Hacher le mot de passe de l'utilisateur (si nécessaire)
             $this->handlePassword($entityInstance);
+
             // Récupérer les rôles de l'utilisateur à partir de l'entité.
             $roles = $entityInstance->getRoles();
             //avant de persister l'entité dans la base de données.
-            $entityInstance->setRoles($roles); 
-        }
+            $entityInstance->setRoles($roles);
+            
+            // Persister l'utilisateur avant de générer le token pour avoir l'ID de l'utilisateur
+            parent::persistEntity($entityManager, $entityInstance);
 
-        parent::persistEntity($entityManager, $entityInstance);
+            // Générer le token après que l'utilisateur soit persisté
+            $header = [
+                'typ' => 'JWT',
+                'alg' => 'HS256'
+            ];
+
+            // L'ID de l'utilisateur est maintenant disponible
+            $payload = [
+                'user_id' => $entityInstance->getId()
+            ];
+
+            // Utilisation de votre service JWT pour générer le token
+            $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
+            $user = $entityInstance;
+
+            // Générer l'URL de validation
+            // $activationUrl = $this->urlGenerator->generate(
+            //     'account_activation', 
+            //     ['token' => $token],
+            //     UrlGeneratorInterface::ABSOLUTE_URL
+            // );
+
+            // Envoyer l'e-mail d'activation
+            $this->sendEmailService->send(
+                'no-reply@example.com', 
+                $entityInstance->getEmail(), 
+                'Activation de votre compte', 
+                'register',
+                compact('user', 'token')
+            );
+        }
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
