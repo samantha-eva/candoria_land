@@ -25,7 +25,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @var list<string> The user roles
      */
     #[ORM\Column]
-    private array $roles = ['ROLE_USER'];  // Valeur par défaut
+    private array $roles = [];  // Valeur par défaut
 
     /**
      * @var string The hashed password
@@ -136,5 +136,24 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isVerfified = $isVerfified;
 
         return $this;
+    }
+
+    /**
+     * Retourne le rôle principal à afficher dans le listing.
+     */
+    public function getMainRole(): string
+    {
+        $rolePriority = [
+            'ROLE_ADMIN' => 'Admin',
+            'ROLE_USER' => 'Utilisateur',
+        ];
+
+        foreach (array_keys($rolePriority) as $role) {
+            if (in_array($role, $this->roles, true)) {
+                return $rolePriority[$role];
+            }
+        }
+
+        return 'Aucun rôle'; // Rôle par défaut si aucun rôle connu n'est trouvé
     }
 }

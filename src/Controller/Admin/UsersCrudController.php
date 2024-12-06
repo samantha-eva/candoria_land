@@ -9,11 +9,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UsersCrudController extends AbstractCrudController
 {
+
     private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -32,37 +33,45 @@ class UsersCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('username', 'Nom d\'utilisateur'),
             TextField::new('email', 'Email'),
-            ChoiceField::new('roles', 'Rôles')
+            // Affiche uniquement le rôle principal dans le listing
+            TextField::new('mainRole', 'Rôles')->onlyOnIndex(),
+        ];
+        //Ce bloc de code s'assure que les champs pour les rôles et le mot de passe sont ajoutés seulement lors de la création ou modification de lentité.
+
+        if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
+            // Ajoute un champ "roles" qui permet de sélectionner un ou plusieurs rôles pour l'utilisateur.
+            $fields[] = ChoiceField::new('roles', 'Rôles')
                 ->setChoices([
                     'Utilisateur' => 'ROLE_USER',
                     'Admin' => 'ROLE_ADMIN',
                 ])
-                ->allowMultipleChoices(true)
-                ->setHelp('Sélectionner un ou plusieurs rôles.')
-                ->renderExpanded(true)
-                ->setRequired(true), // Le rôle est requis lors de la création
-        ];
+                ->allowMultipleChoices(true)  // Permet à l'utilisateur de sélectionner plusieurs rôles.
+                ->renderExpanded(true) // Affiche les options sous forme de cases à cocher 
+                ->setHelp('Sélectionner un ou plusieurs rôles.')  // Ajoute une aide visuelle sous le champ pour indiquer à l'utilisateur qu'il peut choisir un ou plusieurs rôles.
+                ->setRequired(true);   // Définit que le champ est requis
+        }
 
-        // Champ de mot de passe (vide lors de l'édition)
+        // Ce bloc de code ajoute le champ pour le mot de passe uniquement lors de la création ou de la modification de l'entité.
+
         if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
+            // Ajoute un champ "password" pour saisir le mot de passe de l'utilisateur.
             $fields[] = TextField::new('password', 'Mot de passe')
                 ->setFormTypeOption('attr', ['type' => 'password'])
                 ->setFormType(PasswordType::class)
-                ->setRequired($pageName === Crud::PAGE_NEW); // Obligatoire uniquement lors de la création
+                ->setRequired($pageName === Crud::PAGE_NEW); // Obligatoire uniquement à la création
         }
-
         return $fields;
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof Users) {
-            $this->handlePassword($entityInstance);  // Hache le mot de passe lors de la création
-
-            // Si les rôles sont vides, attribuer un rôle par défaut
-            if (empty($entityInstance->getRoles())) {
-                $entityInstance->setRoles(['ROLE_USER']); // ROLE_USER par défaut
-            }
+        if ($entityInstance instanceof Users) { // Vérifie si l'entité passée est une instance de la classe Users.
+            // Hacher le mot de passe de l'utilisateur (si nécessaire)
+            $this->handlePassword($entityInstance);
+            // Récupérer les rôles de l'utilisateur à partir de l'entité.
+            $roles = $entityInstance->getRoles();
+            //avant de persister l'entité dans la base de données.
+            $entityInstance->setRoles($roles); 
         }
 
         parent::persistEntity($entityManager, $entityInstance);
@@ -71,7 +80,8 @@ class UsersCrudController extends AbstractCrudController
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if ($entityInstance instanceof Users) {
-            $this->handlePassword($entityInstance);  // Hache le mot de passe lors de la mise à jour
+            // Hacher le mot de passe de l'utilisateur (si nécessaire)
+            $this->handlePassword($entityInstance);
         }
 
         parent::updateEntity($entityManager, $entityInstance);
@@ -81,11 +91,12 @@ class UsersCrudController extends AbstractCrudController
     {
         $password = $user->getPassword();
 
-        // Vérifier si le mot de passe a été défini (lors de la création ou modification)
         if ($password) {
-            // Hacher le mot de passe
             $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
             $user->setPassword($hashedPassword);
         }
     }
+
+
+
 }
