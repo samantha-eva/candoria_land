@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -35,6 +36,7 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('email', 'Email'),
             // Affiche uniquement le rôle principal dans le listing
             TextField::new('mainRole', 'Rôles')->onlyOnIndex(),
+           BooleanField::new('isVerfified')->renderAsSwitch(false),
         ];
         //Ce bloc de code s'assure que les champs pour les rôles et le mot de passe sont ajoutés seulement lors de la création ou modification de lentité.
 
