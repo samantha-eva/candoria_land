@@ -12,7 +12,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -41,16 +43,15 @@ class UsersCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+    
         $fields = [
             IdField::new('id')->hideOnForm(),
             TextField::new('username', 'Nom d\'utilisateur'),
-            TextField::new('email', 'Email'),
+            TextField::new('email', 'Email')->setFormType(EmailType::class),
             // Affiche uniquement le rôle principal dans le listing
-            TextField::new('mainRole', 'Rôles')->onlyOnIndex(),
-           BooleanField::new('isVerified')->renderAsSwitch(false),
+            TextField::new('mainRole', 'Rôles')->onlyOnIndex()
         ];
-        //Ce bloc de code s'assure que les champs pour les rôles et le mot de passe sont ajoutés seulement lors de la création ou modification de lentité.
-
+     
         if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
             // Ajoute un champ "roles" qui permet de sélectionner un ou plusieurs rôles pour l'utilisateur.
             $fields[] = ChoiceField::new('roles', 'Rôles')
@@ -64,21 +65,38 @@ class UsersCrudController extends AbstractCrudController
                 ->setRequired(true);   // Définit que le champ est requis
         }
 
-        // Ce bloc de code ajoute le champ pour le mot de passe uniquement lors de la création ou de la modification de l'entité.
-
-        if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
-            // Ajoute un champ "password" pour saisir le mot de passe de l'utilisateur.
+        if ($pageName === Crud::PAGE_EDIT) {
             $fields[] = TextField::new('password', 'Mot de passe')
-                ->setFormTypeOption('attr', ['type' => 'password'])
                 ->setFormType(PasswordType::class)
-                ->setRequired($pageName === Crud::PAGE_NEW); // Obligatoire uniquement à la création
+                ->setFormTypeOption('empty_data', '')
+                ->setRequired(false) // Ne pas rendre le champ obligatoire
+                ->setHelp('Laissez vide si vous ne souhaitez pas modifier le mot de passe.');
         }
+
+        if ($pageName === Crud::PAGE_NEW) {
+            $fields[] = TextField::new('password', 'Mot de passe')
+                ->setFormType(RepeatedType::class)
+                ->setFormTypeOption('type', PasswordType::class)
+                ->setFormTypeOption('invalid_message', 'Les mots de passe doivent correspondre')
+                ->setFormTypeOption('first_options', ['label' => 'Mot de passe'])
+                ->setFormTypeOption('second_options', ['label' => 'Confirmation du mot de passe'])
+                ->setRequired(true);
+        }
+            // Ajoutez isVerified uniquement dans la vue d'index ou show
+        if ($pageName === Crud::PAGE_INDEX || $pageName === Crud::PAGE_DETAIL) {
+            $fields[] = BooleanField::new('isVerified', 'Compte vérifié')
+                ->renderAsSwitch(false);
+        }
+        
+        
         return $fields;
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
+
         if ($entityInstance instanceof Users) { 
+
             // Hacher le mot de passe de l'utilisateur (si nécessaire)
             $this->handlePassword($entityInstance);
 
@@ -105,13 +123,6 @@ class UsersCrudController extends AbstractCrudController
             $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
             $user = $entityInstance;
 
-            // Générer l'URL de validation
-            // $activationUrl = $this->urlGenerator->generate(
-            //     'account_activation', 
-            //     ['token' => $token],
-            //     UrlGeneratorInterface::ABSOLUTE_URL
-            // );
-
             // Envoyer l'e-mail d'activation
             $this->sendEmailService->send(
                 'no-reply@example.com', 
@@ -125,9 +136,18 @@ class UsersCrudController extends AbstractCrudController
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
+       
         if ($entityInstance instanceof Users) {
-            // Hacher le mot de passe de l'utilisateur (si nécessaire)
-            $this->handlePassword($entityInstance);
+        
+            $password = $entityInstance->getPassword();
+
+            // Si le mot de passe est vide ou null, ne rien faire
+            if (!$password) {
+                $entityInstance->setPassword($entityManager->getUnitOfWork()->getOriginalEntityData($entityInstance)['password'] ?? '');
+            } else {
+                $this->handlePassword($entityInstance);
+            }
+            
         }
 
         parent::updateEntity($entityManager, $entityInstance);
@@ -141,6 +161,7 @@ class UsersCrudController extends AbstractCrudController
             $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
             $user->setPassword($hashedPassword);
         }
+        
     }
 
 
