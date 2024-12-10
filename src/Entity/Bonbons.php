@@ -20,11 +20,11 @@ class Bonbons
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $prix = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $poid = null;
+    private ?string $poids = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
@@ -79,14 +79,14 @@ class Bonbons
         return $this;
     }
 
-    public function getPoid(): ?string
+    public function getPoids(): ?string
     {
-        return $this->poid;
+        return $this->poids;
     }
 
-    public function setPoid(string $poid): static
+    public function setPoids(string $poids): static
     {
-        $this->poid = $poid;
+        $this->poids = $poids;
 
         return $this;
     }
