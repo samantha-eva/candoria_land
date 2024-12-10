@@ -33,6 +33,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    // Champs non persistants
+    private ?string $oldPassword = null;
+    private ?string $newPassword = null;
+
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
@@ -100,6 +104,28 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    public function getOldPassword(): ?string
+    {
+        return $this->oldPassword;
+    }
+
+    public function setOldPassword(?string $oldPassword): self
+    {
+        $this->oldPassword = $oldPassword;
+        return $this;
+    }
+
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(?string $newPassword): self
+    {
+        $this->newPassword = $newPassword;
         return $this;
     }
 

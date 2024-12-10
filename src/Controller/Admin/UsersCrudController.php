@@ -65,11 +65,21 @@ class UsersCrudController extends AbstractCrudController
                 ->setRequired(true);   // Définit que le champ est requis
         }
 
+
+
         if ($pageName === Crud::PAGE_EDIT) {
-            $fields[] = TextField::new('password', 'Mot de passe')
+            $fields[] = TextField::new('oldPassword', 'Ancien mot de passe')
                 ->setFormType(PasswordType::class)
-                ->setFormTypeOption('empty_data', '')
-                ->setRequired(false) // Ne pas rendre le champ obligatoire
+                ->setRequired(false)
+                ->setHelp('Saisissez votre ancien mot de passe pour en changer.');
+    
+            $fields[] = TextField::new('newPassword', 'Nouveau mot de passe')
+                ->setFormType(RepeatedType::class)
+                ->setFormTypeOption('type', PasswordType::class)
+                ->setFormTypeOption('invalid_message', 'Les mots de passe doivent correspondre')
+                ->setFormTypeOption('first_options', ['label' => 'Nouveau mot de passe'])
+                ->setFormTypeOption('second_options', ['label' => 'Confirmation du nouveau mot de passe'])
+                ->setRequired(false)
                 ->setHelp('Laissez vide si vous ne souhaitez pas modifier le mot de passe.');
         }
 
@@ -87,7 +97,7 @@ class UsersCrudController extends AbstractCrudController
             $fields[] = BooleanField::new('isVerified', 'Compte vérifié')
                 ->renderAsSwitch(false);
         }
-        
+    
         
         return $fields;
     }
@@ -138,16 +148,26 @@ class UsersCrudController extends AbstractCrudController
     {
        
         if ($entityInstance instanceof Users) {
-        
-            $password = $entityInstance->getPassword();
 
-            // Si le mot de passe est vide ou null, ne rien faire
-            if (!$password) {
-                $entityInstance->setPassword($entityManager->getUnitOfWork()->getOriginalEntityData($entityInstance)['password'] ?? '');
-            } else {
-                $this->handlePassword($entityInstance);
+            $oldPassword = $entityInstance->getOldPassword();
+            $newPassword = $entityInstance->getNewPassword();
+    
+            // Si un nouveau mot de passe est fourni
+            if ($newPassword) {
+                // Vérifiez que l'ancien mot de passe est également fourni
+                if (!$oldPassword) {
+                    throw new \Exception('Vous devez fournir l\'ancien mot de passe pour changer votre mot de passe.');
+                }
+
+                // Vérifiez que l'ancien mot de passe est correct
+                if (!$this->passwordHasher->isPasswordValid($entityInstance, $oldPassword)) {
+                    throw new \Exception('L\'ancien mot de passe est incorrect.');
+                }
+
+                // Hachez et mettez à jour le nouveau mot de passe
+                $hashedPassword = $this->passwordHasher->hashPassword($entityInstance, $newPassword);
+                $entityInstance->setPassword($hashedPassword);
             }
-            
         }
 
         parent::updateEntity($entityManager, $entityInstance);
