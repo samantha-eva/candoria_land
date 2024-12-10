@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class BonbonsCrudController extends AbstractCrudController
 {
@@ -26,9 +27,10 @@ class BonbonsCrudController extends AbstractCrudController
             TextField::new('nom'),
             ImageField::new('image')
             ->setBasePath('/uploads')
-            ->setUploadDir('public/uploads'),
-            NumberField::new('prix')->setNumDecimals(0), 
-            TextField::new('poid'),
+            ->setUploadDir('public/uploads')
+            ->setRequired($pageName === Crud::PAGE_NEW),
+            NumberField::new('prix', 'Prix')->setNumDecimals(2),
+            TextField::new('poids'),
             TextEditorField::new('description'),
             AssociationField::new('categorie', 'Catégorie'), // Add this line for the category relationship
             AssociationField::new('marque', 'Marque')
