@@ -82,8 +82,8 @@ class RegistrationController extends AbstractController
             $user = $usersRepository->find($payload['user_id']);
 
             // On vérifie qu'on a bien un user et qu'il n'est pas déjà activé
-            if($user && !$user->isVerfified()){
-                $user->setVerfified(true);
+            if($user && !$user->isVerified()){
+                $user->setVerified(true);
                 $em->flush();
 
                 $this->addFlash('success', 'Utilisateur activé');

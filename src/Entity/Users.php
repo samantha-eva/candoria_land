@@ -25,7 +25,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @var list<string> The user roles
      */
     #[ORM\Column]
-    private array $roles = [];
+    private array $roles = [];  // Valeur par défaut
 
     /**
      * @var string The hashed password
@@ -33,11 +33,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    // Champs non persistants
+    private ?string $oldPassword = null;
+    private ?string $newPassword = null;
+
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
     #[ORM\Column]
-    private ?bool $isVerfified = false;
+    private ?bool $isVerified = false;
 
     public function getId(): ?int
     {
@@ -74,8 +78,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -105,6 +107,28 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getOldPassword(): ?string
+    {
+        return $this->oldPassword;
+    }
+
+    public function setOldPassword(?string $oldPassword): self
+    {
+        $this->oldPassword = $oldPassword;
+        return $this;
+    }
+
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(?string $newPassword): self
+    {
+        $this->newPassword = $newPassword;
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
@@ -126,15 +150,34 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isVerfified(): ?bool
+    public function isVerified(): ?bool
     {
-        return $this->isVerfified;
+        return $this->isVerified;
     }
 
-    public function setVerfified(bool $isVerfified): static
+    public function setVerified(bool $isVerified): static
     {
-        $this->isVerfified = $isVerfified;
+        $this->isVerified = $isVerified;
 
         return $this;
+    }
+
+    /**
+     * Retourne le rôle principal à afficher dans le listing.
+     */
+    public function getMainRole(): string
+    {
+        $rolePriority = [
+            'ROLE_ADMIN' => 'Admin',
+            'ROLE_USER' => 'Utilisateur',
+        ];
+
+        foreach (array_keys($rolePriority) as $role) {
+            if (in_array($role, $this->roles, true)) {
+                return $rolePriority[$role];
+            }
+        }
+
+        return 'Aucun rôle'; // Rôle par défaut si aucun rôle connu n'est trouvé
     }
 }

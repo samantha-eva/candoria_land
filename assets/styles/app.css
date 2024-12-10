@@ -8,7 +8,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #D0D6EB;
-    
 }
 
 header {
@@ -192,6 +191,73 @@ header {
     cursor: pointer;
 }
 
+/* Dropdown pour l'utilisateur */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown .user-icon {
+    background: none;
+    border: none;
+    color: #5f5c8c;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.user-dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.user-dropdown .dropdown-menu {
+    display: none;
+    list-style: none;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 100%; /* Positionne sous l'icône */
+    right: 0;  /* Positionne à droite de l'icône */
+    z-index: 1000;
+    min-width: 70px; /* Fixer une largeur minimale */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+}
+
+.user-dropdown .dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #5f5c8c;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+ 
+}
+
+.user-dropdown .dropdown-menu a:hover {
+    background-color: #e8dff2;
+    color: #7f4fa2;
+    border-radius: 5px;
+  
+}
+
+.user-dropdown .user-icon ion-icon {
+    font-size: 24px;
+    color: #5f5c8c;
+    transition: color 0.3s ease;
+}
+
+.user-dropdown:hover .user-icon ion-icon {
+    color: #7f4fa2;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .navigation {
@@ -212,7 +278,21 @@ header {
     .menu-toggle {
         display: block;
     }
+
+    .icons {
+        display: none; /* Masquer les autres icônes pour les petites tailles */
+    }
+
+    .user-dropdown {
+        display: none; /* Masquer le dropdown utilisateur sur mobile */
+    }
 }
+
+/* Afficher le menu lorsque le toggle est actif */
+.menu-toggle.active + .navigation {
+    display: flex;
+}
+
 
 
 /* formulaire login  */

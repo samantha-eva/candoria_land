@@ -102,4 +102,26 @@ class JWTService
 
         return $token === $verifToken;
     }
+
+    public function decode(string $token, string $secret): ?array
+    {
+        // Vérifier si le token est valide (forme correcte)
+        if (!$this->isValid($token)) {
+            return null;
+        }
+
+        // Vérifier la signature
+        if (!$this->check($token, $secret)) {
+            return null;
+        }
+
+        // Vérifier l'expiration
+        if ($this->isExpired($token)) {
+            return null;
+        }
+
+        // Récupérer et retourner le payload
+        return $this->getPayload($token);
+    }
+
 }

@@ -1,56 +1,73 @@
 <header>
-        <a href="{{ path('app_home') }}" class="logo">
-            <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo">
-        </a>
-        <nav class="navbar">
-            <ul class="navigation">
-                <li><a href="#">Accueil</a></li>
-                <li class="dropdown">
-                    <a href="#">Bonbons</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-submenu">
-                            <a href="#">Marques</a>
-                            <ul class="submenu">
-                                <li><a href="#">Haribo</a></li>
-                                <li><a href="#">Lutti</a></li>
-                                <li><a href="#">Chupa Chups</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a href="#">Goût</a>
-                            <ul class="submenu">
-                                <li><a href="#">Sucré</a></li>
-                                <li><a href="#">Acide</a></li>
-                                <li><a href="#">Fruitée</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a href="#">Format</a>
-                            <ul class="submenu">
-                                <li><a href="#">Petits Bonbons</a></li>
-                                <li><a href="#">Moyens Bonbons</a></li>
-                                <li><a href="#">Grands Bonbons</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">Célébrations</a></li>
-                <li><a href="#">Nouveautés</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <div class="icons">
-                <div class="search-box">
-                    <input type="text" placeholder="Rechercher...">
-                    <button class="search-icon"><ion-icon name="search-outline"></ion-icon></button>
-                </div>
-                <button class="user-icon"><ion-icon name="person-outline"></ion-icon></button>
-                <button class="cart-icon">
-                    <ion-icon name="cart-outline"></ion-icon>
-                    <span class="cart-count">0</span>
-                </button>
+    <a href="{{ path('app_home') }}" class="logo">
+        <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo">
+    </a>
+    <nav class="navbar">
+        <ul class="navigation">
+            <li><a href="#">Accueil</a></li>
+            <li class="dropdown">
+                <a href="#">Bonbons</a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-submenu">
+                        <a href="#">Marques</a>
+                        <ul class="submenu">
+                            <li><a href="#">Haribo</a></li>
+                            <li><a href="#">Lutti</a></li>
+                            <li><a href="#">Chupa Chups</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a href="#">Goût</a>
+                        <ul class="submenu">
+                            <li><a href="#">Sucré</a></li>
+                            <li><a href="#">Acide</a></li>
+                            <li><a href="#">Fruitée</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a href="#">Format</a>
+                        <ul class="submenu">
+                            <li><a href="#">Petits Bonbons</a></li>
+                            <li><a href="#">Moyens Bonbons</a></li>
+                            <li><a href="#">Grands Bonbons</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#">Célébrations</a></li>
+            <li><a href="#">Nouveautés</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="icons">
+            <div class="search-box">
+                <input type="text" placeholder="Rechercher...">
+                <button class="search-icon"><ion-icon name="search-outline"></ion-icon></button>
             </div>
-            <button class="menu-toggle">
-                <ion-icon name="menu-outline"></ion-icon>
+
+            {% if app.user %}
+                <div class="user-dropdown">
+                    <button class="user-icon">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('user_edit', { 'id': app.user.id }) }}">Profil</a></li>
+                        <li><a href="{{ path('app_logout') }}">Déco</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="user-icon">
+                    <ion-icon name="person-outline"></ion-icon>
+                </a>
+            {% endif %}
+
+            <button class="cart-icon">
+                <ion-icon name="cart-outline"></ion-icon>
+                <span class="cart-count">0</span>
             </button>
-        </nav>
-    </header>
+        </div>
+
+        <button class="menu-toggle">
+            <ion-icon name="menu-outline"></ion-icon>
+        </button>
+    </nav>
+</header>
