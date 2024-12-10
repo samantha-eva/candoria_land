@@ -17,6 +17,12 @@ class Bonbons
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $marque = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
     private ?string $prix = null;
 
@@ -28,7 +34,7 @@ class Bonbons
 
     #[ORM\ManyToOne(inversedBy: 'bonbons')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categories $id_categorie = null;
+    private ?Categories $categorie = null;
 
     public function getId(): ?int
     {
@@ -85,12 +91,12 @@ class Bonbons
 
     public function getIdCategorie(): ?Categories
     {
-        return $this->id_categorie;
+        return $this->categorie;
     }
 
-    public function setIdCategorie(?Categories $id_categorie): static
+    public function setIdCategorie(?Categories $categorie): static
     {
-        $this->id_categorie = $id_categorie;
+        $this->categorie = $categorie;
 
         return $this;
     }
