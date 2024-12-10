@@ -18,9 +18,6 @@ class Bonbons
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $marque = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $image = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
@@ -36,6 +33,10 @@ class Bonbons
     #[ORM\JoinColumn(nullable: false)]
     private ?Categories $categorie = null;
 
+    #[ORM\ManyToOne(inversedBy: 'bonbons')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Marques $marque = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -49,6 +50,19 @@ class Bonbons
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
@@ -89,14 +103,26 @@ class Bonbons
         return $this;
     }
 
-    public function getIdCategorie(): ?Categories
+    public function getCategorie(): ?Categories
     {
         return $this->categorie;
     }
 
-    public function setIdCategorie(?Categories $categorie): static
+    public function setCategorie(?Categories $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getMarque(): ?Marques
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marques $marque): static
+    {
+        $this->marque = $marque;
 
         return $this;
     }

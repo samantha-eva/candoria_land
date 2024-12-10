@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriesRepository;
+use App\Repository\MarquesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategoriesRepository::class)]
-class Categories
+#[ORM\Entity(repositoryClass: MarquesRepository::class)]
+class Marques
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,12 +16,10 @@ class Categories
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $libelle = null;
+    private ?string $nom = null;
 
-    /**
-     * @var Collection<int, Bonbons>
-     */
-    #[ORM\OneToMany(targetEntity: Bonbons::class, mappedBy: 'id_categorie')]
+
+    #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Bonbons::class, orphanRemoval: true)]
     private Collection $bonbons;
 
     public function __construct()
@@ -32,7 +30,7 @@ class Categories
      // Add the __toString() method
      public function __toString(): string
      {
-         return $this->libelle ?? '';
+         return $this->nom ?? '';
      }
 
     public function getId(): ?int
@@ -40,21 +38,18 @@ class Categories
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function getNom(): ?string
     {
-        return $this->libelle;
+        return $this->nom;
     }
 
-    public function setLibelle(string $libelle): static
+    public function setNom(string $nom): static
     {
-        $this->libelle = $libelle;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Bonbons>
-     */
     public function getBonbons(): Collection
     {
         return $this->bonbons;
@@ -64,7 +59,7 @@ class Categories
     {
         if (!$this->bonbons->contains($bonbon)) {
             $this->bonbons->add($bonbon);
-            $bonbon->setCategorie($this);
+            $bonbon->setMarque($this);
         }
 
         return $this;
@@ -73,9 +68,9 @@ class Categories
     public function removeBonbon(Bonbons $bonbon): static
     {
         if ($this->bonbons->removeElement($bonbon)) {
-            // set the owning side to null (unless already changed)
-            if ($bonbon->getCategorie() === $this) {
-                $bonbon->setCategorie(null);
+            // Set the owning side to null (unless already changed)
+            if ($bonbon->getMarque() === $this) {
+                $bonbon->setMarque(null);
             }
         }
 
