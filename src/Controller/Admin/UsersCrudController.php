@@ -20,6 +20,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
+
 class UsersCrudController extends AbstractCrudController
 {
 
@@ -58,6 +59,12 @@ class UsersCrudController extends AbstractCrudController
                 ->allowDelete() // Permet de supprimer des adresses
                 ->setFormTypeOption('by_reference', false)
                 ->setRequired(true)
+                ->formatValue(function ($value) {
+                    // This will concatenate the 'adresse' and 'code_postal' fields
+                    return implode(' - ', array_map(function ($adress) {
+                        return $adress->getAdresse() . ' ' . $adress->getCodePostal();
+                    }, $value->toArray()));
+                })
            
         ];
      
@@ -105,8 +112,7 @@ class UsersCrudController extends AbstractCrudController
                 ->renderAsSwitch(false);
         }
 
-    
-        
+
         return $fields;
     }
 
@@ -191,6 +197,8 @@ class UsersCrudController extends AbstractCrudController
         }
         
     }
+
+    
 
 
 
