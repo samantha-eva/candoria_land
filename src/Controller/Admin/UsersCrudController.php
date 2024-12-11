@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Users;
+use App\Form\AdresseFormType;
 use App\Service\JWTService;
 use App\Service\SendEmailService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
 class UsersCrudController extends AbstractCrudController
 {
@@ -47,13 +48,19 @@ class UsersCrudController extends AbstractCrudController
     
         $fields = [
             
-            IdField::new('id')->hideOnForm(),
-            TextField::new('nom', 'Nom')->setColumns('col-md-6'),
-            TextField::new('prenom', 'Prenom')->setColumns('col-md-6'),
-            TextField::new('username', 'Nom d\'utilisateur')->setColumns('col-md-6'),
-            TextField::new('email', 'Email')->setFormType(EmailType::class)->setColumns('col-md-6'),
-            // Affiche uniquement le rôle principal dans le listing
-            TextField::new('mainRole', 'Rôles')->onlyOnIndex(),
+            TextField::new('username'),
+            TextField::new('nom'),
+            TextField::new('prenom'),
+            TextField::new('email'),
+            CollectionField::new('adresses') // Affiche la collection des adresses
+                ->setEntryType(AdresseFormType::class) // Spécifie le formulaire d'entrée pour chaque adresse
+                ->renderExpanded(true) // Déplie la collection par défaut
+                ->allowAdd() // Permet d'ajouter de nouvelles adresses
+                ->allowDelete() // Permet de supprimer des adresses
+                ->setFormTypeOption('by_reference', false)
+                ->setRequired(true)  // Empêche les problèmes de référence (option nécessaire dans les relations OneToMany)
+        
+           
         ];
      
         if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
@@ -99,6 +106,7 @@ class UsersCrudController extends AbstractCrudController
             $fields[] = BooleanField::new('isVerified', 'Compte vérifié')
                 ->renderAsSwitch(false);
         }
+
     
         
         return $fields;
