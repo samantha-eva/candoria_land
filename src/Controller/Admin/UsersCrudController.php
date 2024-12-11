@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+
 class UsersCrudController extends AbstractCrudController
 {
 
@@ -45,11 +46,14 @@ class UsersCrudController extends AbstractCrudController
     {
     
         $fields = [
+            
             IdField::new('id')->hideOnForm(),
-            TextField::new('username', 'Nom d\'utilisateur'),
-            TextField::new('email', 'Email')->setFormType(EmailType::class),
+            TextField::new('nom', 'Nom')->setColumns('col-md-6'),
+            TextField::new('prenom', 'Prenom')->setColumns('col-md-6'),
+            TextField::new('username', 'Nom d\'utilisateur')->setColumns('col-md-6'),
+            TextField::new('email', 'Email')->setFormType(EmailType::class)->setColumns('col-md-6'),
             // Affiche uniquement le rôle principal dans le listing
-            TextField::new('mainRole', 'Rôles')->onlyOnIndex()
+            TextField::new('mainRole', 'Rôles')->onlyOnIndex(),
         ];
      
         if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
@@ -64,8 +68,6 @@ class UsersCrudController extends AbstractCrudController
                 ->setHelp('Sélectionner un ou plusieurs rôles.')  // Ajoute une aide visuelle sous le champ pour indiquer à l'utilisateur qu'il peut choisir un ou plusieurs rôles.
                 ->setRequired(true);   // Définit que le champ est requis
         }
-
-
 
         if ($pageName === Crud::PAGE_EDIT) {
             $fields[] = TextField::new('oldPassword', 'Ancien mot de passe')
