@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -20,6 +22,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     private ?string $username = null;
+
+    #[ORM\Column(length: 180)]
+    private ?string $nom = null;
+    
+    #[ORM\Column(length: 180)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(type: 'string', length: 20, nullable: true)]
+    private ?string $telephone = null;
+
 
     /**
      * @var list<string> The user roles
@@ -43,6 +55,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isVerified = false;
 
+    /**
+     * @var Collection<int, Adresses>
+     */
+    #[ORM\OneToMany(targetEntity: Adresses::class, mappedBy: 'user', cascade: ['persist'])]
+    private Collection $adresses;
+
+    public function __construct()
+    {
+        $this->adresses = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,6 +79,42 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): static
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }
@@ -180,4 +239,40 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return 'Aucun rôle'; // Rôle par défaut si aucun rôle connu n'est trouvé
     }
+
+    /**
+     * @return Collection<int, Adresses>
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adresses $adress): static
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses->add($adress);
+            $adress->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adresses $adress): static
+    {
+        if ($this->adresses->removeElement($adress)) {
+            // set the owning side to null (unless already changed)
+            if ($adress->getUser() === $this) {
+                $adress->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+     // Add the __toString() method
+     public function __toString(): string
+     {
+         return $this->nom ?? '';
+     }
 }

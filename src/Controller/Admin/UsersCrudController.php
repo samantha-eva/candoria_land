@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Users;
+use App\Form\AdresseFormType;
 use App\Service\JWTService;
 use App\Service\SendEmailService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+
 
 class UsersCrudController extends AbstractCrudController
 {
@@ -45,11 +48,24 @@ class UsersCrudController extends AbstractCrudController
     {
     
         $fields = [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('username', 'Nom d\'utilisateur'),
-            TextField::new('email', 'Email')->setFormType(EmailType::class),
-            // Affiche uniquement le rôle principal dans le listing
-            TextField::new('mainRole', 'Rôles')->onlyOnIndex()
+            
+            TextField::new('username'),
+            TextField::new('nom'),
+            TextField::new('prenom'),
+            TextField::new('email'),
+            CollectionField::new('adresses') // Affiche la collection des adresses
+                ->setEntryType(AdresseFormType::class) // Spécifie le formulaire d'entrée pour chaque adresse
+                ->allowAdd() // Permet d'ajouter de nouvelles adresses
+                ->allowDelete() // Permet de supprimer des adresses
+                ->setFormTypeOption('by_reference', false)
+                ->setRequired(true)
+                ->formatValue(function ($value) {
+                    // This will concatenate the 'adresse' and 'code_postal' fields
+                    return implode(' - ', array_map(function ($adress) {
+                        return $adress->getAdresse() . ' ' . $adress->getCodePostal();
+                    }, $value->toArray()));
+                })
+           
         ];
      
         if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
@@ -64,8 +80,6 @@ class UsersCrudController extends AbstractCrudController
                 ->setHelp('Sélectionner un ou plusieurs rôles.')  // Ajoute une aide visuelle sous le champ pour indiquer à l'utilisateur qu'il peut choisir un ou plusieurs rôles.
                 ->setRequired(true);   // Définit que le champ est requis
         }
-
-
 
         if ($pageName === Crud::PAGE_EDIT) {
             $fields[] = TextField::new('oldPassword', 'Ancien mot de passe')
@@ -97,8 +111,8 @@ class UsersCrudController extends AbstractCrudController
             $fields[] = BooleanField::new('isVerified', 'Compte vérifié')
                 ->renderAsSwitch(false);
         }
-    
-        
+
+
         return $fields;
     }
 
@@ -183,6 +197,8 @@ class UsersCrudController extends AbstractCrudController
         }
         
     }
+
+    
 
 
 
