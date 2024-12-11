@@ -54,12 +54,10 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('email'),
             CollectionField::new('adresses') // Affiche la collection des adresses
                 ->setEntryType(AdresseFormType::class) // Spécifie le formulaire d'entrée pour chaque adresse
-                ->renderExpanded(true) // Déplie la collection par défaut
                 ->allowAdd() // Permet d'ajouter de nouvelles adresses
                 ->allowDelete() // Permet de supprimer des adresses
                 ->setFormTypeOption('by_reference', false)
-                ->setRequired(true)  // Empêche les problèmes de référence (option nécessaire dans les relations OneToMany)
-        
+                ->setRequired(true)
            
         ];
      
