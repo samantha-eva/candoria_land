@@ -139,6 +139,50 @@ nav .menu a:hover {
     cursor: pointer;
 }
 
+
+
+
+
+
+/* Profile Card */
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-card a {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.profile-card span {
+    margin-left: 0.5rem;
+    font-weight: bold;
+}
+
+.profile-card a:hover {
+    color: #5c6994;
+}
+
+.profile-card a ion-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.profile-card a:hover ion-icon {
+    transform: scale(1.1);
+}
+
+
+
+
+
+
+
 /* Responsiveness */
 @media (max-width: 768px) {
     .flex {
