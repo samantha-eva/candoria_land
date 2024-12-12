@@ -1,0 +1,194 @@
+
+/* Header Styling */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem 5%;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header:hover {
+    background-color: #F4F8EE;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+header .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap; /* Gérer les débordements */
+}
+
+/* Logo */
+.logo img {
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+/* Navigation Menu */
+nav .menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav .menu a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: #333;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+nav .menu a:hover {
+    color: #FFFFFF;
+    background-color: #5c6994 ;
+    border-radius: 0.5rem;
+}
+
+/* Search Form */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ffe3f5;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.search-form:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-form input {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    color: #333;
+}
+
+.search-form input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.search-form button {
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    color: #5c6994;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.search-form button:hover {
+    transform: scale(1.2);
+}
+
+/* Icons */
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.icons ion-icon {
+    font-size: 1.8rem;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.icons ion-icon:hover {
+    color: #D5C29C;
+    transform: scale(1.2);
+}
+
+.icons sup {
+    display: inline-block;
+    min-width: 20px;
+    height: 20px;
+    background-color: #D5C29C;
+    color: #fff;
+    font-size: 0.75rem;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    position: relative;
+    top: -10px;
+    left: -10px;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu {
+        flex-direction: column;
+        width: 100%;
+        display: none; /* Masquer le menu par défaut */
+    }
+
+    .menu.active {
+        display: block; /* Afficher le menu quand la classe "active" est ajoutée */
+    }
+
+    .search-form {
+        width: 100%;
+    }
+
+    .icons {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    /* Afficher le menu hamburger sur les petits écrans */
+    .hamburger {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1rem 2%;
+    }
+
+    .menu a {
+        font-size: 0.9rem;
+    }
+
+    .search-form {
+        padding: 0.5rem;
+    }
+
+    .search-form input {
+        font-size: 0.9rem;
+    }
+
+    .icons ion-icon {
+        font-size: 1.5rem;
+    }
+}
