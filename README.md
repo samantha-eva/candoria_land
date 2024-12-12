@@ -80,6 +80,10 @@ Connectez-vous avec les identifiants administrateurs créés dans les fixtures o
 - **Panier d'achat** : Ajoutez des bonbons au panier et passez commande.
 - **Compte utilisateur** : Connectez-vous pour suivre vos commandes.
 
+  1.couleurs HTML:
+  -Bleu foncé: #5c6994
+ -Beige doré : #D5C29C (pour les détails décoratifs comme les petits arcs).
+ 
 ### Backend
 - **EasyAdmin** : Gestion simplifiée des entités.
 - **Gestion des stocks** : Mettre à jour la disponibilité des produits.
