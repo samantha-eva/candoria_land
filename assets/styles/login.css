@@ -1,0 +1,92 @@
+/* Section du formulaire */
+.login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+    margin-top: 100px; /* Espacement entre le header et le formulaire */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Card du formulaire */
+.login-card h2 {
+    font-size: 2rem;
+    color: #5c6994; /* Couleur principale */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Formulaire */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 1rem;
+    color: #5c6994; /* Couleur principale */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #5c6994;
+    border-radius: 5px;
+    outline: none;
+    background-color: #f9f9f9;
+}
+
+.form-group input:focus {
+    border-color: #9badd4; /* Couleur plus claire au focus */
+}
+
+.submit-btn {
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #5c6994;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #4f5b7e; /* Couleur plus sombre au survol */
+}
+
+.submit-btn:active {
+    background-color: #3e4a65; /* Couleur encore plus foncée lorsque l'on clique */
+}
+
+/* Liens sous le formulaire */
+.links {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.links a {
+    text-decoration: none;
+    color: #5c6994;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.links p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}

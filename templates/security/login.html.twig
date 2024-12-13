@@ -2,7 +2,32 @@
 
 {% block body %}
 
-    <main>
+<!-- Formulaire de Connexion -->
+    <div class="login-container">
+        <div class="login-card">
+            <h2>Se connecter</h2>
+            <form action="#" method="POST" class="login-form">
+                <div class="form-group">
+                    <label for="inputUsername">Nom utilisateur</label>
+                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                </div>
+                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <button type="submit" class="submit-btn">Se connecter</button>
+            </form>
+             <div class="links">
+                <a href="{{ path('app_forgotten_password') }}" class="forgot-password">Mot de passe oublié ?</a>
+                <p>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">S'inscrire</a></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    {# <main>
         <div class="login-container">
             <form method="post" class="login-form">
                 {% if error %}
@@ -15,7 +40,7 @@
                     </div>
                 {% endif %}
 
-                <h1>Me connecter</h1>
+                <h1>Me connecterrerer</h1>
 
                 <div class="form-group">
                     <label for="inputUsername">Nom utilisateur</label>
@@ -43,7 +68,7 @@
                 <a href="{{ path('app_register') }}">Pas encore inscrit ? M'inscrire</a>
             </form>
         </div>
-    </main>
+    </main> #}
 
 {% endblock %}
 

@@ -4,8 +4,52 @@
 
 {% block body %}
 
-    <main>
-        <div class="register-container">
+
+<!-- Formulaire d'inscription -->
+    <div class="form-container">
+        <h2>Inscription</h2>
+
+        {{ form_errors(registrationForm) }}
+        {{ form_start(registrationForm) }}
+          <div class="form-group">
+                {{ form_row(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+              <div class="form-group">
+                {{ form_row(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Mot de passe',
+                    'attr': {'class': 'form-control'}
+                }) }}
+            </div>
+            {# <div class="form-group">
+                {{ form_row(registrationForm.agreeTerms) }}
+            </div> #}
+            <button type="submit" class="btn">M'inscrire</button>
+        {{ form_end(registrationForm) }}
+
+        <p>Déjà inscrit ? <a href="{{ path('app_login') }}">Me connecter</a></p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+ 
+        {# <div class="register-container">
             <h1>M'inscrire</h1>
 
             {{ form_errors(registrationForm) }}
@@ -22,6 +66,6 @@
                 <button type="submit" class="btn">M'inscrire</button>
             {{ form_end(registrationForm) }}
             <p>Déjà inscrit ? <a href="{{ path('app_login') }}">Me connecter</a></p>
-        </div>
-    </main>
+        </div> #}
+    
 {% endblock %}

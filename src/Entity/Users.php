@@ -116,7 +116,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->telephone = $telephone;
 
-        return $this;
+        return $this; 
     }
 
     /**
