@@ -1,17 +1,20 @@
-let searchForm = document.querySelector('.search-form');
+document.addEventListener('turbo:load', function() {
+    let searchForm = document.querySelector('.search-form');
+    let shoppingCart = document.querySelector('.shopping-cart');
+    let userLogin = document.querySelector('.user-login');
 
-document.querySelector('#search-btn').onclick = () =>{
-    searchForm.classList.toggle('active');
-}
+    // Réinitialisation du comportement pour l'icône de recherche
+    document.querySelector('#search-btn').onclick = () => {
+        searchForm.classList.toggle('active');
+    };
 
-let shoppingCart = document.querySelector('.shopping-cart');
+    // Réinitialisation pour le panier
+    document.querySelector('#cart-btn').onclick = () => {
+        shoppingCart.classList.toggle('active');
+    };
 
-document.querySelector('#cart-btn').onclick = () =>{
-    shoppingCart.classList.toggle('active');
-}
-
-let userLogin = document.querySelector('.user-login');
-
-document.querySelector('#user-btn').onclick = () =>{
-    userLogin.classList.toggle('active');
-}
+    // Réinitialisation du profil utilisateur
+    document.querySelector('#user-btn').onclick = () => {
+        userLogin.classList.toggle('active');
+    };
+});
