@@ -26,50 +26,6 @@
     </div>
 
 
-
-    {# <main>
-        <div class="login-container">
-            <form method="post" class="login-form">
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-
-                {% if app.user %}
-                    <div class="mb-3">
-                    Vous êtes déjà connecté {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Me déconnecter</a>
-                    </div>
-                {% endif %}
-
-                <h1>Me connecterrerer</h1>
-
-                <div class="form-group">
-                    <label for="inputUsername">Nom utilisateur</label>
-                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-                </div>
-
-                <div class="form-group">
-                    <label for="inputPassword">Mot de passe</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                </div>
-
-                <input type="hidden" name="_csrf_token"
-                    value="{{ csrf_token('authenticate') }}">
-
-                <div class="checkbox">
-                    <input type="checkbox" name="_remember_me" id="rememberMe">
-                    <label for="rememberMe">Remember me</label>
-                </div>
-
-                <button class="btn btn-primary" type="submit">
-                Me connecter
-                </button>
-
-                <a href="{{ path('app_forgotten_password') }}">Mot de passe oublié</a>
-                <a href="{{ path('app_register') }}">Pas encore inscrit ? M'inscrire</a>
-            </form>
-        </div>
-    </main> #}
-
 {% endblock %}
 
 

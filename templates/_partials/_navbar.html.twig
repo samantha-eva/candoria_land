@@ -15,7 +15,17 @@
             <div class="fas fa-bars" id="menu-btn"></div>
             <div class="fas fa-search" id="search-btn"></div>
             <div class="fas fa-shopping-cart" id="cart-btn"></div>
-            <div class="fas fa-user" id="login-btn"></div>
+            
+            {% if app.user %}
+                {% set initials = app.user.username[0:1]|upper %}
+                <div class="user-initials" aria-label="Profil de {{ app.user.username }}" id="user-btn">
+                    {{ initials }}
+                </div>
+            {% else %}
+                <a href="{{ path('app_login') }}">
+                    <div class="fas fa-user" id="login-btn"></div>
+                </a>
+            {% endif %}
         </div>
 
         <form action="" class="search-form">
@@ -55,10 +65,12 @@
             </div>
             <div class="total"> total: 19.99€</div>
             <a href="" class="btn">check out</a>
-
-
         </div>
-
+        
+        <div class="user-login">
+            <a href="">Modifier Profil</a>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
 
     </section>
 </header>
