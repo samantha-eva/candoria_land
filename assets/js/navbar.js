@@ -1,6 +1,11 @@
-const hamburger = document.querySelector('.hamburger');
-const menu = document.querySelector('.menu');
+let searchForm = document.querySelector('.search-form');
 
-hamburger.addEventListener('click', () => {
-    menu.classList.toggle('active');
-});
+document.querySelector('#search-btn').onclick = () =>{
+    searchForm.classList.toggle('active');
+}
+
+let shoppingCart = document.querySelector('.shopping-cart');
+
+document.querySelector('#cart-btn').onclick = () =>{
+    shoppingCart.classList.toggle('active');
+}
