@@ -1,73 +1,78 @@
-<header>
-    <a href="{{ path('app_home') }}" class="logo">
-        <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo">
-    </a>
-    <nav class="navbar">
-        <ul class="navigation">
-            <li><a href="#">Accueil</a></li>
-            <li class="dropdown">
-                <a href="#">Bonbons</a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-submenu">
-                        <a href="#">Marques</a>
-                        <ul class="submenu">
-                            <li><a href="#">Haribo</a></li>
-                            <li><a href="#">Lutti</a></li>
-                            <li><a href="#">Chupa Chups</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a href="#">Goût</a>
-                        <ul class="submenu">
-                            <li><a href="#">Sucré</a></li>
-                            <li><a href="#">Acide</a></li>
-                            <li><a href="#">Fruitée</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a href="#">Format</a>
-                        <ul class="submenu">
-                            <li><a href="#">Petits Bonbons</a></li>
-                            <li><a href="#">Moyens Bonbons</a></li>
-                            <li><a href="#">Grands Bonbons</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="#">Célébrations</a></li>
-            <li><a href="#">Nouveautés</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-        <div class="icons">
-            <div class="search-box">
-                <input type="text" placeholder="Rechercher...">
-                <button class="search-icon"><ion-icon name="search-outline"></ion-icon></button>
-            </div>
+<header class="header">
+    <section class="flex">
+        <a href="{{ path('app_home') }}" class="logo" aria-label="Accueil">
+            <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo du site" width="130px">
+        </a>
+        <nav class="navbar">
+            <a href="{{ path('app_home') }}" title="Accueil">Accueil</a>
+            <a href="#" title="Bonbons">Bonbons</a>
+            <a href="#" title="Célébrations">Célébrations</a>
+            <a href="#" title="Nouveautés">Nouveautés</a>
+            <a href="#" title="Contact">Contact</a>  
+        </nav>
 
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            
             {% if app.user %}
-                <div class="user-dropdown">
-                    <button class="user-icon">
-                        <ion-icon name="person-outline"></ion-icon>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ path('user_edit', { 'id': app.user.id }) }}">Profil</a></li>
-                        <li><a href="{{ path('app_logout') }}">Déco</a></li>
-                    </ul>
+                {% set initials = app.user.username[0:1]|upper %}
+                <div class="user-initials" aria-label="Profil de {{ app.user.username }}" id="user-btn">
+                    {{ initials }}
                 </div>
             {% else %}
-                <a href="{{ path('app_login') }}" class="user-icon">
-                    <ion-icon name="person-outline"></ion-icon>
+                <a href="{{ path('app_login') }}">
+                    <div class="fas fa-user" id="login-btn"></div>
                 </a>
             {% endif %}
-
-            <button class="cart-icon">
-                <ion-icon name="cart-outline"></ion-icon>
-                <span class="cart-count">0</span>
-            </button>
         </div>
 
-        <button class="menu-toggle">
-            <ion-icon name="menu-outline"></ion-icon>
-        </button>
-    </nav>
+        <form action="" class="search-form">
+            <input type="search" id="search" class="box" placeholder="rechercher">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="shopping-cart">
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="{{ asset('assets/images/tagada.jpg') }}">
+                <div class="content">
+                    <h3>Tagada</h3>
+                    <span class="price">5.00</span>
+                    <span class="quantity">qte : 1</span>
+                </div>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="{{ asset('assets/images/banane.jpg') }}">
+                <div class="content">
+                    <h3>Bananes</h3>
+                    <span class="price">5.00/-</span>
+                    <span class="quantity">qte : 1</span>
+                </div>
+            </div>
+
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="{{ asset('assets/images/acidules.jpg') }}">
+                <div class="content">
+                    <h3>Acidulés</h3>
+                    <span class="price">5.00</span>
+                    <span class="quantity">qte : 1</span>
+                </div>
+            </div>
+            <div class="total"> total: 19.99€</div>
+            <a href="" class="btn">check out</a>
+        </div>
+        
+        <div class="user-login">
+            <a href="">Modifier Profil</a>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+
+    </section>
 </header>
+
+
