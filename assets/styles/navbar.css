@@ -104,7 +104,7 @@ header .flex {
 
 .header .shopping-cart.active{
     right: 2rem;
-    transition: .4 linear;
+    transition: .4s linear;
 }
 
 .header .shopping-cart .box{
@@ -214,6 +214,54 @@ header .flex {
 
 .header .user-login.active{
     right: 2rem;
-    transition: .4 linear;
+    transition: .4s linear;
 }
 
+@media (max-width:991px){
+
+    html{
+        font-size: 55%;
+    }
+    
+    .header{
+        padding: 2rem;
+    }
+}
+
+@media (max-width:768px){
+
+    #menu-btn{
+        display: inline-block;
+    }
+
+    .header .search-form{
+        width: 90%;
+    }
+    
+   .header .navbar{
+    position: absolute;
+    top:110%;
+    right:-110%;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    background: #fff;
+   }
+
+   header .navbar.active{
+    right: 2rem;
+    transition: .4s linear;
+   }
+
+   .header .navbar a{
+    font-size: 2rem;
+    margin: 2rem 2.5rem;
+    display: block;
+   }
+}
+
+@media (max-width:450px){
+
+    html{
+        font-size: 50%;
+    }
+}

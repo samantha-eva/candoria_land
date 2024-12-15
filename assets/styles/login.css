@@ -1,92 +1,90 @@
-/* Section du formulaire */
+/* Formulaire de connexion */
 .login-container {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 350px;
-    margin-top: 100px; /* Espacement entre le header et le formulaire */
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    justify-content: center; /* Centrer le formulaire horizontalement */
+    align-items: center; /* Centrer verticalement */
+    height: 80vh; /* Utiliser toute la hauteur de la fenêtre */
+    padding-top: 22rem; /* Ajouter un peu d'espace au-dessus du formulaire */
 }
 
-/* Card du formulaire */
+.login-card {
+    background-color: #fff;
+    box-shadow: var(--box-shadow); /* Ombre légère pour faire ressortir le formulaire */
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 35rem;
+    max-width: 100%;
+    text-align: center;
+}
+
 .login-card h2 {
     font-size: 2rem;
-    color: #5c6994; /* Couleur principale */
-    margin-bottom: 20px;
-    font-weight: bold;
+    color: var(--bleu);
+    margin-bottom: 2rem;
 }
 
-/* Formulaire */
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.form-group {
+.login-form .form-group {
+    margin-bottom: 1.5rem;
     text-align: left;
 }
 
-.form-group label {
-    font-size: 1rem;
-    color: #5c6994; /* Couleur principale */
-    margin-bottom: 5px;
-    font-weight: bold;
+.login-form .form-group label {
+    display: block;
+    font-size: 1.4rem;
+    color: var(--bleu);
+    margin-bottom: 0.5rem;
 }
 
-.form-group input {
+.login-form .form-group input {
     width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #5c6994;
-    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
     outline: none;
-    background-color: #f9f9f9;
+    color: var(--bleu);
 }
 
-.form-group input:focus {
-    border-color: #9badd4; /* Couleur plus claire au focus */
+.login-form .form-group input:focus {
+    border-color: var(--bleu); /* Changer la couleur du bord au focus */
 }
 
 .submit-btn {
-    padding: 12px;
-    font-size: 1.1rem;
-    background-color: #5c6994;
-    color: white;
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.8rem;
+    background-color: var(--bleu);
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .submit-btn:hover {
-    background-color: #4f5b7e; /* Couleur plus sombre au survol */
+    background-color: var(--beige); /* Changer de couleur au survol */
 }
 
-.submit-btn:active {
-    background-color: #3e4a65; /* Couleur encore plus foncée lorsque l'on clique */
-}
-
-/* Liens sous le formulaire */
 .links {
-    margin-top: 20px;
-    font-size: 0.9rem;
+    margin-top: 2rem;
+    font-size: 1.4rem;
 }
 
 .links a {
+    color: var(--bleu);
     text-decoration: none;
-    color: #5c6994;
 }
 
 .links a:hover {
     text-decoration: underline;
 }
 
-.links p {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #666;
+.forgot-password {
+    font-size: 1.4rem;
+    color: var(--bleu);
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
 }
