@@ -9,6 +9,7 @@ header {
     background-color: #FFFFFF;
     box-shadow: var(--box-shadow);
     padding: 1rem 5%;
+    height: 160px; /* Hauteur de l'en-tête (incluant le logo) */
 }
 
 header .flex {
@@ -224,6 +225,9 @@ header .flex {
     }
     
     .header{
+        padding: 2rem;
+    }
+    section{
         padding: 2rem;
     }
 }

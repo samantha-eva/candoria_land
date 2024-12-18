@@ -1,0 +1,62 @@
+/* Section Home Styling */
+.home {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 160px); /* Utilise la hauteur de l'écran moins la hauteur de l'en-tête (160px) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Empêche tout débordement */
+    margin-top: 160px;
+    
+}
+
+.home .swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.home .swiper-wrapper .slider {
+    position: relative; /* Parent pour le positionnement absolu */
+    display: flex;
+    justify-content: center; /* Centre les éléments à l'intérieur */
+    align-items: center;
+    height: 100%;
+}
+
+.home .swiper-wrapper .slider .content {
+    position: absolute; /* Positionnement absolu par rapport au parent */
+    top: 50%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Correction pour le centrage */
+    z-index: 10; /* Assure que le bouton est au-dessus de l'image */
+}
+
+.home .swiper-wrapper .slider .content .btn-silde {
+    background-color: brown;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Pour centrer le bouton au centre de l'image */
+.home .swiper-wrapper .slider .image {
+    position: relative; /* Nécessaire pour positionner le bouton au centre de l'image */
+    width: 100%;
+    height: 100%;
+}
+
+.home .swiper-wrapper .slider .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Couvre toute la zone sans distorsion */
+}
+
+/* Cacher les puces de pagination */
+.swiper-pagination-bullet {
+    display: none;
+}
