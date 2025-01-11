@@ -4,40 +4,57 @@
 
 {% block body %}
 
-<section class="home" id="home">
-     <div class="swiper-container home-slider">
-          <div class="swiper-wrapper wrapper">
-               <div class="swiper-slide slider">
-                    <div class="content">
-                         <a href="" class="btn-silde">Commander</a>
-                    </div>
-                    <div class="image">
-                         <img src="{{ asset('assets/images/banner-noel.webp') }}">
-                    </div>  
-               </div>
+<header class="header">
+    <div class="hero_info">
+        <div class="contain">
+            <h2>Gourmandise</h2>
+            <p> Succombez à une explosion de saveurs !</p>
+            <div class="shop-now-btn">
+                <button class="shop_now_btn"><a href="">Achetez maintenant</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="hero-img">
+        <img src="{{ asset('assets/images/shop.png') }}">
+    </div>
+</header>
 
-               <div class="swiper-slide slider">
-                    <div class="content">
-                         <a href="" class="btn-silde">Commander</a>
-                    </div>
-                    <div class="image">
-                         <img src="{{ asset('assets/images/banner-noel2.webp') }}">
-                    </div>  
-               </div>
+<div class="collection">
+    <div class="collection-big-card all-collection">
+        <img src="{{ asset('assets/images/bonbon_vrac.jpg') }}">
+        <div class="collection-text">
+            <p>COLLECTION</p>
+            <h1>Vrac</h1>
+        </div>
+    </div>
 
-               <div class="swiper-slide slider">
-                    <div class="content">
-                         <a href="" class="btn-silde">Commander</a>
-                    </div>
-                    <div class="image">
-                         <img src="{{ asset('assets/images/banner-noel3.webp') }}">
-                    </div>  
-               </div>
-          </div>
-          <div class="swiper-pagination"></div>
-     </div>
-</section>
+    <div class="small-collection-small-card">
+        {# car1 #}
+        <div class="collection-small-card all-collection">
+            <img src="{{ asset('assets/images/Caramel.png') }}">
+            <div class="collection-small-card-text">
+                <p>COLLECTION</p>
+                <h1>Caramel</h1>
+            </div>
+        </div>
+        <div class="collection-small-card all-collection">
+            <img src="{{ asset('assets/images/Chocolat.png') }}" class="choco-img">
+            <div class="collection-small-card-text change-text">
+                <p>COLLECTION</p>
+                <h1>Chocolat</h1>
+            </div>
+        </div>
+    </div>
+    <div class="collection-big-card all-collection last-cell-size">
+        <img src="{{ asset('assets/images/bonbon_sac.jpg') }}" class="emballe-img">
+        <div class="collection-text change-last-cell">
+            <p>COLLECTION</p>
+            <h1>Emballé</h1>
+        </div>
+    </div>
 
 
+
+</div>
 
 {% endblock %}

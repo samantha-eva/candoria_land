@@ -7,6 +7,4 @@ import './bootstrap.js';
  */
 import './styles/app.css';
 import './styles/navbar.css';
-import './styles/login.css';
-import './styles/register.css';
 import './styles/home.css';

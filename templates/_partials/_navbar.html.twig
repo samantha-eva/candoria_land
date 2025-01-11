@@ -1,78 +1,24 @@
-<header class="header">
-    <section class="flex">
-        <a href="{{ path('app_home') }}" class="logo" aria-label="Accueil">
-            <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo du site" width="130px">
-        </a>
-        <nav class="navbar">
-            <a href="{{ path('app_home') }}" title="Accueil">Accueil</a>
-            <a href="#" title="Bonbons">Bonbons</a>
-            <a href="#" title="Célébrations">Célébrations</a>
-            <a href="#" title="Nouveautés">Nouveautés</a>
-            <a href="#" title="Contact">Contact</a>  
-        </nav>
+<nav>
+    <div class="logo">
+        <a href={{ path('app_home') }}><img src="{{ asset('assets/images/logo1.png') }}">   
+    </div>
+    <ul class="menu">
+        <li><a href="">Accueil</a></li>
+        <li><a href="">Boutiques</a></li>
+        <li><a href="">Promotions</a></li>
+        <li><a href="">Nouveautés</a></li>
+        <li><a href="">Contact</a></li>
+    </ul>
 
-        <div class="icons">
-            <div class="fas fa-bars" id="menu-btn"></div>
-            <div class="fas fa-search" id="search-btn"></div>
-            <div class="fas fa-shopping-cart" id="cart-btn"></div>
-            
-            {% if app.user %}
-                {% set initials = app.user.username[0:1]|upper %}
-                <div class="user-initials" aria-label="Profil de {{ app.user.username }}" id="user-btn">
-                    {{ initials }}
-                </div>
-            {% else %}
-                <a href="{{ path('app_login') }}">
-                    <div class="fas fa-user" id="login-btn"></div>
-                </a>
-            {% endif %}
+    <div class="icons_sec">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <a href=""><i class="fa-regular fa-user"></i></a>
+        <div class="cart_menu">
+            <i class="fa-solid fa-cart-shopping"><span id="cart_count">0</span></i>
         </div>
-
-        <form action="" class="search-form">
-            <input type="search" id="search" class="box" placeholder="rechercher">
-            <label for="search-box" class="fas fa-search"></label>
-        </form>
-
-        <div class="shopping-cart">
-            <div class="box">
-                <i class="fas fa-trash"></i>
-                <img src="{{ asset('assets/images/tagada.jpg') }}">
-                <div class="content">
-                    <h3>Tagada</h3>
-                    <span class="price">5.00</span>
-                    <span class="quantity">qte : 1</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <i class="fas fa-trash"></i>
-                <img src="{{ asset('assets/images/banane.jpg') }}">
-                <div class="content">
-                    <h3>Bananes</h3>
-                    <span class="price">5.00/-</span>
-                    <span class="quantity">qte : 1</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <i class="fas fa-trash"></i>
-                <img src="{{ asset('assets/images/acidules.jpg') }}">
-                <div class="content">
-                    <h3>Acidulés</h3>
-                    <span class="price">5.00</span>
-                    <span class="quantity">qte : 1</span>
-                </div>
-            </div>
-            <div class="total"> total: 19.99€</div>
-            <a href="" class="btn">check out</a>
-        </div>
-        
-        <div class="user-login">
-            <a href="">Modifier Profil</a>
-            <a href="{{ path('app_logout') }}">Déconnexion</a>
-        </div>
-
-    </section>
-</header>
-
-
+        <h3>100.25</h3>
+    </div>
+    <div class="bars">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>

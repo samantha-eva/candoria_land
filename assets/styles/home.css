@@ -1,62 +1,246 @@
-/* Section Home Styling */
-.home {
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    background-image: url(/../assets/images/home2.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    background-color: #fff;
+    width: 100%;
+    height: 80vh;
+}
+
+.hero_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.hero_info .contain h2{
+font-size: 70px;
+font-weight: 400;
+margin:15px 0;
+color:#feefef;
+}
+
+.hero_info .contain p{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+    width: 60%;
+    margin: 10px;
+}
+
+.shop-now-btn .shop_now_btn{
+    margin: 10px 0;
+    height: 35px;
+    width: 200px;
+    border: none;
+    background-color: transparent;
     position: relative;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+}
+.shop-now-btn button:after{
+    content:'';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: #fd2975ff;
+    transition: .3s;
+}
+
+.shop-now-btn button:hover:after{
     width: 100%;
-    height: calc(100vh - 160px); /* Utilise la hauteur de l'écran moins la hauteur de l'en-tête (160px) */
+}
+
+.hero-img{
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Empêche tout débordement */
-    margin-top: 160px;
-    
 }
-
-.home .swiper-container {
-    width: 100%;
+.hero-img img{
+    width: 90%;
     height: 100%;
 }
 
-.home .swiper-wrapper .slider {
-    position: relative; /* Parent pour le positionnement absolu */
+/* COLLECTION SECTION */
+
+.collection{
     display: flex;
-    justify-content: center; /* Centre les éléments à l'intérieur */
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     align-items: center;
-    height: 100%;
+    padding: 40px 2%;
+    background-color: #feefef !important;
 }
 
-.home .swiper-wrapper .slider .content {
-    position: absolute; /* Positionnement absolu par rapport au parent */
-    top: 50%; /* Centre verticalement */
-    left: 50%; /* Centre horizontalement */
-    transform: translate(-50%, -50%); /* Correction pour le centrage */
-    z-index: 10; /* Assure que le bouton est au-dessus de l'image */
+.collection .collection-big-card{
+    width: 500px;
+    height: 500px;
+    background-color: #fd2975ff;
+    overflow: hidden;
+    position: relative;
+    transition: .3s;
 }
 
-.home .swiper-wrapper .slider .content .btn-silde {
-    background-color: brown;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    text-decoration: none;
-    font-size: 1rem;
-    border-radius: 5px;
-    display: inline-block;
-    text-align: center;
+.collection-big-card img{
+    transition: .3s;
 }
 
-/* Pour centrer le bouton au centre de l'image */
-.home .swiper-wrapper .slider .image {
-    position: relative; /* Nécessaire pour positionner le bouton au centre de l'image */
+.collection-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    position: absolute;
+    top: 70%;
+    right: 5%;
+}
+
+.collection-text p{
+    color:#6d0575;
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.collection-text h1{
+    font-weight: 400;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.collection-small-card{
+    width: 500px;
+    height: 240px;
+    background-color: orange;
+    overflow: hidden;
+    position: relative;
+    transition: .3s;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.collection-small-card img{
+    position: relative;
+    top:20%;
+    left: 40%;
+    transition: .3s;
+}
+
+.collection-small-card-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: absolute;
+    top:10%;
+    left: 10%;
+}
+
+.collection-small-card-text h1{
+    font-size: 20px;
+    font-weight: 500;
+    position: relative;
+}
+
+.change-text{
+    top: 60%;
+    left: 65%;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.change-text:after{
+    content: '';
+    position:absolute;
+    bottom: -10px;
+    left:0;
+    width: 40px;
+    height: 2px;
+    background-color: #000;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.change-last-cell{
+    right: 55%;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.emballe-img{
+    position: relative;
+    left: 197px;
+}
+
+.choco-img{
+  left: 0 !important;  
+}
+
+.collection-text:after{
+    content:'';
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    width: 40px;
+    height: 2px;
+    background-color: #000;
+    transition: .3s;
+    cursor: pointer;
+
+}
+
+.collection-small-card-text:after{
+    content:'';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: #000;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.change-last-cell:after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width: 20px;
+    height: 2px;
+    background-color: #000;
+}
+
+
+
+.collection-small-card:hover .collection-small-card-text:after{
     width: 100%;
-    height: 100%;
+    cursor: pointer;
 }
-
-.home .swiper-wrapper .slider .image img {
+.collection-small-card:hover  .change-text::after{
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Couvre toute la zone sans distorsion */
 }
 
-/* Cacher les puces de pagination */
-.swiper-pagination-bullet {
-    display: none;
+.collection-small-card:hover .collection-text::after{
+    width: 100%;
+}
+
+.collection-big-card:hover img{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.collection-small-card:hover img{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.collection-big-card:hover .collection-text:after{
+    width: 100%;
 }
