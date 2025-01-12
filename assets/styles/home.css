@@ -280,7 +280,7 @@ color:#feefef;
 
 /* Section Marques */
 .marque-section {
-    padding: 50px 2%;
+    padding: 40px 2%;
     background-color: #feefef ;
     text-align: center;
 }
@@ -306,6 +306,8 @@ color:#feefef;
     align-items: center;
     padding: 10px;
     cursor: pointer;
+    border-radius: 10% 50%;
+    background-color: #fd2975ff;
    
 }
 
