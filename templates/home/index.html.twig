@@ -19,9 +19,11 @@
     </div>
 </header>
 
+{# COLLECTION SECTION  #}
+
 <div class="collection">
     <div class="collection-big-card all-collection">
-        <img src="{{ asset('assets/images/bonbon_vrac.jpg') }}">
+        <img src="{{ asset('assets/images/vrac.png') }}" class="vrac-img">
         <div class="collection-text">
             <p>COLLECTION</p>
             <h1>Vrac</h1>
@@ -46,15 +48,31 @@
         </div>
     </div>
     <div class="collection-big-card all-collection last-cell-size">
-        <img src="{{ asset('assets/images/bonbon_sac.jpg') }}" class="emballe-img">
+        <img src="{{ asset('assets/images/marsha.png') }}" class="emballe-img">
         <div class="collection-text change-last-cell">
             <p>COLLECTION</p>
-            <h1>Emballé</h1>
+            <h1>Guimauve</h1>
         </div>
     </div>
 
 
 
+</div>
+
+{# PRODUCT SECTION #}
+<div class="marque-section">
+    <h1>Nos Marques de Bonbons</h1>
+    <div class="customer-logos">
+        <div class="slide"><img src="{{ asset('assets/images/haribo_logo.png') }}" alt="Haribo"></div>
+        <div class="slide"><img src="{{ asset('assets/images/fini_logo.png') }}" alt="Fini"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Trolli_logo.png') }}" alt="Trolli"></div>
+        <div class="slide"><img src="{{ asset('assets/images/mns_logo.png') }}" alt="M&M's"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Milka_logo.png') }}" alt="Milka"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Lutti_logo.png') }}" alt="Lutti"></div>
+        <div class="slide"><img src="{{ asset('assets/images/ferrero_logo.png') }}" alt="Ferrero"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Werther_s_Original_logo.png') }}" alt="Werther's Original"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Skittles_logo.png') }}" alt="Skittles"></div>
+    </div>
 </div>
 
 {% endblock %}
