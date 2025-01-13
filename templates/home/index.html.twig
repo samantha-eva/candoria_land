@@ -1,20 +1,315 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}home{% endblock %}
 
 {% block body %}
-{# <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif;padding:300px }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<header class="header">
+    <div class="hero_info">
+        <div class="contain">
+            <h2>Gourmandise</h2>
+            <p> Succombez à une explosion de saveurs !</p>
+            <div class="shop-now-btn">
+                <button class="shop_now_btn"><a href="">Achetez maintenant</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="hero-img">
+        <img src="{{ asset('assets/images/shop.png') }}">
+    </div>
+</header>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/saman/Documents/Symfony/candoria_land/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/saman/Documents/Symfony/candoria_land/templates/home/index.html.twig</code></li>
-    </ul>
-</div> #}
+{# COLLECTION SECTION  #}
+
+<div class="collection">
+    <div class="collection-big-card all-collection">
+        <img src="{{ asset('assets/images/vrac.png') }}" class="vrac-img">
+        <div class="collection-text">
+            <p>COLLECTION</p>
+            <h1>Vrac</h1>
+        </div>
+    </div>
+
+    <div class="small-collection-small-card">
+        {# car1 #}
+        <div class="collection-small-card all-collection">
+            <img src="{{ asset('assets/images/Caramel.png') }}">
+            <div class="collection-small-card-text">
+                <p>COLLECTION</p>
+                <h1>Caramel</h1>
+            </div>
+        </div>
+        <div class="collection-small-card all-collection">
+            <img src="{{ asset('assets/images/Chocolat.png') }}" class="choco-img">
+            <div class="collection-small-card-text change-text">
+                <p>COLLECTION</p>
+                <h1>Chocolat</h1>
+            </div>
+        </div>
+    </div>
+    <div class="collection-big-card all-collection last-cell-size">
+        <img src="{{ asset('assets/images/marsha.png') }}" class="emballe-img">
+        <div class="collection-text change-last-cell">
+            <p>COLLECTION</p>
+            <h1>Guimauve</h1>
+        </div>
+    </div>
+</div>
+
+{# PRODUCT SECTION  #}
+<div class="product-heading-text">
+    <h1>Les produits originaux</h1>
+    <div class="product-menu">
+        <a href="" data-filter="*">Tous</a>
+        <a href="" data-filter=".retro">Retro</a>
+        <a href="" data-filter=".internationaux">Internationaux</a>
+        <a href="" data-filter=".macher">Mâcher</a>
+        <a href="" data-filter=".filant">Filant</a>
+    </div>
+</div>
+
+<div class="product-wrapper">
+    <div class="product-container">
+        {# produit 1 #}
+        <div class="product-box item retro">
+            <a href="">
+                <img src="{{ asset('assets/images/bubble.png') }}">
+                <p>Daily cream</p>
+                <span><strike>€16.00</strike></span>
+                <span>40E</span>
+                    <div class="after-addcart-boxs">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>        
+                    </div>
+            </a>
+        </div>
+         {# produit 2 #}
+        <div class="product-box item internationaux">
+            <a href="">
+                <img src="{{ asset('assets/images/reglisse.jpg') }}">
+                <p>Daily cream</p>
+                <span><strike>€16.00</strike></span>
+                <span>40E</span>
+                    <div class="after-addcart-boxs">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>        
+                    </div>
+            </a>
+        </div>
+         {# produit 3 #}
+        <div class="product-box item filant">
+            <a href="">
+                <img src="{{ asset('assets/images/barbappa.jpg') }}">
+                <p>Daily cream</p>
+                <span><strike>€16.00</strike></span>
+                <span>40E</span>
+                <span class="product-off">-29%</span>
+                    <div class="after-addcart-boxs">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>        
+                    </div>
+            </a>
+        </div>
+         {# produit 4 #}
+        <div class="product-box item internationaux">
+            <a href="">
+                <img src="{{ asset('assets/images/skitlles.jpg') }}">
+                <p>Daily cream</p>
+                <span><strike>€16.00</strike></span>
+                <span>40E</span>
+                <span class="product-off">-29%</span>
+                    <div class="after-addcart-boxs">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>        
+                    </div>
+            </a>
+        </div>
+         {# produit 5 #}
+        <div class="product-box item macher">
+            <a href="">
+                <img src="{{ asset('assets/images/nougat.jpg') }}">
+                <p>Daily cream</p>
+                <span><strike>€16.00</strike></span>
+                <span>40E</span>
+                <span class="product-off">-29%</span>
+                    <div class="after-addcart-boxs">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>        
+                    </div>
+            </a>
+        </div>
+         {# produit 6 #}
+        <div class="product-box item internationaux">
+            <a href="">
+                <img src="{{ asset('assets/images/mochi.jpg') }}">
+                <p>Daily cream</p>
+                <span><strike>€16.00</strike></span>
+                <span>40E</span>
+                <span class="product-off">-29%</span>
+                    <div class="after-addcart-boxs">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>        
+                    </div>
+            </a>
+        </div>
+         {# produit 7 #}
+        <div class="product-box item retro">
+            <a href="">
+                <img src="{{ asset('assets/images/popcorn.png') }}">
+                <p>Daily cream</p>
+                <span><strike>€16.00</strike></span>
+                <span>40E</span>
+                <span class="product-off">-29%</span>
+                    <div class="after-addcart-boxs">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>        
+                    </div>
+            </a>
+        </div>
+         {# produit 8 #}
+        <div class="product-box item retro">
+            <a href="">
+                <img src="{{ asset('assets/images/roudoudou.jpg') }}">
+                <p>Daily cream</p>
+                <span><strike>€16.00</strike></span>
+                <span>40E</span>
+                <span class="product-off">-29%</span>
+                    <div class="after-addcart-boxs">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>        
+                    </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+{# A PROPOS SECTION  #}
+
+<div class="about-heading-text">
+    <h1>A propos de nous </h1>
+</div>
+
+<div class="about-client">
+    <div class="left-side-contain">
+        <h1>Notre boutique</h1>
+        <p>Bienvenue chez **Candoria**, votre paradis sucré où les saveurs d’hier et d’aujourd’hui 
+            se rencontrent pour émerveiller vos papilles ! Plongez dans un univers coloré et gourmand, 
+            rempli de douceurs rétro, de friandises internationales, et de créations originales qui raviront petits et grands.
+            Que vous soyez nostalgique des bonbons de votre enfance ou curieux de découvrir de nouvelles saveurs exotiques, 
+            Candoria est l’endroit idéal pour satisfaire toutes vos envies sucrées. Venez explorer notre collection unique 
+            et laissez-vous tenter par un voyage gustatif inoubliable ! 🎉🍭
+        </p>
+        <div class="take-your-btn">
+            <h3>En savoir plus</p>
+        </div>
+    </div>
+    <div class="right-side-contain">
+        <img src="{{ asset('assets/images/shop2.jpg') }}">
+    </div>
+
+
+</div>
+
+{# services SECTION #}
+<div class="shop-form-us">
+    <div class="shop-service-box">
+        <div class="box1">
+            <i class="fa-solid fa-truck-fast"></i>
+            <h2>Livraison gratuite</h2>
+        </div>
+        <div class="box1">
+           <i class="fa-solid fa-headset"></i>
+            <h2>24/7 support</h2>
+        </div>
+        <div class="box1">
+            <i class="fa-regular fa-hand-point-left"></i>
+            <h2>Politique de retour</h2>
+        </div>
+        <div class="box1">
+            <i class="fa-solid fa-credit-card"></i>
+            <h2>Paiement securisé</h2>
+        </div>
+    </div>
+</div>
+
+
+{# newsletter SECTION #}
+
+<div class="feedback-sec">
+    <div class="contain-email">
+        <h2>newsLetter !</h2>
+        <p>Inscrivez votre adresse électronique ci-dessous</p>
+        <div class="email-submit-btn">
+            <input type="email" placeholder="Entre ton adresse mail">
+            <button>Envoyer</button>
+        </div>
+    </div>
+</div>
+
+
+{# MARQUES SECTION #}
+<div class="marque-section">
+    <h1>Nos Marques de Bonbons</h1>
+    <div class="customer-logos">
+        <div class="slide"><img src="{{ asset('assets/images/haribo_logo.png') }}" alt="Haribo"></div>
+        <div class="slide"><img src="{{ asset('assets/images/fini_logo.png') }}" alt="Fini"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Trolli_logo.png') }}" alt="Trolli"></div>
+        <div class="slide"><img src="{{ asset('assets/images/mns_logo.png') }}" alt="M&M's"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Milka_logo.png') }}" alt="Milka"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Lutti_logo.png') }}" alt="Lutti"></div>
+        <div class="slide"><img src="{{ asset('assets/images/ferrero_logo.png') }}" alt="Ferrero"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Werther_s_Original_logo.png') }}" alt="Werther's Original"></div>
+        <div class="slide"><img src="{{ asset('assets/images/Skittles_logo.png') }}" alt="Skittles"></div>
+    </div>
+</div> 
+
+
 {% endblock %}

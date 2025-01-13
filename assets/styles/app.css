@@ -1,50 +1,20 @@
-:root{
-    --bleu:#5c6994;
-    --beige:#D5C29C;
-    --light-color:#ffe3f5;
-    --box-shadow: 0 .5rem 1rem rbga(0,0,0.1);
-    --border: .2rem solid rbga(0,0,0.1);
-    --outline: .1rem solid rbga(0,0,0.1);
-    --outline-hover: .2rem solid var(--bleu);
-
-}
-
-/* Global Reset */
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: none;
-    outline: none;
+    list-style: none;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Chewy', cursive;
 }
 
-html{
-    font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scroll-padding-top: 7rem;
-}
-
-body{
-    background-color:  #E9F0FA;
+/* body{
     
-}
+    background-image: url(/../assets/images/section2BG.png);
+    background-repeat: no-repeat;
+    height: 78vh;
+    background-size: cover;
+    background-attachment: fixed;
+    backdrop-filter: blur(20px);
+    background-color: #fff;
+} */
 
-.btn{
-    margin-top: 1rem;
-    display: inline-block;
-    padding: .8rem 3rem;
-    font-size: 1.7rem;
-    border-radius: .5rem;
-    border: .2rem solid var(--bleu);
-    color:var(--bleu);
-    cursor: pointer;
-    background: none;
-}
-
-.btn:hover{
-    background: var(--beige);
-    color: #fff;
-}
