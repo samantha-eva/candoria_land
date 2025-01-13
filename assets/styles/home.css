@@ -505,7 +505,7 @@ color:#feefef;
 
 /* Section services */
 .shop-form-us{
-    background-color: #ffc0fd;
+    background-color: #FE1A71;
     width: 100%;
 }
 .contain-text{
@@ -521,7 +521,7 @@ color:#feefef;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #febeee;
+    /* background-color: #c7a2be; */
 }
  
 .box1{
@@ -556,6 +556,73 @@ color:#feefef;
 
 
 
+/* SECTION NEWSLETTERS */
+
+.feedback-sec{
+    background-image: url(/../assets/images/banner_newsletter.png);
+    background-repeat: no-repeat;
+    padding: 0 4%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center center;
+}
+
+.contain-email{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 70%;
+    position: relative;
+    top: 40%;
+}
+
+.contain-email h2{
+    margin: 10px 0;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.contain-email p{
+    font-size: 18px;
+    margin: 20px 0;
+}
+.contain-email input{
+    width: 450px;
+    height: 50px;
+    border: none;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 17px;
+    font-weight: 400;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.email-submit-btn{
+    margin: 20px 0;
+    display: flex;
+    width: 100%;
+}
+
+.contain-email button{
+    width: 150px;
+    height: 50px;
+    background-color: #fd2975ff;
+    color:#fff;
+    font-size: 18px;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+.contain-email button:hover{
+    background-color: rgb(255, 0, 93);
+    border: 1px solid #fd2975ff;
+    color:#fff;
+}
 
 
 
@@ -589,7 +656,7 @@ color:#feefef;
     padding: 10px;
     cursor: pointer;
     border-radius: 10% 50%;
-    background-color: #fd2975ff;
+    /* background-color: #fd2975ff; */
    
 }
 
@@ -612,4 +679,3 @@ color:#feefef;
         max-height: 60px;
     }
 }
- 
