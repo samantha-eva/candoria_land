@@ -503,10 +503,60 @@ color:#feefef;
     border-radius: 50%;
 }
 
+/* Section services */
+.shop-form-us{
+    background-color: #ffc0fd;
+    width: 100%;
+}
+.contain-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    position: relative;
+}
 
+.shop-service-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #febeee;
+}
  
+.box1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    width: 250px;
+    height: 190px;
+    /* background-color: #fff; */
+  
+}
 
- 
+.box1:hover i{
+    background-color: #c2009b;
+    color: #000;
+    cursor: pointer;
+}
+.box1 i{
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    background-color: #000;
+    color:#fff;
+    font-size: 40px;
+    padding: 20px 10px;
+    margin: 20px 0px;
+    transition: .3s;
+}
+
+
+
+
 
 
 
