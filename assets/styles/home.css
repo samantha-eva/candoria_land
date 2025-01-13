@@ -315,7 +315,7 @@ color:#feefef;
     display: grid;
     grid-template-columns: repeat(4,1fr);
     place-items: center;
-    background-color: #feefef;
+    gap: 20px; /* Espacement entre les produits */
 }
 
 
@@ -324,10 +324,12 @@ color:#feefef;
     height: 370px;
     background-color: #feefef;
     position: relative;
-    margin: 10px 0;
+    /* margin: 10px 0; */
     transition: .3s;
     cursor: pointer;
     overflow: hidden;
+    margin: 25px;
+  
 }
 
 .product-box img{
@@ -442,7 +444,7 @@ color:#feefef;
 
 
 
-
+/* Section A PROPOS */
 
 
 

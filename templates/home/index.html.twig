@@ -60,18 +60,18 @@
 <div class="product-heading-text">
     <h1>Les produits originaux</h1>
     <div class="product-menu">
-        <a href="">Tous</a>
-        <a href="">Retro</a>
-        <a href="">Internationaux</a>
-        <a href="">Mâcher</a>
-        <a href="">Filant</a>
+        <a href="" data-filter="*">Tous</a>
+        <a href="" data-filter=".retro">Retro</a>
+        <a href="" data-filter=".internationaux">Internationaux</a>
+        <a href="" data-filter=".macher">Mâcher</a>
+        <a href="" data-filter=".filant">Filant</a>
     </div>
 </div>
 
 <div class="product-wrapper">
     <div class="product-container">
         {# produit 1 #}
-        <div class="product-box">
+        <div class="product-box item retro">
             <a href="">
                 <img src="{{ asset('assets/images/bubble.png') }}">
                 <p>Daily cream</p>
@@ -90,7 +90,7 @@
             </a>
         </div>
          {# produit 2 #}
-        <div class="product-box">
+        <div class="product-box item internationaux">
             <a href="">
                 <img src="{{ asset('assets/images/reglisse.jpg') }}">
                 <p>Daily cream</p>
@@ -109,7 +109,7 @@
             </a>
         </div>
          {# produit 3 #}
-        <div class="product-box">
+        <div class="product-box item filant">
             <a href="">
                 <img src="{{ asset('assets/images/barbappa.jpg') }}">
                 <p>Daily cream</p>
@@ -129,7 +129,7 @@
             </a>
         </div>
          {# produit 4 #}
-        <div class="product-box">
+        <div class="product-box item internationaux">
             <a href="">
                 <img src="{{ asset('assets/images/skitlles.jpg') }}">
                 <p>Daily cream</p>
@@ -149,7 +149,7 @@
             </a>
         </div>
          {# produit 5 #}
-        <div class="product-box">
+        <div class="product-box item macher">
             <a href="">
                 <img src="{{ asset('assets/images/nougat.jpg') }}">
                 <p>Daily cream</p>
@@ -169,7 +169,7 @@
             </a>
         </div>
          {# produit 6 #}
-        <div class="product-box">
+        <div class="product-box item internationaux">
             <a href="">
                 <img src="{{ asset('assets/images/mochi.jpg') }}">
                 <p>Daily cream</p>
@@ -189,7 +189,7 @@
             </a>
         </div>
          {# produit 7 #}
-        <div class="product-box">
+        <div class="product-box item retro">
             <a href="">
                 <img src="{{ asset('assets/images/popcorn.png') }}">
                 <p>Daily cream</p>
@@ -209,7 +209,7 @@
             </a>
         </div>
          {# produit 8 #}
-        <div class="product-box">
+        <div class="product-box item retro">
             <a href="">
                 <img src="{{ asset('assets/images/roudoudou.jpg') }}">
                 <p>Daily cream</p>
@@ -230,6 +230,8 @@
         </div>
     </div>
 </div>
+
+{# A PROPOS SECTION  #}
 
 {# MARQUES SECTION #}
 <div class="marque-section">

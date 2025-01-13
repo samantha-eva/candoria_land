@@ -32,4 +32,24 @@ $(document).ready(function() {
             }
         ]
     });
+
+    var $grid = $('.product-container').isotope({
+        itemSelector: '.product-box', // Classe des éléments à trier
+        layoutMode: 'fitRows'        // Mode de disposition
+    });
+
+    // Filtrage au clic sur les boutons
+    $('.product-menu a').on('click', function (e) {
+        e.preventDefault(); // Empêche le rechargement de la page
+        
+        var filterValue = $(this).attr('data-filter'); // Récupère la valeur du filtre
+        $grid.isotope({ filter: filterValue }); // Applique le filtre
+
+        // Gère l'état actif des boutons
+        $('.product-menu a').removeClass('active'); // Supprime la classe active
+        $(this).addClass('active'); // Ajoute la classe active au bouton actuel
+    });
+
+
 });
+
