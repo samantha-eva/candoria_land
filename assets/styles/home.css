@@ -278,6 +278,189 @@ color:#feefef;
     background: linear-gradient(135deg, #34e89e, #0f7b5f); /* Emballé */
 }
 
+
+/* Section product */
+.product-heading-text{
+    text-align: center;
+    background-color: #feefef;
+}
+
+.product-heading-text h1{
+    font-weight: 400;
+    font-size: 40px;
+    padding: 70px;
+}
+
+.product-menu{
+    padding: 40px; 
+}
+.product-menu a{
+   margin: 0 10px;
+   font-size: 18px;
+   transition: .3s;
+}
+
+.product-menu a:hover{
+   color:#fd2975ff;
+   letter-spacing: 1px;
+ }
+
+ .product-wrapper{
+    width: 100%;
+    background-color:#feefef;
+ }
+.product-container{
+    max-width: 1600px;
+    margin:auto;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    place-items: center;
+    background-color: #feefef;
+}
+
+
+.product-box{
+    width: 350px;
+    height: 370px;
+    background-color: #feefef;
+    position: relative;
+    margin: 10px 0;
+    transition: .3s;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.product-box img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50px;
+ 
+}
+
+.product-box p{
+   font-size: 18px;
+   font-weight: bold;
+   color:#6d0575;
+   margin: 10px 0;
+}
+
+.product-box span{
+    font-weight: bold;
+    margin: 0 5px;
+    color:#000;
+ }
+ .product-box span strike{
+    color:#aa0340;
+ }
+ 
+ .product-off{
+    position: absolute;
+    top:10%;
+    left: 10%;
+    background-color: #fd2975ff;
+    color:#feefef !important;
+    width: 45px;
+    height: 25px;
+    border-radius: 5px;
+    padding: 5px;
+ }
+ 
+/* Masquer par défaut la boîte après ajout au panier */
+.after-addcart-boxs {
+    display: none;
+    justify-content: space-between;
+    align-items: center !important;
+    width: 180px;
+    position: absolute;
+    bottom: -15px;
+    left: 17%;
+    transform: translateY(-120px);
+}
+
+/* Afficher la boîte au survol de la boîte produit */
+.product-box:hover .after-addcart-boxs {
+    display: flex;
+}
+
+/* Contrôle de la quantité */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-btn {
+    background-color: #6d0575;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.quantity-btn:hover {
+    background-color: #aa0340;
+}
+
+.quantity-input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Bouton Ajouter au panier */
+.add-to-cart-btn {
+    background-color: #fd2975ff;
+    color: #feefef;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-btn i {
+    font-size: 18px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #fd2975ff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
 /* Section Marques */
 .marque-section {
     padding: 40px 2%;
@@ -313,16 +496,16 @@ color:#feefef;
 
 .customer-logos .slide img {
     max-width: 100%;
-    max-height: 90px; /* Taille adaptative des logos */
+    max-height: 90px; 
     object-fit: contain;
 }
 
-.customer-logos .slide:hover {
+ .customer-logos .slide:hover {
     transform: scale(1.1);
 }
 
 /* Réactivité pour les petits écrans */
-@media (max-width: 768px) {
+ @media (max-width: 768px) {
     .marque-section h1 {
         font-size: 28px;
     }
@@ -330,4 +513,4 @@ color:#feefef;
         max-height: 60px;
     }
 }
-
+ 
