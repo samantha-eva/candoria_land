@@ -279,7 +279,9 @@ color:#feefef;
 }
 
 
-/* Section product */
+/* SECTION PRODUIT */
+
+
 .product-heading-text{
     text-align: center;
     background-color: #feefef;
@@ -441,10 +443,8 @@ color:#feefef;
     background-color: #fd2975ff;
 }
 
-
-
-
 /* Section A PROPOS */
+
 .about-heading-text{
     text-align: center;
     background-color: #feefef;
@@ -503,7 +503,9 @@ color:#feefef;
     border-radius: 50%;
 }
 
-/* Section services */
+/* SECTION SERVICE */
+
+
 .shop-form-us{
     background-color: #FE1A71;
     width: 100%;
@@ -627,7 +629,9 @@ color:#feefef;
 
 
 
-/* Section Marques */
+/* SECTION MARQUES */
+
+
 .marque-section {
     padding: 40px 2%;
     background-color: #feefef ;
