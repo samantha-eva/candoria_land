@@ -1,0 +1,94 @@
+footer{
+    width: 100%;
+    height: 50vh;
+    background-color: #feefef;
+}
+.hero_footer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    background-color: #FFA8C5;
+    color:#810090;
+    padding: 4% 0;
+}
+.address img{
+    width: 100%;
+}
+
+h1{
+    font-size: 20px;
+}
+
+.address{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.address img{
+    width: 150px;
+    height: 90px;
+}
+.info{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
+.info h3{
+    font-size: 16x;
+    font-weight: 300;
+}
+
+.information{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:20px;
+}
+
+.information a {
+    color:#fd2975ff;
+    transition: .3s;
+}
+.information a:hover{
+    color:#feefef;
+    cursor: pointer;
+}
+.icons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.icons i{
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.icons i:hover{
+color:#feefef
+}
+
+.last-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap:25px;
+    padding: 2% 5%;
+    background-color: #FFA8C5;
+    color:#feefef
+}
+
+.last-section h3{
+    font-family: 500;
+}
+
+.last-section h3 span{
+    color:#fd2975ff;
+}
