@@ -56,6 +56,10 @@ symfony server:start
 
 Le site sera accessible sur [http://localhost:8000](http://localhost:8000).
 
+# Tests unitaires
+
+ php bin/phpunit
+
 ## Usage
 
 ### Frontend
