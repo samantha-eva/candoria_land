@@ -38,141 +38,26 @@
         <!-- Liste des produits -->
         <div class="shop_products">
             <!-- Exemple de produit avec réduction -->
-            <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
+            {% for bonbon in bonbons %}
+                <div class="product">
+                    <div class="product_img">
+                        <a href="#">
+                            <span class="sale-badge">-40%</span>
+                            <img src="{{ asset('uploads/' ~ bonbon.image) }}" alt="Bonbons Fruités">
+                        </a>
+                    </div>
+                    <p class="product-name">{{ bonbon.nom }}</p>
+                    <p class="product-price">{{ bonbon.prix }}</p>
+                    <div class="quantity-control">
+                        <button class="decrease">-</button>
+                        <span class="quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="add-to-cart">Ajouter au Panier</button>
                 </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-            <!-- D'autres produits répétés ici -->
-              <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-            <!-- D'autres produits répétés ici -->
-              <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-            <!-- D'autres produits répétés ici -->
-              <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-            <!-- D'autres produits répétés ici -->
-              <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-            <!-- D'autres produits répétés ici -->  <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-            <!-- D'autres produits répétés ici -->  <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-            <!-- D'autres produits répétés ici -->  <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-            <!-- D'autres produits répétés ici -->
+            {% endfor %}
+          
         </div>
-
     </div>
 
     <!-- Menu de filtrage et recherche -->
@@ -283,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </form>
     </div>
 </div>
