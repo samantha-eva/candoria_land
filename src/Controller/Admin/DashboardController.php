@@ -6,7 +6,7 @@ use App\Entity\Bonbons;
 use App\Entity\Categories;
 use App\Entity\Users;
 use App\Entity\Marques;
-use App\Entity\Adresses;
+use App\Entity\SousCategories;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -43,7 +43,7 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::linkToCrud('Categories', 'fas fa-list', Categories::class);
          yield MenuItem::linkToCrud('Users', 'fas fa-list', Users::class);
          yield MenuItem::linkToCrud('Marques', 'fas fa-list', Marques::class);
-         yield MenuItem::linkToCrud('Adresses', 'fas fa-list', Adresses::class);
+         yield MenuItem::linkToCrud('Sous categorie', 'fas fa-list', SousCategories::class);
     
     }
 }

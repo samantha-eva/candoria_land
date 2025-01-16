@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Adresses;
+use App\Entity\SousCategories;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Adresses>
+ * @extends ServiceEntityRepository<SousCategories>
  */
-class AdressesRepository extends ServiceEntityRepository
+class SousCategoriesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Adresses::class);
+        parent::__construct($registry, SousCategories::class);
     }
 
     //    /**
-    //     * @return Adresses[] Returns an array of Adresses objects
+    //     * @return SousCategories[] Returns an array of SousCategories objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
+    //            ->orderBy('s.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Adresses
+    //    public function findOneBySomeField($value): ?SousCategories
     //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

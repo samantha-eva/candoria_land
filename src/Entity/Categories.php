@@ -18,17 +18,7 @@ class Categories
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
-    /**
-     * @var Collection<int, Bonbons>
-     */
-    #[ORM\OneToMany(targetEntity: Bonbons::class, mappedBy: 'id_categorie')]
-    private Collection $bonbons;
-
-    public function __construct()
-    {
-        $this->bonbons = new ArrayCollection();
-    }
-
+    
      // Add the __toString() method
      public function __toString(): string
      {
@@ -52,33 +42,6 @@ class Categories
         return $this;
     }
 
-    /**
-     * @return Collection<int, Bonbons>
-     */
-    public function getBonbons(): Collection
-    {
-        return $this->bonbons;
-    }
-
-    public function addBonbon(Bonbons $bonbon): static
-    {
-        if (!$this->bonbons->contains($bonbon)) {
-            $this->bonbons->add($bonbon);
-            $bonbon->setCategorie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBonbon(Bonbons $bonbon): static
-    {
-        if ($this->bonbons->removeElement($bonbon)) {
-            // set the owning side to null (unless already changed)
-            if ($bonbon->getCategorie() === $this) {
-                $bonbon->setCategorie(null);
-            }
-        }
-
-        return $this;
-    }
+    
+    
 }

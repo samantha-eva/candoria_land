@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\MarquesRepository;
+use App\Repository\SousCategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MarquesRepository::class)]
-class Marques
+#[ORM\Entity(repositoryClass: SousCategoriesRepository::class)]
+class SousCategories
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,21 +21,19 @@ class Marques
     /**
      * @var Collection<int, Bonbons>
      */
-    #[ORM\OneToMany(targetEntity: Bonbons::class, mappedBy: 'marque')]
+    #[ORM\OneToMany(targetEntity: Bonbons::class, mappedBy: 'SousCategorie')]
     private Collection $bonbons;
+
+    #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'sousCategories')]
+    private Collection $categories;
 
     public function __construct()
     {
         $this->bonbons = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
-
-    // Add the __toString() method
-     public function __toString(): string
-     {
-         return $this->nom ?? '';
-     }
-
+ 
     public function getId(): ?int
     {
         return $this->id;
@@ -65,7 +63,7 @@ class Marques
     {
         if (!$this->bonbons->contains($bonbon)) {
             $this->bonbons->add($bonbon);
-            $bonbon->setMarque($this);
+            $bonbon->setSousCategorie($this);
         }
 
         return $this;
@@ -75,18 +73,44 @@ class Marques
     {
         if ($this->bonbons->removeElement($bonbon)) {
             // set the owning side to null (unless already changed)
-            if ($bonbon->getMarque() === $this) {
-                $bonbon->setMarque(null);
+            if ($bonbon->getSousCategorie() === $this) {
+                $bonbon->setSousCategorie(null);
             }
         }
 
         return $this;
     }
 
-    
+    /**
+     * @return Collection<int, Categories>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categories $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categories $category): static
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+     // Ajouter cette méthode
+     public function __toString(): string
+     {
+         return $this->nom ?? '';
+     }
 
    
-
-   
-   
+  
 }

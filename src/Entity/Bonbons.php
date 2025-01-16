@@ -26,16 +26,16 @@ class Bonbons
     #[ORM\Column(length: 255)]
     private ?string $poids = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'bonbons')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categories $categorie = null;
+    private ?Marques $marque = null;
 
     #[ORM\ManyToOne(inversedBy: 'bonbons')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Marques $marque = null;
+    private ?SousCategories $SousCategorie = null;
 
     public function getId(): ?int
     {
@@ -54,11 +54,12 @@ class Bonbons
         return $this;
     }
 
-
+    
     public function getImage(): ?string
     {
         return $this->image;
     }
+
 
     public function setImage(string $image): static
     {
@@ -66,6 +67,7 @@ class Bonbons
 
         return $this;
     }
+
 
     public function getPrix(): ?string
     {
@@ -103,18 +105,6 @@ class Bonbons
         return $this;
     }
 
-    public function getCategorie(): ?Categories
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categories $categorie): static
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
     public function getMarque(): ?Marques
     {
         return $this->marque;
@@ -123,6 +113,18 @@ class Bonbons
     public function setMarque(?Marques $marque): static
     {
         $this->marque = $marque;
+
+        return $this;
+    }
+
+    public function getSousCategorie(): ?SousCategories
+    {
+        return $this->SousCategorie;
+    }
+
+    public function setSousCategorie(?SousCategories $SousCategorie): static
+    {
+        $this->SousCategorie = $SousCategorie;
 
         return $this;
     }
