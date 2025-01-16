@@ -46,7 +46,7 @@
                             <img src="{{ asset('uploads/' ~ bonbon.image) }}" alt="Bonbons Fruités">
                         </a>
                     </div>
-                    <p class="product-name">{{ bonbon.nom }}</p>
+                    <p class="product-name">{{ bonbon.nom }} - {{bonbon.poids}}</p>
                     <p class="product-price">{{ bonbon.prix }}</p>
                     <div class="quantity-control">
                         <button class="decrease">-</button>
@@ -131,41 +131,13 @@
             <div class="category_marque_container">
                 <h1>Marques</h1>
                 <div class="brand-checkboxes">
+                  {% for marque in marques %}
                     <div>
-                        <label for="brand_haribo">
-                            <input type="checkbox" id="brand_haribo" name="brands[]" value="Haribo" onchange="submitForm()"> Haribo
+                        <label for="brand_{{ marque.nom }}">
+                            <input type="checkbox" id="brand_{{ marque.nom }}" name="brands[]" value="{{ marque.nom }}" onchange="submitForm()">{{ marque.nom }}
                         </label>
                     </div>
-                    <div>
-                        <label for="brand_twix">
-                            <input type="checkbox" id="brand_twix" name="brands[]" value="Twix" onchange="submitForm()"> Twix
-                        </label>
-                    </div>
-                    <div>
-                        <label for="brand_kinder">
-                            <input type="checkbox" id="brand_kinder" name="brands[]" value="Kinder" onchange="submitForm()"> Kinder
-                        </label>
-                    </div>
-                    <div>
-                        <label for="brand_lutti">
-                            <input type="checkbox" id="brand_lutti" name="brands[]" value="Lutti" onchange="submitForm()"> Lutti
-                        </label>
-                    </div>
-                    <div>
-                        <label for="brand_fizzy">
-                            <input type="checkbox" id="brand_fizzy" name="brands[]" value="Fizzy" onchange="submitForm()"> Fizzy
-                        </label>
-                    </div>
-                     <div>
-                        <label for="brand_fizzy">
-                            <input type="checkbox" id="brand_fizzy" name="brands[]" value="Fizzy" onchange="submitForm()"> Fizzy
-                        </label>
-                    </div>
-                     <div>
-                        <label for="brand_fizzy">
-                            <input type="checkbox" id="brand_fizzy" name="brands[]" value="Fizzy" onchange="submitForm()"> Fizzy
-                        </label>
-                    </div>
+                   {% endfor %} 
                 </div>
             </div>
 
