@@ -2,6 +2,7 @@ footer{
     width: 100%;
     height: 49vh;
     background-color: #feefef;
+    padding: 15px 0;
 }
 .hero_footer{
     display: flex;

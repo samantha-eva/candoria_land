@@ -19,13 +19,14 @@
 {# SHOP CONTAINER #}
 <div class="shop_container">
     <div class="shop_product_container">
+        <!-- Entête de la section produits -->
         <div class="shop_header_contain">
-            <h3>Affichage 1 - 9 sur 100 resultats</h3>
+            <h3>Affichage 1 - 9 sur 100 résultats</h3>
             <div class="shop_filter">
-                <select name="" id="shop_filter_select">
-                    <option value="last">dernier</option>
-                    <option value="price">Prix bas à elevé</option>
-                    <option value="price">Prix elevé à bas</option>
+                <select id="shop_filter_select" onchange="submitForm()">
+                    <option value="last">Derniers</option>
+                    <option value="price_asc">Prix bas à élevé</option>
+                    <option value="price_desc">Prix élevé à bas</option>
                 </select>
                 <i class="fa-solid fa-table-cells"></i>
                 <div class="shop_bars">
@@ -34,24 +35,9 @@
             </div>
         </div>
 
+        <!-- Liste des produits -->
         <div class="shop_products">
-
-            <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-
+            <!-- Exemple de produit avec réduction -->
             <div class="product">
                 <div class="product_img">
                     <a href="#">
@@ -68,58 +54,7 @@
                 </div>
                 <button class="add-to-cart">Ajouter au Panier</button>
             </div>
-
-            <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-
-            <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-
-            <div class="product">
-                <div class="product_img">
-                    <a href="#">
-                        <span class="sale-badge">-40%</span>
-                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
-                    </a>
-                </div>
-                <p class="product-name">Bonbons Fruités</p>
-                <p class="product-price">$19.99</p>
-                <div class="quantity-control">
-                    <button class="decrease">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase">+</button>
-                </div>
-                <button class="add-to-cart">Ajouter au Panier</button>
-            </div>
-
+            <!-- D'autres produits répétés ici -->
               <div class="product">
                 <div class="product_img">
                     <a href="#">
@@ -136,7 +71,7 @@
                 </div>
                 <button class="add-to-cart">Ajouter au Panier</button>
             </div>
-
+            <!-- D'autres produits répétés ici -->
               <div class="product">
                 <div class="product_img">
                     <a href="#">
@@ -153,7 +88,7 @@
                 </div>
                 <button class="add-to-cart">Ajouter au Panier</button>
             </div>
-
+            <!-- D'autres produits répétés ici -->
               <div class="product">
                 <div class="product_img">
                     <a href="#">
@@ -170,7 +105,7 @@
                 </div>
                 <button class="add-to-cart">Ajouter au Panier</button>
             </div>
-
+            <!-- D'autres produits répétés ici -->
               <div class="product">
                 <div class="product_img">
                     <a href="#">
@@ -187,11 +122,10 @@
                 </div>
                 <button class="add-to-cart">Ajouter au Panier</button>
             </div>
-
-              <div class="product">
+            <!-- D'autres produits répétés ici -->  <div class="product">
                 <div class="product_img">
                     <a href="#">
-                        {# <span class="sale-badge">-40%</span> #}
+                        <span class="sale-badge">-40%</span>
                         <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
                     </a>
                 </div>
@@ -204,11 +138,156 @@
                 </div>
                 <button class="add-to-cart">Ajouter au Panier</button>
             </div>
-
+            <!-- D'autres produits répétés ici -->  <div class="product">
+                <div class="product_img">
+                    <a href="#">
+                        <span class="sale-badge">-40%</span>
+                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
+                    </a>
+                </div>
+                <p class="product-name">Bonbons Fruités</p>
+                <p class="product-price">$19.99</p>
+                <div class="quantity-control">
+                    <button class="decrease">-</button>
+                    <span class="quantity">1</span>
+                    <button class="increase">+</button>
+                </div>
+                <button class="add-to-cart">Ajouter au Panier</button>
+            </div>
+            <!-- D'autres produits répétés ici -->  <div class="product">
+                <div class="product_img">
+                    <a href="#">
+                        <span class="sale-badge">-40%</span>
+                        <img src="{{ asset('assets/images/anneaux.png') }}" alt="Bonbons Fruités">
+                    </a>
+                </div>
+                <p class="product-name">Bonbons Fruités</p>
+                <p class="product-price">$19.99</p>
+                <div class="quantity-control">
+                    <button class="decrease">-</button>
+                    <span class="quantity">1</span>
+                    <button class="increase">+</button>
+                </div>
+                <button class="add-to-cart">Ajouter au Panier</button>
+            </div>
+            <!-- D'autres produits répétés ici -->
         </div>
 
     </div>
+
+    <!-- Menu de filtrage et recherche -->
+    <div class="shop_menus">
+        <form id="searchForm" action="search.php" method="GET">
+            <!-- Barre de recherche -->
+            <input 
+                type="text" 
+                name="query" 
+                placeholder="Rechercher" 
+                class="search-bar" 
+                oninput="submitForm()" 
+                aria-label="Rechercher un produit"
+            >
+
+            <!-- Catégories -->
+            <div class="shop_menu_heading">
+                <h1>Catégories</h1>
+            </div>
+
+            <div class="shop_menu_category">
+                <div>
+                    <select name="category" id="category_emballes" class="category-dropdown" onchange="submitForm()">
+                        <option value="emballes">bonbon emballes</option>
+                        <option value="sucre">Sucré</option>
+                        <option value="acidule">Acidulé</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select name="category" id="category_vrac" class="category-dropdown" onchange="submitForm()">
+                        <option value="vrac">Bonbon en vrac</option>
+                        <option value="sucre">Sucré</option>
+                        <option value="acidule">Acidulés</option>
+                        <option value="guimauvee">Marshmallow / Guimauve</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select name="category" id="category_grands_conditionnements" class="category-dropdown" onchange="submitForm()">
+                        <option value="">grands conditionnements</option>
+                        <option value="emballes">Sucette</option>
+                        <option value="vrac">Bonbons rétro</option>
+                        <option value="chocolat">Veggie</option>
+                        <option value="themes">Chewing-gums</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select name="category" id="category_themes" class="category-dropdown" onchange="submitForm()">
+                        <option value="">themes</option>
+                        <option value="emballes">Anniversaire</option>
+                        <option value="vrac">Halloween</option>
+                        <option value="chocolat">Noël</option>
+                        <option value="themes">Pâques</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select name="category" id="category_chocolat" class="category-dropdown" onchange="submitForm()">
+                        <option value="">chocolat</option>
+                        <option value="emballes">Barre chocolatée</option>
+                        <option value="vrac">Pâte à tartiner</option>
+                        <option value="chocolat">À la boîte</option>
+                        <option value="themes">Cacahuètes</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Marques -->
+            <div class="category_marque_container">
+                <h1>Marques</h1>
+                <div class="brand-checkboxes">
+                    <div>
+                        <label for="brand_haribo">
+                            <input type="checkbox" id="brand_haribo" name="brands[]" value="Haribo" onchange="submitForm()"> Haribo
+                        </label>
+                    </div>
+                    <div>
+                        <label for="brand_twix">
+                            <input type="checkbox" id="brand_twix" name="brands[]" value="Twix" onchange="submitForm()"> Twix
+                        </label>
+                    </div>
+                    <div>
+                        <label for="brand_kinder">
+                            <input type="checkbox" id="brand_kinder" name="brands[]" value="Kinder" onchange="submitForm()"> Kinder
+                        </label>
+                    </div>
+                    <div>
+                        <label for="brand_lutti">
+                            <input type="checkbox" id="brand_lutti" name="brands[]" value="Lutti" onchange="submitForm()"> Lutti
+                        </label>
+                    </div>
+                    <div>
+                        <label for="brand_fizzy">
+                            <input type="checkbox" id="brand_fizzy" name="brands[]" value="Fizzy" onchange="submitForm()"> Fizzy
+                        </label>
+                    </div>
+                     <div>
+                        <label for="brand_fizzy">
+                            <input type="checkbox" id="brand_fizzy" name="brands[]" value="Fizzy" onchange="submitForm()"> Fizzy
+                        </label>
+                    </div>
+                     <div>
+                        <label for="brand_fizzy">
+                            <input type="checkbox" id="brand_fizzy" name="brands[]" value="Fizzy" onchange="submitForm()"> Fizzy
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
 </div>
+
 
 
 {% endblock %}
