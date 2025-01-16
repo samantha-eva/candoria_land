@@ -16,6 +16,11 @@ class BonbonsRepository extends ServiceEntityRepository
         parent::__construct($registry, Bonbons::class);
     }
 
+    public function findAllBonbons(): array
+    {
+        return $this->findAll();
+    }
+
     //    /**
     //     * @return Bonbons[] Returns an array of Bonbons objects
     //     */

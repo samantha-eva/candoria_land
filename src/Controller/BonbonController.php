@@ -13,30 +13,30 @@ class BonbonController extends AbstractController
 
 {
 
-    // private $bonbonsRepository;
-    // private $marquesRepository;
-    // private $categoriesRepository;
+    private $bonbonsRepository;
+    private $marquesRepository;
+    private $categoriesRepository;
 
-    // public function __construct(BonbonsRepository $bonbonsRepository,MarquesRepository $marquesRepository,CategoriesRepository $categoriesRepository)
-    // {
-    //     $this->bonbonsRepository = $bonbonsRepository;
-    //     $this->marquesRepository = $marquesRepository;
-    //     $this->categoriesRepository = $categoriesRepository;
-    // }
+    public function __construct(BonbonsRepository $bonbonsRepository,MarquesRepository $marquesRepository,CategoriesRepository $categoriesRepository)
+    {
+        $this->bonbonsRepository = $bonbonsRepository;
+        $this->marquesRepository = $marquesRepository;
+        $this->categoriesRepository = $categoriesRepository;
+    }
 
     #[Route('/boutique', name: 'app_shop')]
     public function index(): Response
     {
 
-    //     $bonbons    = $this->bonbonsRepository->findAll();
-    //     $marques    = $this->marquesRepository->findAll();
-    //     $categories = $this->categoriesRepository->findAll();
+        $bonbons    = $this->bonbonsRepository->findAll();
+        $marques    = $this->marquesRepository->findAll();
+        $categories = $this->categoriesRepository->findAll();
 
          return $this->render('boutique/index.html.twig', [
-    //         'controller_name' => 'BonbonController',
-    //         'bonbons'=> $bonbons,
-    //         'marques'=> $marques,
-    //         'categories' => $categories
+            'controller_name' => 'BonbonController',
+            'bonbons'=> $bonbons,
+            'marques'=> $marques,
+            'categories' => $categories
          ]);
      }
 }
