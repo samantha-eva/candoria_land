@@ -1,0 +1,219 @@
+header{
+    background-image: url(/../assets/images/banner_shop.jpg);
+    height: 50vh;
+}
+
+.contain-shop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.contain-shop h1{
+    font-size: 4rem;
+    line-height: 3rem;
+}
+.our-site-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+
+.our-site-link a, i, p{
+    margin: 0px 3px;
+    font-size: 18px;
+}
+.our-site-link a{
+    color:#fd2975ff;
+}
+
+
+/*================== SHOP SECTION  ===================== */
+
+.main_header_text{
+    font-size: 45px;
+}
+
+
+.shop_product_container{
+    width: 100%;
+}
+
+.shop_container{
+    background-color: #feefef;
+    width: 100%;
+    display: flex;
+}
+
+.shop_header_contain{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 8%;
+}
+.shop_header_contain h3{
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.shop_filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#shop_filter_select{
+   height: 28px;
+}
+
+.shop_header_contain .shop_filter select{
+    width: 130px;
+    height: 25px;
+    font-size: 16px;
+    padding: 5px;
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+.shop_header_contain .shop_filter i {
+    margin: 0 10px;
+    padding: 3px;
+    border: 1px solid #fd2975ff;
+    color:#fd2975ff;
+}
+
+/*================ TEST================ */
+
+
+.shop_products {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 4%;
+    gap: 10px;
+}
+
+.product {
+    width: 280px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+}
+
+.product:hover {
+    transform: translateY(-8px); /* Elevate the card on hover */
+}
+
+/* Image container */
+.product_img {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Sale badge */
+.sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #fd2975ff;
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Product name and price */
+.product-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-top: 15px;
+}
+
+.product-price {
+    font-size: 20px;
+    color: #fd2975ff;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Cache les contrôles de quantité et le bouton "Ajouter au Panier" par défaut */
+.quantity-control,
+.add-to-cart {
+    display: none;
+}
+
+/* Affiche les contrôles de quantité et le bouton "Ajouter au Panier" au survol du produit */
+.product:hover .quantity-control,
+.product:hover .add-to-cart {
+    display: flex;
+}
+
+/* Quantity control */
+.quantity-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.quantity-control button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-control button:hover {
+    background-color: #fd2975ff;
+    color: white;
+}
+
+.quantity-control .quantity {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Add to Cart button */
+.add-to-cart {
+    background-color: #fd2975ff;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-to-cart:hover {
+    background-color: #fd2975ff;
+}
