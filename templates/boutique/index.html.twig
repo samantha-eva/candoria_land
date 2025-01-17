@@ -83,9 +83,9 @@
                 <div>
                     <select name="category" id="category{{categorie.libelle}}" class="category-dropdown" onchange="submitForm()">
                         <option value="">{{categorie.libelle}}</option>
-                              {% for sousCategories in categorie.sousCategories %}
-                                <option value="{{sousCategories.nom}}">{{sousCategories.nom}}</option>
-                               {% endfor %}
+                        {% for sousCategories in categorie.sousCategories %}
+                        <option value="{{sousCategories.nom}}">{{sousCategories.nom}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 {% endfor %}
