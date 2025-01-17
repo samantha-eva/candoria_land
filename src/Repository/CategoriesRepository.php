@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Categories;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
+use App\Entity\SousCategories;
 /**
  * @extends ServiceEntityRepository<Categories>
  */
@@ -19,6 +19,17 @@ class CategoriesRepository extends ServiceEntityRepository
     public function findAllCategories(): array
     {
         return $this->findAll();
+    }
+
+    public function findCategoriesWithSubCategories(): array
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.sousCategories', 'sc') 
+            ->addSelect('sc') 
+            ->getQuery();
+          
+        // Execute the query and return the results
+        return $qb->getResult();
     }
 
     //    /**

@@ -18,6 +18,14 @@ class Categories
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
+    #[ORM\ManyToMany(targetEntity: SousCategories::class, mappedBy: 'categories')]
+    private Collection $sousCategories;
+
+    public function __construct()
+    {
+        $this->sousCategories = new ArrayCollection();
+    }
+
     
      // Add the __toString() method
      public function __toString(): string
@@ -38,6 +46,32 @@ class Categories
     public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+     /**
+     * @return Collection<int, SousCategories>
+     */
+    public function getSousCategories(): Collection
+    {
+        return $this->sousCategories;
+    }
+
+    public function addSousCategory(SousCategories $sousCategory): static
+    {
+        if (!$this->sousCategories->contains($sousCategory)) {
+            $this->sousCategories->add($sousCategory);
+            $sousCategory->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSousCategory(SousCategories $sousCategory): static
+    {
+        if ($this->sousCategories->removeElement($sousCategory)) {
+            $sousCategory->removeCategory($this);
+        }
 
         return $this;
     }

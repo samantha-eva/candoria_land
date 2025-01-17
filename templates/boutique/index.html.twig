@@ -79,52 +79,17 @@
             </div>
 
             <div class="shop_menu_category">
+                {% for categorie in categories %}
                 <div>
-                    <select name="category" id="category_emballes" class="category-dropdown" onchange="submitForm()">
-                        <option value="emballes">bonbon emballes</option>
-                        <option value="sucre">Sucré</option>
-                        <option value="acidule">Acidulé</option>
+                    <select name="category" id="category{{categorie.libelle}}" class="category-dropdown" onchange="submitForm()">
+                        <option value="">{{categorie.libelle}}</option>
+                              {% for sousCategories in categorie.sousCategories %}
+                                <option value="{{sousCategories.nom}}">{{sousCategories.nom}}</option>
+                               {% endfor %}
                     </select>
                 </div>
-
-                <div>
-                    <select name="category" id="category_vrac" class="category-dropdown" onchange="submitForm()">
-                        <option value="vrac">Bonbon en vrac</option>
-                        <option value="sucre">Sucré</option>
-                        <option value="acidule">Acidulés</option>
-                        <option value="guimauvee">Marshmallow / Guimauve</option>
-                    </select>
-                </div>
-
-                <div>
-                    <select name="category" id="category_grands_conditionnements" class="category-dropdown" onchange="submitForm()">
-                        <option value="">grands conditionnements</option>
-                        <option value="emballes">Sucette</option>
-                        <option value="vrac">Bonbons rétro</option>
-                        <option value="chocolat">Veggie</option>
-                        <option value="themes">Chewing-gums</option>
-                    </select>
-                </div>
-
-                <div>
-                    <select name="category" id="category_themes" class="category-dropdown" onchange="submitForm()">
-                        <option value="">themes</option>
-                        <option value="emballes">Anniversaire</option>
-                        <option value="vrac">Halloween</option>
-                        <option value="chocolat">Noël</option>
-                        <option value="themes">Pâques</option>
-                    </select>
-                </div>
-
-                <div>
-                    <select name="category" id="category_chocolat" class="category-dropdown" onchange="submitForm()">
-                        <option value="">chocolat</option>
-                        <option value="emballes">Barre chocolatée</option>
-                        <option value="vrac">Pâte à tartiner</option>
-                        <option value="chocolat">À la boîte</option>
-                        <option value="themes">Cacahuètes</option>
-                    </select>
-                </div>
+                {% endfor %}
+              
             </div>
 
             <!-- Marques -->

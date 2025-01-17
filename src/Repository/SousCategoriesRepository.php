@@ -16,6 +16,12 @@ class SousCategoriesRepository extends ServiceEntityRepository
         parent::__construct($registry, SousCategories::class);
     }
 
+    public function findAllSousCategories(): array
+    {
+        return $this->findAll();
+    }
+
+
     //    /**
     //     * @return SousCategories[] Returns an array of SousCategories objects
     //     */
