@@ -21,6 +21,19 @@ class BonbonsRepository extends ServiceEntityRepository
         return $this->findAll();
     }
 
+    public function findBySearchTerm(string $searchTerm): array
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        if (!empty($searchTerm)) {
+            $qb->where('b.nom LIKE :searchTerm')
+            ->setParameter('searchTerm', '%' . $searchTerm . '%');
+        }
+        
+
+        return $qb->getQuery()->getResult();
+    }
+
     //    /**
     //     * @return Bonbons[] Returns an array of Bonbons objects
     //     */

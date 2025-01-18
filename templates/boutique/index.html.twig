@@ -62,15 +62,16 @@
 
     <!-- Menu de filtrage et recherche -->
     <div class="shop_menus">
-        <form id="searchForm" action="search.php" method="GET">
+        <form id="searchForm" action="{{ path('app_shop') }}" method="GET">
             <!-- Barre de recherche -->
             <input 
                 type="text" 
-                name="query" 
+                name="search" 
+                value="{{ app.request.get('search', '') }}" 
                 placeholder="Rechercher" 
                 class="search-bar" 
-                oninput="submitForm()" 
                 aria-label="Rechercher un produit"
+                oninput="submitSearchForm()"
             >
 
             <!-- Catégories -->
@@ -81,7 +82,7 @@
             <div class="shop_menu_category">
                 {% for categorie in categories %}
                 <div>
-                    <select name="category" id="category{{categorie.libelle}}" class="category-dropdown" onchange="submitForm()">
+                    <select id="categorie_{{categorie.libelle}}" class="category-dropdown" onchange="submitForm()">
                         <option value="">{{categorie.libelle}}</option>
                         {% for sousCategories in categorie.sousCategories %}
                         <option value="{{sousCategories.nom}}">{{sousCategories.nom}}</option>

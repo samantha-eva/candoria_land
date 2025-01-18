@@ -23,3 +23,19 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+let debounceTimer;
+
+// Fonction pour soumettre le formulaire
+function submitSearchForm() {
+    // Annule toute soumission en cours
+    clearTimeout(debounceTimer);
+
+    // Attends un court délai avant de soumettre (pour limiter les requêtes)
+    debounceTimer = setTimeout(() => {
+        document.getElementById('searchForm').submit();
+    }, 800); // Délai ajustable en millisecondes
+}
+
+
+window.submitSearchForm = submitSearchForm;

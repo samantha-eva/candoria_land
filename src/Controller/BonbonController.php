@@ -9,6 +9,7 @@ use App\Repository\BonbonsRepository;
 use App\Repository\MarquesRepository;
 use App\Repository\CategoriesRepository;
 use App\Repository\SousCategoriesRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class BonbonController extends AbstractController
 
@@ -33,10 +34,10 @@ class BonbonController extends AbstractController
     }
 
     #[Route('/boutique', name: 'app_shop')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-
-        $bonbons    = $this->bonbonsRepository->findAll();
+        $searchTerm = $request->query->get('search', '');
+        $bonbons = $this->bonbonsRepository->findBySearchTerm($searchTerm);
         $marques    = $this->marquesRepository->findAll();
         $categories = $this->categoriesRepository->findCategoriesWithSubCategories();
 
