@@ -24,6 +24,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+
+
+
 let debounceTimer;
 
 // Fonction pour soumettre le formulaire

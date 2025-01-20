@@ -228,7 +228,7 @@ header{
   
 }
 
-/* Header for categories and filters */
+/* Header for filters */
 .shop_menu_heading {
     font-size: 25px;
     font-weight: 600;
@@ -238,29 +238,13 @@ header{
     text-transform: uppercase;
 }
 
-/* Category Dropdown Styling */
-.shop_menu_category div {
+/* Marques Dropdown Styling */
+.shop_menu_marque div {
     margin-bottom: 20px;
 }
 
-.category-dropdown {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 2px solid #fd2975;
-    border-radius: 8px;
-    background-color: #fff;
-    color: #fd2975;
-    transition: all 0.3s ease;
-}
-
-/* Hover effect for dropdown */
-.category-dropdown:hover,
-.category-dropdown:focus {
-    border-color: #ff61a6;
-    background-color: #ffdeeb; /* Light pink hover effect */
-    color: #ff61a6;
-    outline: none;
+#marque {
+    border: 2px solid pink; /* Bordure rose */
 }
 
 /* Search bar */
@@ -285,74 +269,9 @@ header{
     outline: none;
 }
 
-/* Brands checkboxes */
-.category_marque_container {
-    margin-top: 30px;
-}
 
-.category_marque_container h1 {
-    text-align: center;
-    font-size: 22px;
-    color: #fd2975;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
 
-.brand-checkboxes div {
-    margin-bottom: 12px;
-}
-
-.brand-checkboxes label {
-    font-size: 16px;
-    color: #333;
-    font-weight: 500;
-}
-
-/* Checkbox styling */
-input[type="checkbox"] {
-    margin-right: 10px;
-    accent-color: #fd2975; /* Pink accent for checkboxes */
-}
-
-/* Hover effect for category and brand dropdowns */
-.category-dropdown:hover, .brand-checkboxes label:hover {
-    cursor: pointer;
-    color: #ff61a6;
-}
-
-/* Adding some spacing between categories and brands */
-.shop_menu_category {
+/* Adding some spacing between marques and categories */
+.shop_menu_marque {
     margin-bottom: 30px;
-}
-
-/* Style for active items or selected options */
-.category-dropdown:focus, .brand-checkboxes input:checked {
-    background-color: #ffdeeb;
-    border-color: #ff61a6;
-}
-
-
-/*================== RESPONSIVENESS ==================*/
-@media (max-width: 768px) {
-    .shop_menus {
-        width: 100%;
-        padding: 30px 20px;
-    }
-
-    .shop_products {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .shop_products {
-        grid-template-columns: 1fr;
-    }
-
-    .shop_menus {
-        padding: 20px;
-    }
 }

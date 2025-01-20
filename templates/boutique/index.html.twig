@@ -61,6 +61,7 @@
     </div>
 
     <!-- Menu de filtrage et recherche -->
+     
     <div class="shop_menus">
         <form id="searchForm" action="{{ path('app_shop') }}" method="GET">
             <!-- Barre de recherche -->
@@ -74,40 +75,25 @@
                 oninput="submitSearchForm()"
             >
 
-            <!-- Catégories -->
+            <!-- Marques -->
             <div class="shop_menu_heading">
-                <h1>Catégories</h1>
+                <h1>Marques</h1>
             </div>
-
-            <div class="shop_menu_category">
-                {% for categorie in categories %}
+            
+            <div class="category_marque_container">
                 <div>
-                    <select id="categorie_{{categorie.libelle}}" class="category-dropdown" onchange="submitForm()">
-                        <option value="">{{categorie.libelle}}</option>
+                    <select name="marque" id="marque" multiple>
+                        {% for marque in marques %}
+                        <option value="{{marque.id}}">{{marque.nom}}</option>
+                        {% endfor %} 
                     </select>
                 </div>
-                {% endfor %}
-              
-            </div>
 
-            <!-- Marques -->
-            <div class="category_marque_container">
-                <h1>Marques</h1>
-                <div class="brand-checkboxes">
-                  {% for marque in marques %}
-                    <div>
-                        <label for="brand_{{ marque.nom }}">
-                            <input type="checkbox" id="brand_{{ marque.nom }}" name="brands[]" value="{{ marque.nom }}" onchange="submitForm()">{{ marque.nom }}
-                        </label>
-                    </div>
-                   {% endfor %} 
-                </div>
             </div>
 
         </form>
     </div>
 </div>
-
 
 
 {% endblock %}
