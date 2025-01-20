@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\BonbonsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: BonbonsRepository::class)]
 class Bonbons
@@ -33,9 +35,16 @@ class Bonbons
     #[ORM\JoinColumn(nullable: false)]
     private ?Marques $marque = null;
 
-    #[ORM\ManyToOne(inversedBy: 'bonbons')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?SousCategories $SousCategorie = null;
+    #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'bonbons')]
+    #[ORM\JoinTable(name: 'bonbon_categorie')]
+    private Collection $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -116,15 +125,37 @@ class Bonbons
 
         return $this;
     }
+    /**
+    * @return Collection<int, Categories>
+    */
 
-    public function getSousCategorie(): ?SousCategories
+    public function getCategories(): Collection
     {
-        return $this->SousCategorie;
+        return $this->categories;
     }
 
-    public function setSousCategorie(?SousCategories $SousCategorie): static
+    public function setCategories(Collection $categories): static
     {
-        $this->SousCategorie = $SousCategorie;
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    public function addCategories(Categories $categories): self
+    {
+        if (!$this->categories->contains($categories)) {
+            $this->categories->add($categories);
+            $categories->addBonbons($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategories(Categories $categories): self
+    {
+        if ($this->categories->removeElement($categories)) {
+            $categories->removeBonbons($this);
+        }
 
         return $this;
     }

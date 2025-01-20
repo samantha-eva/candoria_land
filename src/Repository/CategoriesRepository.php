@@ -21,16 +21,7 @@ class CategoriesRepository extends ServiceEntityRepository
         return $this->findAll();
     }
 
-    public function findCategoriesWithSubCategories(): array
-    {
-        $qb = $this->createQueryBuilder('c')
-            ->leftJoin('c.sousCategories', 'sc') 
-            ->addSelect('sc') 
-            ->getQuery();
-          
-        // Execute the query and return the results
-        return $qb->getResult();
-    }
+   
 
     //    /**
     //     * @return Categories[] Returns an array of Categories objects

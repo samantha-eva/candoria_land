@@ -18,12 +18,12 @@ class Categories
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
-    #[ORM\ManyToMany(targetEntity: SousCategories::class, mappedBy: 'categories')]
-    private Collection $sousCategories;
+    #[ORM\ManyToMany(targetEntity: Bonbons::class, mappedBy: 'categories')]
+    private Collection $bonbons;
 
     public function __construct()
     {
-        $this->sousCategories = new ArrayCollection();
+        $this->bonbons = new ArrayCollection();
     }
 
     
@@ -49,28 +49,30 @@ class Categories
 
         return $this;
     }
-     /**
+  
+
+      /**
      * @return Collection<int, SousCategories>
      */
-    public function getSousCategories(): Collection
+    public function getBonbons(): Collection
     {
-        return $this->sousCategories;
+        return $this->bonbons;
     }
 
-    public function addSousCategory(SousCategories $sousCategory): static
+    public function addBonbons(Bonbons $bonbons): static
     {
-        if (!$this->sousCategories->contains($sousCategory)) {
-            $this->sousCategories->add($sousCategory);
-            $sousCategory->addCategory($this);
+        if (!$this->bonbons->contains($bonbons)) {
+            $this->bonbons->add($bonbons);
+            $bonbons->addCategories($this);
         }
 
         return $this;
     }
 
-    public function removeSousCategory(SousCategories $sousCategory): static
+    public function removeBonbons(Bonbons $bonbons): static
     {
-        if ($this->sousCategories->removeElement($sousCategory)) {
-            $sousCategory->removeCategory($this);
+        if ($this->bonbons->removeElement($bonbons)) {
+            $bonbons->removeCategories($this);
         }
 
         return $this;

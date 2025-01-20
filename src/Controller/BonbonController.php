@@ -18,19 +18,16 @@ class BonbonController extends AbstractController
     private $bonbonsRepository;
     private $marquesRepository;
     private $categoriesRepository;
-    private $souscategoriesRepository;
 
     public function __construct(BonbonsRepository $bonbonsRepository,
      MarquesRepository $marquesRepository,
      CategoriesRepository $categoriesRepository,
-     SousCategoriesRepository $sousCategoriesRepository
     )
     
     {
         $this->bonbonsRepository = $bonbonsRepository;
         $this->marquesRepository = $marquesRepository;
         $this->categoriesRepository = $categoriesRepository;
-        $this->souscategoriesRepository = $sousCategoriesRepository;
     }
 
     #[Route('/boutique', name: 'app_shop')]
@@ -39,14 +36,13 @@ class BonbonController extends AbstractController
         $searchTerm = $request->query->get('search', '');
         $bonbons = $this->bonbonsRepository->findBySearchTerm($searchTerm);
         $marques    = $this->marquesRepository->findAll();
-        $categories = $this->categoriesRepository->findCategoriesWithSubCategories();
-
+        $categories =$this->categoriesRepository->findAllCategories();
+        
          return $this->render('boutique/index.html.twig', [
             'controller_name' => 'BonbonController',
             'bonbons'=> $bonbons,
             'marques'=> $marques,
-            'categories' => $categories,
-
+            'categories' => $categories
          ]);
      }
 }
