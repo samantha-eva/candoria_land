@@ -39,8 +39,11 @@ class BonbonController extends AbstractController
         $categoriesJson = $request->query->get('categories', '[]');
         $selectedCategories = json_decode($categoriesJson, true) ?? [];
 
+        $marquesJson = $request->query->get('marques', '[]');
+        $selectedMarques = json_decode($marquesJson, true) ?? []; // Cela renvoie un tableau des IDs des marques sélectionnées
+      
         // Récupération des bonbons
-        $bonbons = $this->bonbonsRepository->findBySearchTermAndCategories($searchTerm, $selectedCategories);
+        $bonbons = $this->bonbonsRepository->findBySearchTermAndCategoriesAndMarques($searchTerm, $selectedCategories, $selectedMarques);
 
         // Récupération des autres données
         $marques = $this->marquesRepository->findAll();

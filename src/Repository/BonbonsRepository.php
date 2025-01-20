@@ -22,7 +22,7 @@ class BonbonsRepository extends ServiceEntityRepository
     }
 
    // src/Repository/BonbonsRepository.php
-   public function findBySearchTermAndCategories($searchTerm, $selectedCategories): array
+   public function findBySearchTermAndCategoriesAndMarques($searchTerm, $selectedCategories, $selectedMarques): array
    {
 
 
@@ -34,12 +34,17 @@ class BonbonsRepository extends ServiceEntityRepository
        }
 
 
-   
        if (!empty($selectedCategories)) {
            $qb->innerJoin('b.categories', 'c')
                ->andWhere('c.id IN (:categories)')
                ->setParameter('categories', $selectedCategories);
        }
+
+       if (!empty($selectedMarques)) {
+            $qb->innerJoin('b.marque', 'm')
+                ->andWhere('m.id IN (:marques)')
+                ->setParameter('marques', $selectedMarques);
+        }
    
        return $qb->getQuery()->getResult();
    }

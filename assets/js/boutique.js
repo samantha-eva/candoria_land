@@ -16,7 +16,9 @@ function initializeShopScripts() {
                 bgColor: '#eaffe6', // Couleur de fond des tags
             },
             onChange: function (values) {
-                console.log(values); // Affiche les valeurs sélectionnées dans la console
+                console.log(values); 
+                updateMarques()
+              
             }
         });
     }
@@ -59,6 +61,22 @@ function updateCategories() {
     // Soumettre le formulaire avec un délai (debounce)
     submitSearchForm();
 }
+
+function updateMarques() {
+    const marquesSelect = document.getElementById('marques');
+    const selectedMarques = Array.from(marquesSelect.selectedOptions)
+        .map(option => parseInt(option.value)); // Récupère les IDs des marques sélectionnées
+        
+    document.getElementById('marquesField').value = JSON.stringify(selectedMarques);
+
+
+    // Soumettre le formulaire
+    submitSearchForm();
+}
+
+
+
+
 
 let debounceTimer;
 function submitSearchForm() {
