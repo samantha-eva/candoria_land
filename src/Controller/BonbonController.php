@@ -34,15 +34,24 @@ class BonbonController extends AbstractController
     public function index(Request $request): Response
     {
         $searchTerm = $request->query->get('search', '');
-        $bonbons = $this->bonbonsRepository->findBySearchTerm($searchTerm);
-        $marques    = $this->marquesRepository->findAll();
-        $categories =$this->categoriesRepository->findAllCategories();
-        
-         return $this->render('boutique/index.html.twig', [
+
+        // Décoder le tableau JSON des catégories
+        $categoriesJson = $request->query->get('categories', '[]');
+        $selectedCategories = json_decode($categoriesJson, true) ?? [];
+
+        // Récupération des bonbons
+        $bonbons = $this->bonbonsRepository->findBySearchTermAndCategories($searchTerm, $selectedCategories);
+
+        // Récupération des autres données
+        $marques = $this->marquesRepository->findAll();
+        $categories = $this->categoriesRepository->findAllCategories();
+
+        return $this->render('boutique/index.html.twig', [
             'controller_name' => 'BonbonController',
-            'bonbons'=> $bonbons,
-            'marques'=> $marques,
-            'categories' => $categories
-         ]);
-     }
+            'bonbons' => $bonbons,
+            'marques' => $marques,
+            'categories' => $categories,
+        ]);
+    }
+
 }

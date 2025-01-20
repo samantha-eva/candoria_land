@@ -228,25 +228,6 @@ header{
   
 }
 
-/* Header for filters */
-.shop_menu_heading {
-    font-size: 25px;
-    font-weight: 600;
-    color: #fd2975; /* Bright pink for the candy theme */
-    margin-bottom: 20px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-/* Marques Dropdown Styling */
-.shop_menu_marque div {
-    margin-bottom: 20px;
-}
-
-#marque {
-    border: 2px solid pink; /* Bordure rose */
-}
-
 /* Search bar */
 .search-bar {
     width: 100%;
@@ -269,9 +250,66 @@ header{
     outline: none;
 }
 
-
-
-/* Adding some spacing between marques and categories */
-.shop_menu_marque {
-    margin-bottom: 30px;
+/* Header for filters */
+.shop_menu_heading {
+    font-size: 25px;
+    font-weight: 600;
+    color: #fd2975; /* Bright pink for the candy theme */
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
 }
+
+/* ==================Catgeories======================= */
+.shop_menu_categories {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.shop_menu_categories .checkbox-container {
+    display: flex;
+    align-items: center; /* Align checkbox and label on the same line */
+    gap: 10px; /* Add space between checkbox and label */
+}
+
+.shop_menu_categories input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #fd2975; /* Add color to checkbox */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shop_menu_categories input[type="checkbox"]:hover {
+    transform: scale(1.2); /* Hover effect to enlarge the checkbox */
+}
+
+.shop_menu_categories label {
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shop_menu_categories label:hover {
+    color: #fd2975;
+    font-weight: 600;
+}
+
+/* ==================Marques======================= */
+
+.category_marques_container h1 {
+    margin: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fd2975;
+}
+
+.multi-select-container {
+    width: 100%;
+    display: block;
+}
+

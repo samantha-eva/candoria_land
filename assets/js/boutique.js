@@ -26,20 +26,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+function updateCategories() {
+    const checkboxes = document.querySelectorAll('.shop_menu_categories input[type="checkbox"]');
+    const selectedCategories = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => parseInt(checkbox.value));
 
+    // Convertir le tableau en JSON et définir la valeur du champ caché
+    document.getElementById('categoriesField').value = JSON.stringify(selectedCategories);
 
-let debounceTimer;
-
-// Fonction pour soumettre le formulaire
-function submitSearchForm() {
-    // Annule toute soumission en cours
-    clearTimeout(debounceTimer);
-
-    // Attends un court délai avant de soumettre (pour limiter les requêtes)
-    debounceTimer = setTimeout(() => {
-        document.getElementById('searchForm').submit();
-    }, 800); // Délai ajustable en millisecondes
+    // Soumettre le formulaire avec un délai (debounce)
+    submitSearchForm();
 }
 
+let debounceTimer;
+function submitSearchForm() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        document.getElementById('searchForm').submit();
+    }, 800);
+}
 
+window.updateCategories = updateCategories;
 window.submitSearchForm = submitSearchForm;

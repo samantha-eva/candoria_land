@@ -37,18 +37,18 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	<script>
     // Initialise le MultiSelectTag
-    new MultiSelectTag('marque', {
-        rounded: true,    // default true
-        shadow: true,      // default false
-        placeholder: 'Search',  // default Search...
+    new MultiSelectTag('marques', {
+        rounded: true,   // Par défaut true, pour les coins arrondis
+        shadow: true,    // Par défaut false, pour une ombre autour du tag
+        placeholder: 'Rechercher...', // Texte par défaut dans la barre de recherche
         tagColor: {
-        textColor: '#327b2c',
-        borderColor: '#92e681',
-        bgColor: '#eaffe6',
+            textColor: '#327b2c', // Couleur du texte (vert foncé)
+            borderColor: '#92e681', // Couleur de la bordure des tags
+            bgColor: '#eaffe6', // Couleur de fond des tags
         },
         onChange: function(values) {
-            console.log(values)
+            console.log(values); // Affiche les valeurs sélectionnées dans la console
         }
-    })
-    </script>	
+    });
+</script>
 </html>
