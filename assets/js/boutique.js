@@ -1,11 +1,33 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbo:load", function () {
+    initializeShopScripts();
+});
+
+function initializeShopScripts() {
+    const shopContainer = document.querySelector('.shop_container');
+    if (shopContainer) {
+        // Initialise le MultiSelectTag uniquement si on est dans `shop_container`
+        new MultiSelectTag('marques', {
+            rounded: true,   // Coins arrondis
+            shadow: true,    // Ombre autour du tag
+            placeholder: 'Rechercher...', // Texte par défaut dans la barre de recherche
+            tagColor: {
+                textColor: '#327b2c', // Couleur du texte (vert foncé)
+                borderColor: '#92e681', // Couleur de la bordure des tags
+                bgColor: '#eaffe6', // Couleur de fond des tags
+            },
+            onChange: function (values) {
+                console.log(values); // Affiche les valeurs sélectionnées dans la console
+            }
+        });
+    }
+
     const decreaseButtons = document.querySelectorAll(".decrease");
     const increaseButtons = document.querySelectorAll(".increase");
     const quantities = document.querySelectorAll(".quantity");
 
     // Gérer le clic sur le bouton "-" (réduire la quantité)
     decreaseButtons.forEach((button, index) => {
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             const quantityElement = quantities[index];
             let currentQuantity = parseInt(quantityElement.textContent, 10);
             if (currentQuantity > 1) {
@@ -16,14 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Gérer le clic sur le bouton "+" (augmenter la quantité)
     increaseButtons.forEach((button, index) => {
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             const quantityElement = quantities[index];
             let currentQuantity = parseInt(quantityElement.textContent, 10);
             quantityElement.textContent = currentQuantity + 1;
         });
     });
-});
-
+}
 
 
 function updateCategories() {
