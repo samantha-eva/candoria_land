@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Categories;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
+use App\Entity\SousCategories;
 /**
  * @extends ServiceEntityRepository<Categories>
  */
@@ -15,6 +15,13 @@ class CategoriesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Categories::class);
     }
+
+    public function findAllCategories(): array
+    {
+        return $this->findAll();
+    }
+
+   
 
     //    /**
     //     * @return Categories[] Returns an array of Categories objects

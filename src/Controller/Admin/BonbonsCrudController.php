@@ -32,7 +32,7 @@ class BonbonsCrudController extends AbstractCrudController
             NumberField::new('prix', 'Prix')->setNumDecimals(2),
             TextField::new('poids'),
             TextEditorField::new('description'),
-            AssociationField::new('categorie', 'Catégorie'), // Add this line for the category relationship
+            AssociationField::new('categories', 'Catégorie')->setFormTypeOption('by_reference', false),
             AssociationField::new('marque', 'Marque')
         ];
     }

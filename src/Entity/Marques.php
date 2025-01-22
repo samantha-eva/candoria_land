@@ -18,8 +18,10 @@ class Marques
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-
-    #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Bonbons::class, orphanRemoval: true)]
+    /**
+     * @var Collection<int, Bonbons>
+     */
+    #[ORM\OneToMany(targetEntity: Bonbons::class, mappedBy: 'marque')]
     private Collection $bonbons;
 
     public function __construct()
@@ -27,7 +29,8 @@ class Marques
         $this->bonbons = new ArrayCollection();
     }
 
-     // Add the __toString() method
+
+    // Add the __toString() method
      public function __toString(): string
      {
          return $this->nom ?? '';
@@ -50,6 +53,9 @@ class Marques
         return $this;
     }
 
+    /**
+     * @return Collection<int, Bonbons>
+     */
     public function getBonbons(): Collection
     {
         return $this->bonbons;
@@ -68,7 +74,7 @@ class Marques
     public function removeBonbon(Bonbons $bonbon): static
     {
         if ($this->bonbons->removeElement($bonbon)) {
-            // Set the owning side to null (unless already changed)
+            // set the owning side to null (unless already changed)
             if ($bonbon->getMarque() === $this) {
                 $bonbon->setMarque(null);
             }
@@ -76,4 +82,11 @@ class Marques
 
         return $this;
     }
+
+    
+
+   
+
+   
+   
 }

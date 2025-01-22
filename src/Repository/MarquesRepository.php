@@ -16,6 +16,11 @@ class MarquesRepository extends ServiceEntityRepository
         parent::__construct($registry, Marques::class);
     }
 
+    public function findAllMarques(): array
+    {
+        return $this->findAll();
+    }
+
     //    /**
     //     * @return Categories[] Returns an array of Categories objects
     //     */

@@ -1,4 +1,6 @@
 import './bootstrap.js';
+import './js/boutique.js';
+import './js/home.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -8,4 +10,5 @@ import './bootstrap.js';
 import './styles/app.css';
 import './styles/navbar.css';
 import './styles/home.css';
+import './styles/boutique.css';
 import './styles/footer.css';

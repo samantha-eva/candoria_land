@@ -1,0 +1,410 @@
+header{
+    background-image: url(/../assets/images/banner_shop.jpg);
+    height: 30vh;
+}
+
+.contain-shop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.contain-shop h1{
+    font-size: 4rem;
+    line-height: 3rem;
+}
+.our-site-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+
+.our-site-link a, i, p{
+    margin: 0px 3px;
+    font-size: 18px;
+}
+.our-site-link a{
+    color:#fd2975ff;
+}
+
+
+/*================== SHOP SECTION  ===================== */
+
+.main_header_text{
+    font-size: 45px;
+}
+
+
+.shop_product_container{
+    width: 100%;
+}
+
+.shop_container{
+    background-color: #feefef;
+    width: 100%;
+    display: flex;
+}
+
+.shop_header_contain{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 8%;
+}
+.shop_header_contain h3{
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.shop_filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#shop_filter_select{
+   height: 30px;
+   border-radius: 8px;
+   border: 2px solid #fd2975;
+}
+
+.shop_header_contain .shop_filter select{
+    width: 130px;
+    height: 25px;
+    font-size: 16px;
+    padding: 5px;
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+.shop_header_contain .shop_filter i {
+    margin: 0 10px;
+    padding: 3px;
+    border: 1px solid #fd2975ff;
+    color:#fd2975ff;
+}
+
+/*================ TEST================ */
+
+
+.shop_products {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 4%;
+    gap: 10px;
+}
+
+.product {
+    width: 280px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+}
+
+.product:hover {
+    transform: translateY(-8px); /* Elevate the card on hover */
+}
+
+/* Image container */
+.product_img {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Sale badge */
+.sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #fd2975ff;
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Product name and price */
+.product-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-top: 15px;
+}
+
+.product-price {
+    font-size: 20px;
+    color: #fd2975ff;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Cache les contrôles de quantité et le bouton "Ajouter au Panier" par défaut */
+.quantity-control,
+.add-to-cart {
+    display: none;
+}
+
+/* Affiche les contrôles de quantité et le bouton "Ajouter au Panier" au survol du produit */
+.product:hover .quantity-control,
+.product:hover .add-to-cart {
+    display: flex;
+}
+
+/* Quantity control */
+.quantity-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.quantity-control button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-control button:hover {
+    background-color: #fd2975ff;
+    color: white;
+}
+
+.quantity-control .quantity {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Add to Cart button */
+.add-to-cart {
+    background-color: #fd2975ff;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-to-cart:hover {
+    background-color: #fd2975ff;
+}
+
+/*================ FILTRE PRODUIT================ */
+.shop_menus {
+    width: 30%;
+    height: 100%;
+    padding: 50px 20px;
+  
+}
+
+/* Search bar */
+.search-bar {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #fd2975;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #fd2975;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for search bar */
+.search-bar:hover,
+.search-bar:focus {
+    border-color: #ff61a6;
+    background-color: #ffdeeb;
+    color: #ff61a6;
+    outline: none;
+}
+
+/* Header for filters */
+.shop_menu_heading {
+    font-size: 25px;
+    font-weight: 600;
+    color: #fd2975; /* Bright pink for the candy theme */
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* ==================Catgeories======================= */
+.shop_menu_categories {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.shop_menu_categories .checkbox-container {
+    display: flex;
+    align-items: center; /* Align checkbox and label on the same line */
+    gap: 10px; /* Add space between checkbox and label */
+}
+
+.shop_menu_categories input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #fd2975; /* Add color to checkbox */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shop_menu_categories input[type="checkbox"]:hover {
+    transform: scale(1.2); /* Hover effect to enlarge the checkbox */
+}
+
+.shop_menu_categories label {
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shop_menu_categories label:hover {
+    color: #fd2975;
+    font-weight: 600;
+}
+
+/* ==================Marques======================= */
+
+.category_marques_container h1 {
+    margin: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fd2975;
+}
+
+.multi-select-container {
+    width: 100%;
+    display: block;
+}
+
+
+/*======================DETAIL BONBON==================  */
+.detail_container{
+    background-color: #feefef;
+    width: 100%;
+    display: flex;
+}
+
+.detail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 8%;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.image {
+    flex: 1;
+    max-width: 400px;
+    text-align: center;
+}
+
+.image img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    flex: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.bonbon-name {
+    font-size: 2.5rem;
+    color: #ff6f61;
+    margin-bottom: 20px;
+}
+
+.price h3 {
+    font-size: 2rem;
+    color: #ff8c42;
+    margin-bottom: 15px;
+}
+
+.description p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn.checkout {
+    background-color: #ff6f61;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn.checkout:hover {
+    background-color: #e55d50;
+    transform: scale(1.05);
+}
+
+.btn.cart {
+    background-color: #ffc107;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn.cart:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+.btn span {
+    margin-left: 10px;
+}

@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique{% endblock %}
+{% block body %}
+
+<div class="big-metro-site-container">
+    <header>
+        <div class="contain-shop">
+            <h1 class="main_header_text">Boutique</h1>
+            <div class="our-site-link">
+                <a href="">Accueil</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <p>Boutique</p>
+            </div>
+        </div>
+    </header>
+</div>
+
+{# SHOP CONTAINER #}
+<div class="shop_container">
+    <div class="shop_product_container">
+        <!-- Entête de la section produits -->
+        <div class="shop_header_contain">
+            <h3>Affichage 1 - 9 sur 100 résultats</h3>
+            <div class="shop_filter">
+                <select id="shop_filter_select" onchange="submitForm()">
+                    <option value="last">Derniers</option>
+                    <option value="price_asc">Prix bas à élevé</option>
+                    <option value="price_desc">Prix élevé à bas</option>
+                </select>
+                <i class="fa-solid fa-table-cells"></i>
+                <div class="shop_bars">
+                    <div class="fa-solid fa-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liste des produits -->
+        <div class="shop_products">
+            <!-- Exemple de produit avec réduction -->
+            {% for bonbon in bonbons %}
+                <div class="product">
+                    <div class="product_img">
+                        <a href="{{ path('app_detail', { 'id': bonbon.id }) }}">
+                            <span class="sale-badge">-40%</span>
+                            <img src="{{ asset('uploads/' ~ bonbon.image) }}" alt="Bonbons Fruités">
+                        </a>
+                    </div>
+                    <p class="product-name">{{ bonbon.nom }} - {{bonbon.poids}}</p>
+                    <p class="product-price">{{ bonbon.prix }}</p>
+                    <div class="quantity-control">
+                        <button class="decrease">-</button>
+                        <span class="quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="add-to-cart">Ajouter au Panier</button>
+                </div>
+            {% endfor %}
+          
+        </div>
+    </div>
+
+    <!-- Menu de filtrage et recherche -->
+     
+    <div class="shop_menus">
+        <form id="searchForm" action="{{ path('app_shop') }}" method="GET">
+            <!-- Barre de recherche -->
+            <input 
+                type="text" 
+                name="search" 
+                value="{{ app.request.get('search', '') }}" 
+                placeholder="Rechercher" 
+                class="search-bar" 
+                aria-label="Rechercher un produit"
+                oninput="submitSearchForm()"
+            >
+            <input type="hidden" id="categoriesField" name="categories" value="{{ app.request.get('categories', '[]') }}"/>
+
+            {# <!-- Marques --> #}
+            <div class="shop_menu_heading">
+                <h1>Categories</h1>
+            </div>
+            
+
+            <div class="shop_menu_categories">
+                {% for categorie in categories %}
+                <div class="checkbox-container">
+                    <input 
+                        type="checkbox" 
+                        id="category_{{ categorie.id }}" 
+                        value="{{ categorie.id }}" 
+                        {% if categorie.id in app.request.get('categories', []) %} checked {% endif %}
+                        onchange="updateCategories()"
+                    />
+                    <label for="category_{{ categorie.id }}">{{ categorie.libelle }}</label>
+                </div>
+                {% endfor %}
+ 
+                <input type="hidden" id="marquesField" name="marques" value="{{ app.request.get('marques', '[]') }}"/>
+
+               
+                <div class="category_marques_container">
+                    <h1>Marques</h1>
+                    <div class="multi-select-container">
+                       <select  id="marques" multiple onchange="updateMarques()">
+                            {% for marque in marques %}
+                                <option value="{{ marque.id }}" 
+                                    {% if marque.id in app.request.get('marques', []) %}selected{% endif %}>
+                                    {{ marque.nom }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

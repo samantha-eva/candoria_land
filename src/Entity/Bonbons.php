@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\BonbonsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: BonbonsRepository::class)]
 class Bonbons
@@ -26,16 +28,23 @@ class Bonbons
     #[ORM\Column(length: 255)]
     private ?string $poids = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'bonbons')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categories $categorie = null;
-
-    #[ORM\ManyToOne(inversedBy: 'bonbons')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Marques $marque = null;
+
+    #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'bonbons')]
+    #[ORM\JoinTable(name: 'bonbon_categorie')]
+    private Collection $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -54,11 +63,12 @@ class Bonbons
         return $this;
     }
 
-
+    
     public function getImage(): ?string
     {
         return $this->image;
     }
+
 
     public function setImage(string $image): static
     {
@@ -66,6 +76,7 @@ class Bonbons
 
         return $this;
     }
+
 
     public function getPrix(): ?string
     {
@@ -103,18 +114,6 @@ class Bonbons
         return $this;
     }
 
-    public function getCategorie(): ?Categories
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categories $categorie): static
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
     public function getMarque(): ?Marques
     {
         return $this->marque;
@@ -123,6 +122,40 @@ class Bonbons
     public function setMarque(?Marques $marque): static
     {
         $this->marque = $marque;
+
+        return $this;
+    }
+    /**
+    * @return Collection<int, Categories>
+    */
+
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(Collection $categories): static
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    public function addCategories(Categories $categories): self
+    {
+        if (!$this->categories->contains($categories)) {
+            $this->categories->add($categories);
+            $categories->addBonbons($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategories(Categories $categories): self
+    {
+        if ($this->categories->removeElement($categories)) {
+            $categories->removeBonbons($this);
+        }
 
         return $this;
     }
