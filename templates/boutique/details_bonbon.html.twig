@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique{% endblock %}
+{% block body %}
+
+<div class="big-metro-site-container">
+    <header>
+        <div class="contain-shop">
+            <h1 class="main_header_text">{{bonbon.nom}}</h1>
+            <div class="our-site-link">
+                <a href="">Accueil</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <p>Boutique</p>
+            </div>
+        </div>
+    </header>
+</div>
+
+<div class="detail_container">
+    <div class="detail">
+        <div class="image">
+            <img src="{{ asset('uploads/' ~ bonbon.image) }}" alt="{{bonbon.nom}}">
+        </div>
+        <div class="content">
+            <h1 class="bonbon-name">{{bonbon.nom}}</h1>
+            <div class="price">
+                <h3>{{bonbon.prix}}€</h3>
+            </div>
+            <div class="description">
+               <p>{{ bonbon.description|striptags }}</p>
+            </div>
+            <div class="buttons">
+                <button class="btn checkout">Check out</button>
+                <button class="btn cart">Ajouter panier <span><i class="fa-solid fa-cart-shopping"></i></span></button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -57,4 +57,15 @@ class BonbonController extends AbstractController
         ]);
     }
 
+    #[Route('/boutique/{id}', name: 'app_detail')]
+    public function show(int $id): Response
+    {
+        $bonbon = $this->bonbonsRepository->findBonbonById($id);
+        
+        return $this->render('boutique/details_bonbon.html.twig', [
+            'controller_name' => 'BonbonController',
+            'bonbon' => $bonbon,
+        ]);
+    }
+
 }

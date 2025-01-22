@@ -21,10 +21,8 @@ class BonbonsRepository extends ServiceEntityRepository
         return $this->findAll();
     }
 
-   // src/Repository/BonbonsRepository.php
    public function findBySearchTermAndCategoriesAndMarques($searchTerm, $selectedCategories, $selectedMarques): array
    {
-
 
        $qb = $this->createQueryBuilder('b');
        
@@ -50,28 +48,9 @@ class BonbonsRepository extends ServiceEntityRepository
    }
    
 
-    //    /**
-    //     * @return Bonbons[] Returns an array of Bonbons objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('b.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Bonbons
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+   public function findBonbonById(int $id): ?Bonbons
+   {
+       return $this->find($id);
+   }
+   
 }

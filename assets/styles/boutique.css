@@ -313,3 +313,98 @@ header{
     display: block;
 }
 
+
+/*======================DETAIL BONBON==================  */
+.detail_container{
+    background-color: #feefef;
+    width: 100%;
+    display: flex;
+}
+
+.detail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 8%;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.image {
+    flex: 1;
+    max-width: 400px;
+    text-align: center;
+}
+
+.image img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    flex: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.bonbon-name {
+    font-size: 2.5rem;
+    color: #ff6f61;
+    margin-bottom: 20px;
+}
+
+.price h3 {
+    font-size: 2rem;
+    color: #ff8c42;
+    margin-bottom: 15px;
+}
+
+.description p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn.checkout {
+    background-color: #ff6f61;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn.checkout:hover {
+    background-color: #e55d50;
+    transform: scale(1.05);
+}
+
+.btn.cart {
+    background-color: #ffc107;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn.cart:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+.btn span {
+    margin-left: 10px;
+}
