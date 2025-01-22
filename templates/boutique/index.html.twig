@@ -39,7 +39,7 @@
         <div class="shop_products">
             <!-- Exemple de produit avec réduction -->
             {% for bonbon in bonbons %}
-                <div class="product">
+                <div class="product"  data-id="{{ bonbon.id }}">
                     <div class="product_img">
                         <a href="{{ path('app_detail', { 'id': bonbon.id }) }}">
                             <span class="sale-badge">-40%</span>

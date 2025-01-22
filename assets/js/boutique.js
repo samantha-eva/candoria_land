@@ -26,6 +26,7 @@ function initializeShopScripts() {
     const decreaseButtons = document.querySelectorAll(".decrease");
     const increaseButtons = document.querySelectorAll(".increase");
     const quantities = document.querySelectorAll(".quantity");
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
 
     // Gérer le clic sur le bouton "-" (réduire la quantité)
     decreaseButtons.forEach((button, index) => {
@@ -44,6 +45,32 @@ function initializeShopScripts() {
             const quantityElement = quantities[index];
             let currentQuantity = parseInt(quantityElement.textContent, 10);
             quantityElement.textContent = currentQuantity + 1;
+        });
+    });
+
+     // Gérer le clic sur le bouton "Ajouter au Panier"
+     addToCartButtons.forEach((button, index) => {
+        button.addEventListener("click", function () {
+            const productElement = button.closest(".product");
+            const productId = productElement.dataset.id; // Assurez-vous que chaque produit a un ID
+            const quantity = parseInt(quantities[index].textContent, 10);
+
+            // Envoyer la requête AJAX pour mettre à jour le panier
+            fetch("/add-to-cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+                body: JSON.stringify({ id: productId, quantity }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // Mettre à jour la barre de navigation
+                    document.getElementById("cart_count").textContent = data.totalItems;
+                    document.querySelector(".icons_sec h3").textContent = data.totalPrice + "€";
+                })
+                .catch((error) => console.error("Erreur:", error));
         });
     });
 }
@@ -73,10 +100,6 @@ function updateMarques() {
     // Soumettre le formulaire
     submitSearchForm();
 }
-
-
-
-
 
 let debounceTimer;
 function submitSearchForm() {

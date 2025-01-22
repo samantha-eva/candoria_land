@@ -10,6 +10,8 @@ use App\Repository\MarquesRepository;
 use App\Repository\CategoriesRepository;
 use App\Repository\SousCategoriesRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\CartService;
 
 class BonbonController extends AbstractController
 
@@ -65,6 +67,29 @@ class BonbonController extends AbstractController
         return $this->render('boutique/details_bonbon.html.twig', [
             'controller_name' => 'BonbonController',
             'bonbon' => $bonbon,
+        ]);
+    }
+
+
+    #[Route('/add-to-cart', name: 'add_to_cart', methods: ['POST'])]
+    public function addToCart(Request $request, CartService $cartService): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if (!isset($data['id']) || !isset($data['quantity'])) {
+            return new JsonResponse(['error' => 'Invalid data'], 400);
+        }
+
+        $productId = $data['id'];
+        $quantity = $data['quantity'];
+
+        // Ajouter le produit au panier via un service
+        $cartService->addProduct($productId, $quantity);
+
+        // Retourner les nouvelles informations pour la barre de navigation
+        return new JsonResponse([
+            'totalItems' => $cartService->getTotalItems(),
+            'totalPrice' => $cartService->getTotalPrice(),
         ]);
     }
 
