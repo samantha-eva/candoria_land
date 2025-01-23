@@ -3,10 +3,11 @@
 namespace App\Service;
 
 use App\Repository\BonbonsRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class CartService
 {
-    private array $cart = [];
+    private const CART_KEY = 'cart';
     private BonbonsRepository $bonbonsRepository;
 
     public function __construct(BonbonsRepository $bonbonsRepository)
@@ -14,34 +15,47 @@ class CartService
         $this->bonbonsRepository = $bonbonsRepository;
     }
 
-    public function addProduct(int $productId, int $quantity): void
+    private function getSession(Request $request)
     {
-        if (isset($this->cart[$productId])) {
-            $this->cart[$productId] += $quantity;
+        return $request->getSession();
+    }
+
+    public function addProduct(Request $request, int $productId, int $quantity): void
+    {
+        // Récupérer le panier depuis la session
+        $cart = $this->getSession($request)->get(self::CART_KEY, []);
+
+        // Ajouter ou mettre à jour la quantité du produit
+        if (isset($cart[$productId])) {
+            $cart[$productId] += $quantity;
         } else {
-            $this->cart[$productId] = $quantity;
+            $cart[$productId] = $quantity;
         }
+
+        // Sauvegarder le panier dans la session
+        $this->getSession($request)->set(self::CART_KEY, $cart);
     }
 
-    public function getTotalItems(): int
+    public function getTotalItems(Request $request): int
     {
-        return array_sum($this->cart);
+        $cart = $this->getSession($request)->get(self::CART_KEY, []);
+
+        return array_sum($cart);
     }
 
-    public function getTotalPrice(): float
+    public function getTotalPrice(Request $request): float
     {
+        $cart = $this->getSession($request)->get(self::CART_KEY, []);
         $total = 0;
-        foreach ($this->cart as $productId => $quantity) {
+
+        foreach ($cart as $productId => $quantity) {
             $product = $this->bonbonsRepository->find($productId);
             if ($product) {
                 $total += $product->getPrix() * $quantity;
             }
         }
+
         return $total;
     }
 
-    public function getCart(): array
-    {
-        return $this->cart;
-    }
 }

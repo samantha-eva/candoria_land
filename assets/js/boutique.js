@@ -68,7 +68,7 @@ function initializeShopScripts() {
                 .then((data) => {
                     // Mettre à jour la barre de navigation
                     document.getElementById("cart_count").textContent = data.totalItems;
-                    document.querySelector(".icons_sec h3").textContent = data.totalPrice + "€";
+                    document.querySelector(".icons_sec h3").textContent = data.totalPrice.toFixed(2) + "€";
                 })
                 .catch((error) => console.error("Erreur:", error));
         });

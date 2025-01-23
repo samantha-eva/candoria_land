@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\BonbonsRepository;
 use App\Repository\MarquesRepository;
 use App\Repository\CategoriesRepository;
-use App\Repository\SousCategoriesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Service\CartService;
@@ -20,16 +19,20 @@ class BonbonController extends AbstractController
     private $bonbonsRepository;
     private $marquesRepository;
     private $categoriesRepository;
+    private $cartService;
+
 
     public function __construct(BonbonsRepository $bonbonsRepository,
      MarquesRepository $marquesRepository,
      CategoriesRepository $categoriesRepository,
+     CartService $cartService,
     )
     
     {
         $this->bonbonsRepository = $bonbonsRepository;
         $this->marquesRepository = $marquesRepository;
         $this->categoriesRepository = $categoriesRepository;
+        $this->cartService = $cartService;
     }
 
     #[Route('/boutique', name: 'app_shop')]
@@ -70,27 +73,24 @@ class BonbonController extends AbstractController
         ]);
     }
 
-
     #[Route('/add-to-cart', name: 'add_to_cart', methods: ['POST'])]
-    public function addToCart(Request $request, CartService $cartService): JsonResponse
+    public function addToCart(Request $request): JsonResponse
     {
+        // Récupérer les données de la requête
         $data = json_decode($request->getContent(), true);
 
-        if (!isset($data['id']) || !isset($data['quantity'])) {
-            return new JsonResponse(['error' => 'Invalid data'], 400);
+        if (isset($data['id'], $data['quantity'])) {
+            // Ajouter le produit au panier en utilisant la session
+            $this->cartService->addProduct($request, (int)$data['id'], (int)$data['quantity']);
+
+            // Retourner les informations mises à jour du panier
+            return new JsonResponse([
+                'totalItems' => $this->cartService->getTotalItems($request),
+                'totalPrice' => $this->cartService->getTotalPrice($request),
+            ]);
         }
 
-        $productId = $data['id'];
-        $quantity = $data['quantity'];
-
-        // Ajouter le produit au panier via un service
-        $cartService->addProduct($productId, $quantity);
-
-        // Retourner les nouvelles informations pour la barre de navigation
-        return new JsonResponse([
-            'totalItems' => $cartService->getTotalItems(),
-            'totalPrice' => $cartService->getTotalPrice(),
-        ]);
+        return new JsonResponse(['error' => 'Invalid data'], 400);
     }
 
 }
