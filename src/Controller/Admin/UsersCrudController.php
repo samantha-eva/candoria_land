@@ -53,18 +53,18 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('prenom'),
             TextField::new('email'),
-            // CollectionField::new('adresses') // Affiche la collection des adresses
-            //     ->setEntryType(AdresseFormType::class) // Spécifie le formulaire d'entrée pour chaque adresse
-            //     ->allowAdd() // Permet d'ajouter de nouvelles adresses
-            //     ->allowDelete() // Permet de supprimer des adresses
-            //     ->setFormTypeOption('by_reference', false)
-            //     ->setRequired(true)
-            //     ->formatValue(function ($value) {
-            //         // This will concatenate the 'adresse' and 'code_postal' fields
-            //         return implode(' - ', array_map(function ($adress) {
-            //             return $adress->getAdresse() . ' ' . $adress->getCodePostal();
-            //         }, $value->toArray()));
-            //     })
+            CollectionField::new('adresses') // Affiche la collection des adresses
+                ->setEntryType(AdresseFormType::class) // Spécifie le formulaire d'entrée pour chaque adresse
+                ->allowAdd() // Permet d'ajouter de nouvelles adresses
+                ->allowDelete() // Permet de supprimer des adresses
+                ->setFormTypeOption('by_reference', false)
+                ->setRequired(true)
+                ->formatValue(function ($value) {
+                    // This will concatenate the 'adresse' and 'code_postal' fields
+                    return implode(' - ', array_map(function ($adress) {
+                        return $adress->getRue() . ' ' . $adress->getCodePostal();
+                    }, $value->toArray()));
+                })
            
         ];
      

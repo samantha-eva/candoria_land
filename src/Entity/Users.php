@@ -55,6 +55,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isVerified = false;
 
+    /**
+     * @var Collection<int, Adresses>
+     */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Adresses::class, cascade: ['persist', 'remove'])]
+    private Collection $adresses;
+
+    public function __construct()
+    {
+        $this->adresses = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -235,5 +246,35 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      public function __toString(): string
      {
          return $this->nom ?? '';
+     }
+
+     /**
+      * @return Collection<int, Adresses>
+      */
+     public function getAdresses(): Collection
+     {
+         return $this->adresses;
+     }
+
+     public function addAdress(Adresses $adress): static
+     {
+         if (!$this->adresses->contains($adress)) {
+             $this->adresses->add($adress);
+             $adress->setUser($this);
+         }
+
+         return $this;
+     }
+
+     public function removeAdress(Adresses $adress): static
+     {
+         if ($this->adresses->removeElement($adress)) {
+             // set the owning side to null (unless already changed)
+             if ($adress->getUser() === $this) {
+                 $adress->setUser(null);
+             }
+         }
+
+         return $this;
      }
 }
