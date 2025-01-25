@@ -70,13 +70,18 @@ class BonbonController extends AbstractController
     }
 
     #[Route('/boutique/{id}', name: 'app_detail')]
-    public function show(int $id): Response
+    public function show(int $id, Request $request): Response
     {
         $bonbon = $this->bonbonsRepository->findBonbonById($id);
-        
+        // Récupérer les données du panier
+        $totalItems = $this->cartService->getTotalItems($request);
+        $totalPrice = $this->cartService->getTotalPrice($request);
+    
         return $this->render('boutique/details_bonbon.html.twig', [
             'controller_name' => 'BonbonController',
             'bonbon' => $bonbon,
+            'cart_total_items' => $totalItems,
+            'cart_total_price' => $totalPrice,
         ]);
     }
 
