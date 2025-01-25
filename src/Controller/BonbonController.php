@@ -54,11 +54,18 @@ class BonbonController extends AbstractController
         $marques = $this->marquesRepository->findAll();
         $categories = $this->categoriesRepository->findAllCategories();
 
+         // Récupérer les données du panier
+        $totalItems = $this->cartService->getTotalItems($request);
+        $totalPrice = $this->cartService->getTotalPrice($request);
+
+
         return $this->render('boutique/index.html.twig', [
             'controller_name' => 'BonbonController',
             'bonbons' => $bonbons,
             'marques' => $marques,
             'categories' => $categories,
+            'cart_total_items' => $totalItems,
+            'cart_total_price' => $totalPrice,
         ]);
     }
 
@@ -78,6 +85,7 @@ class BonbonController extends AbstractController
     {
         // Récupérer les données de la requête
         $data = json_decode($request->getContent(), true);
+       
 
         if (isset($data['id'], $data['quantity'])) {
             // Ajouter le produit au panier en utilisant la session
@@ -87,6 +95,7 @@ class BonbonController extends AbstractController
             return new JsonResponse([
                 'totalItems' => $this->cartService->getTotalItems($request),
                 'totalPrice' => $this->cartService->getTotalPrice($request),
+                'cartContents' => $this->cartService->getCartContents($request),
             ]);
         }
 
