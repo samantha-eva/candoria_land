@@ -109,6 +109,7 @@ class CartService
             if ($product) {
                 $cartDetails[] = [
                     'id' => $productId,
+                    'image'=> $product->getImage(),
                     'name' => $product->getNom(),
                     'quantity' => $quantity,
                     'price' => $product->getPrix(),

@@ -12,3 +12,4 @@ import './styles/navbar.css';
 import './styles/home.css';
 import './styles/boutique.css';
 import './styles/footer.css';
+import './styles/cart.css';

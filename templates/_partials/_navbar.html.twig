@@ -1,48 +1,62 @@
 <nav>
     <div class="logo">
-        <a href={{ path('app_home') }}><img src="{{ asset('assets/images/logo1.png') }}">   
+        <a href="{{ path('app_home') }}"><img src="{{ asset('assets/images/logo1.png') }}"></a>   
     </div>
     <ul class="menu">
         <li><a href="{{ path('app_home') }}">Accueil</a></li>
         <li><a href="{{ path('app_shop') }}">Boutiques</a></li>
-        <li><a href="">Promotions</a></li>
-        <li><a href="">Nouveautés</a></li>
-        <li><a href="">Contact</a></li>
+        <li><a href="#">Promotions</a></li>
+        <li><a href="#">Nouveautés</a></li>
+        <li><a href="#">Contact</a></li>
     </ul>
 
     <div class="icons_sec">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <a href=""><i class="fa-regular fa-user"></i></a>
+        <a href="#"><i class="fa-regular fa-user"></i></a>
         <div class="cart_menu">
             <i class="fa-solid fa-cart-shopping"><span id="cart_count">{{ cart_total_items|default(0) }}</span></i>
         </div>
         <h3>{{ cart_total_price|default(0)|number_format(2, '.', ',') }}€</h3>
     </div>
+
     <div class="bars">
         <i class="fa-solid fa-bars"></i>
     </div>
+
     <div class="cart_container">
         <div class="cart_heading">
             <i class="fa-solid fa-xmark close_cart"></i>
             <h1>Panier</h1>
         </div>
         <div class="cartInProduct">
-
             <div class="Pcart1">
-                    <img src="{{ asset('uploads/tagada.jpg') }}">
-                    <div class="cart_detail">
-                        <h2>BAG</h2>
-                        <p>10€</p>
-                        <div class="quantity_control_cart">
-                            <button class="quantity_btn_cart decrease_cart">-</button>
-                            <span class="quantity_value_cart">1</span>
-                            <button class="quantity_btn_cart increase_cart">+</button>
-                        </div>
+                <img src="{{ asset('uploads/tagada.jpg') }}">
+                <div class="cart_detail">
+                    <h2>BAG</h2>
+                    <p>10€</p>
+                    <div class="quantity_control_cart">
+                        <button class="quantity_btn_cart decrease_cart">-</button>
+                        <span class="quantity_value_cart">1</span>
+                        <button class="quantity_btn_cart increase_cart">+</button>
                     </div>
-                    <i class="fa-solid fa-trash"></i>
                 </div>
-
+                <i class="fa-solid fa-trash"></i>
             </div>
+            <div class="Pcart1">
+                <img src="{{ asset('uploads/tagada.jpg') }}">
+                <div class="cart_detail">
+                    <h2>BAG</h2>
+                    <p>10€</p>
+                    <div class="quantity_control_cart">
+                        <button class="quantity_btn_cart decrease_cart">-</button>
+                        <span class="quantity_value_cart">1</span>
+                        <button class="quantity_btn_cart increase_cart">+</button>
+                    </div>
+                </div>
+                <i class="fa-solid fa-trash"></i>
+            </div>
+        </div>
 
+        <button type="submit" class="checkout_button">Accéder au panier</button>
     </div>
 </nav>
