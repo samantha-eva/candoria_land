@@ -8,6 +8,7 @@ use App\Entity\Users;
 use App\Entity\Marques;
 use App\Entity\Adresses;
 use App\Entity\Transporteurs;
+use App\Entity\Commandes;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -46,5 +47,6 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::linkToCrud('Marques', 'fas fa-list', Marques::class);
          yield MenuItem::linkToCrud('Adresses', 'fas fa-list', Adresses::class);
          yield MenuItem::linkToCrud('Transporteurs', 'fas fa-list', Transporteurs::class);
+         yield MenuItem::linkToCrud('Commandes', 'fas fa-list', Commandes::class);
     }
 }
