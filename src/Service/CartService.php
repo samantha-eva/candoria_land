@@ -3,32 +3,40 @@
 namespace App\Service;
 
 use App\Repository\BonbonsRepository;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CartService
 {
     private const CART_KEY = 'cart';
     private BonbonsRepository $bonbonsRepository;
+    private RequestStack $requestStack;
 
-    public function __construct(BonbonsRepository $bonbonsRepository)
+    public function __construct(BonbonsRepository $bonbonsRepository, RequestStack $requestStack)
     {
         $this->bonbonsRepository = $bonbonsRepository;
+        $this->requestStack = $requestStack;
     }
 
     /**
-     * Récupère la session depuis la requête.
+     * Récupère la session actuelle.
      */
-    private function getSession(Request $request)
+    private function getSession()
     {
-        return $request->getSession();
+        $session = $this->requestStack->getSession();
+
+        if (!$session) {
+            throw new \RuntimeException('La session n\'est pas disponible.');
+        }
+
+        return $session;
     }
 
     /**
      * Ajoute un produit au panier ou met à jour sa quantité.
      */
-    public function addProduct(Request $request, int $productId, int $quantity): void
+    public function addProduct(int $productId, int $quantity): void
     {
-        $cart = $this->getSession($request)->get(self::CART_KEY, []);
+        $cart = $this->getSession()->get(self::CART_KEY, []);
 
         if (isset($cart[$productId])) {
             $cart[$productId] += $quantity;
@@ -36,46 +44,46 @@ class CartService
             $cart[$productId] = $quantity;
         }
 
-        $this->getSession($request)->set(self::CART_KEY, $cart);
+        $this->getSession()->set(self::CART_KEY, $cart);
     }
 
     /**
      * Supprime un produit du panier.
      */
-    public function removeProduct(Request $request, int $productId): void
+    public function removeProduct(int $productId): void
     {
-        $cart = $this->getSession($request)->get(self::CART_KEY, []);
+        $cart = $this->getSession()->get(self::CART_KEY, []);
 
         if (isset($cart[$productId])) {
             unset($cart[$productId]);
         }
 
-        $this->getSession($request)->set(self::CART_KEY, $cart);
+        $this->getSession()->set(self::CART_KEY, $cart);
     }
 
     /**
      * Vide complètement le panier.
      */
-    public function clearCart(Request $request): void
+    public function clearCart(): void
     {
-        $this->getSession($request)->remove(self::CART_KEY);
+        $this->getSession()->remove(self::CART_KEY);
     }
 
     /**
      * Retourne le nombre total d'articles dans le panier.
      */
-    public function getTotalItems(Request $request): int
+    public function getTotalItems(): int
     {
-        $cart = $this->getSession($request)->get(self::CART_KEY, []);
+        $cart = $this->getSession()->get(self::CART_KEY, []);
         return array_sum($cart);
     }
 
     /**
      * Retourne le prix total de tous les produits dans le panier.
      */
-    public function getTotalPrice(Request $request): float
+    public function getTotalPrice(): float
     {
-        $cart = $this->getSession($request)->get(self::CART_KEY, []);
+        $cart = $this->getSession()->get(self::CART_KEY, []);
         $total = 0;
 
         foreach ($cart as $productId => $quantity) {
@@ -91,9 +99,9 @@ class CartService
     /**
      * Retourne le contenu détaillé du panier (produits et leurs informations).
      */
-    public function getCartContents(Request $request): array
+    public function getCartContents(): array
     {
-        $cart = $this->getSession($request)->get(self::CART_KEY, []);
+        $cart = $this->getSession()->get(self::CART_KEY, []);
         $cartDetails = [];
 
         foreach ($cart as $productId => $quantity) {

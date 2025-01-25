@@ -12,30 +12,28 @@ use App\Service\CartService;
 class CartController extends AbstractController
 {
 
-    private $cartService;
+    private CartService $cartService;
 
-
-    public function __construct( CartService $cartService){
+    public function __construct(CartService $cartService)
+    {
         $this->cartService = $cartService;
     }
-    
 
     #[Route('/add-to-cart', name: 'add_to_cart', methods: ['POST'])]
     public function addToCart(Request $request): JsonResponse
     {
         // Récupérer les données de la requête
         $data = json_decode($request->getContent(), true);
-       
 
         if (isset($data['id'], $data['quantity'])) {
-            // Ajouter le produit au panier en utilisant la session
-            $this->cartService->addProduct($request, (int)$data['id'], (int)$data['quantity']);
+            // Ajouter le produit au panier
+            $this->cartService->addProduct((int)$data['id'], (int)$data['quantity']);
 
             // Retourner les informations mises à jour du panier
             return new JsonResponse([
-                'totalItems' => $this->cartService->getTotalItems($request),
-                'totalPrice' => $this->cartService->getTotalPrice($request),
-                'cartContents' => $this->cartService->getCartContents($request),
+                'totalItems' => $this->cartService->getTotalItems(),
+                'totalPrice' => $this->cartService->getTotalPrice(),
+                'cartContents' => $this->cartService->getCartContents(),
             ]);
         }
 
