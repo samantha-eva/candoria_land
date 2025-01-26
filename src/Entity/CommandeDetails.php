@@ -18,7 +18,7 @@ class CommandeDetails
     private ?Commandes $commande = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandeDetails')]
-    private ?bonbons $produit = null;
+    private ?Bonbons $produit = null;
 
     #[ORM\Column]
     private ?int $quantite = null;
@@ -43,12 +43,12 @@ class CommandeDetails
         return $this;
     }
 
-    public function getProduit(): ?bonbons
+    public function getProduit(): ?Bonbons
     {
         return $this->produit;
     }
 
-    public function setProduit(?bonbons $produit): static
+    public function setProduit(?Bonbons $produit): static
     {
         $this->produit = $produit;
 

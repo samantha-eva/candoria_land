@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Bonbons;
 use App\Entity\Commandes;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\CommandeDetails;
@@ -53,12 +54,21 @@ class CartController extends AbstractController
             // Sauvegarder la commande en base de données
             $entityManager->persist($commande);
             $entityManager->flush();
+            
+            foreach( $cart as $produit){
+                $bonbon = $entityManager->getRepository(Bonbons::class)->find($produit['id']);
 
-            // foreach( $cart as $bonbon){
-            //     dd($bonbon);
-            //     //$commande_detail  = new CommandeDetails();
-            // }
-   
+               
+                $commande_detail  = new CommandeDetails();
+                $commande_detail->setCommande($commande);
+                $commande_detail->setProduit($bonbon);
+                $commande_detail->setQuantite($produit['quantity']);
+                $commande_detail->setPrix($produit['total']);
+
+                $entityManager->persist($commande_detail);
+            }
+
+            $entityManager->flush();
 
             // Rediriger vers la page de confirmation ou de paiement
             return $this->redirectToRoute('app_home');
