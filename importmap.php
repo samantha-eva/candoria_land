@@ -28,6 +28,10 @@ return [
         'path' => './assets/js/boutique.js',
         'entrypoint' => true,
     ],
+    'cart' => [
+        'path' => './assets/js/cart.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

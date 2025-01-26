@@ -120,4 +120,16 @@ class CartService
 
         return $cartDetails;
     }
+
+    public function updateProductQuantity(int $productId, int $quantity): void
+    {
+        $cart = $this->getSession()->get(self::CART_KEY, []);
+        
+        if (isset($cart[$productId])) {
+            $cart[$productId] = $quantity;
+        }
+
+        $this->getSession()->set(self::CART_KEY, $cart);
+    }
+
 }

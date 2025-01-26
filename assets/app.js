@@ -1,6 +1,7 @@
 import './bootstrap.js';
 import './js/boutique.js';
 import './js/home.js';
+import './js/cart.js';
 /*
  * Welcome to your app's main JavaScript file!
  *

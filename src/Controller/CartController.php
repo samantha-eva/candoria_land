@@ -41,7 +41,7 @@ class CartController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Créer une nouvelle commande
+            //Créer une nouvelle commande
             $commande = new Commandes();
             $commande->setUser($user);
             $commande->setTransporteur($form->get('transporteurs')->getData());
@@ -53,6 +53,11 @@ class CartController extends AbstractController
             // Sauvegarder la commande en base de données
             $entityManager->persist($commande);
             $entityManager->flush();
+
+            // foreach( $cart as $bonbon){
+            //     dd($bonbon);
+            //     //$commande_detail  = new CommandeDetails();
+            // }
    
 
             // Rediriger vers la page de confirmation ou de paiement
@@ -89,4 +94,34 @@ class CartController extends AbstractController
 
         return new JsonResponse(['error' => 'Invalid data'], 400);
     }
+
+    #[Route('/cart/remove/{id}', name: 'cart_remove', methods: ['POST'])]
+    public function removeItem(int $id, Request $request, CartService $cartService): JsonResponse
+    {
+        if ($request->isXmlHttpRequest()) {
+            $cartService->removeProduct($id);
+
+            return new JsonResponse(['status' => 'success'], 200);
+        }
+
+        return new JsonResponse(['status' => 'error'], 400);
+    }
+
+    
+    #[Route('/cart/update/{id}', name:'cart_update', methods: ['POST'])]
+    public function updateQuantity(Request $request, int $id, CartService $cartService): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+       
+        if (!isset($data['quantity']) || $data['quantity'] < 1) {
+            return new JsonResponse(['message' => 'Quantité invalide'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $quantity = (int) $data['quantity'];
+
+        $cartService->updateProductQuantity($id, $quantity);
+
+        return new JsonResponse(['message' => 'Quantité mise à jour']);
+    }
+
 }
