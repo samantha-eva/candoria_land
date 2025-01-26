@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Commandes;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\CommandeDetails;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,14 +17,15 @@ class CartController extends AbstractController
 {
 
     private CartService $cartService;
-
+    
     public function __construct(CartService $cartService)
     {
         $this->cartService = $cartService;
+       
     }
 
     #[Route('/checkout', name: 'app_checkout')]
-    public function index(Request $request): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $totalPrice = $this->cartService->getTotalPrice($request);
         $cart = $this->cartService->getCartContents($request);
@@ -32,6 +35,31 @@ class CartController extends AbstractController
         $form = $this->createForm(CommandeFormType::class, null, [
             'user' => $user, // Passer l'utilisateur au formulaire
         ]);
+
+        // Traitement du formulaire
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Créer une nouvelle commande
+            $commande = new Commandes();
+            $commande->setUser($user);
+            $commande->setTransporteur($form->get('transporteurs')->getData());
+            $commande->setStatut('à payer');
+            $commande->setPrixTotal($totalPrice);
+            $commande->setCreatedAt(new \DateTime());
+            $commande->setUpdatedAt(new \DateTime());
+
+            // Sauvegarder la commande en base de données
+            $entityManager->persist($commande);
+            $entityManager->flush();
+   
+
+            // Rediriger vers la page de confirmation ou de paiement
+            return $this->redirectToRoute('app_home');
+        }
+
+
         return $this->render('cart/index.html.twig', [
             'controller_name' => 'CartController',
             'cart_total_price' => $totalPrice,
