@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +17,7 @@ class Commandes
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
-    private ?users $user = null;
+    private ?Users $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     private ?Transporteurs $transporteur = null;
@@ -32,17 +34,28 @@ class Commandes
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
+    /**
+     * @var Collection<int, CommandeDetails>
+     */
+    #[ORM\OneToMany(targetEntity: CommandeDetails::class, mappedBy: 'commande')]
+    private Collection $commandeDetails;
+
+    public function __construct()
+    {
+        $this->commandeDetails = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): ?users
+    public function getUser(): ?Users
     {
         return $this->user;
     }
 
-    public function setUser(?users $user): static
+    public function setUser(?Users $user): static
     {
         $this->user = $user;
 
@@ -105,6 +118,36 @@ class Commandes
     public function setUpdatedAt(\DateTimeInterface $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommandeDetails>
+     */
+    public function getCommandeDetails(): Collection
+    {
+        return $this->commandeDetails;
+    }
+
+    public function addCommandeDetail(CommandeDetails $commandeDetail): static
+    {
+        if (!$this->commandeDetails->contains($commandeDetail)) {
+            $this->commandeDetails->add($commandeDetail);
+            $commandeDetail->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeDetail(CommandeDetails $commandeDetail): static
+    {
+        if ($this->commandeDetails->removeElement($commandeDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeDetail->getCommande() === $this) {
+                $commandeDetail->setCommande(null);
+            }
+        }
 
         return $this;
     }

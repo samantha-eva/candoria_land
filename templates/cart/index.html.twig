@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Boutique{% endblock %}
-{% block body %}
+{% block title %}Panier{% endblock %}
 
+{% block body %}
 <div class="big-metro-site-container">
     <header>
         <div class="contain-shop">
@@ -17,7 +17,33 @@
 </div>
 
 <div class="panier_container">
+    <div class="user-info-container">
+        <h3>Informations utilisateur</h3>
+        {{ form_start(form) }}
+        <div class="form-row">
+            {{ form_row(form.nom) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.prenom) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.email) }}
+        </div>
+    </div>
+
+    <div class="address-transporteur-container">
+        <h3>Choisissez votre transporteur</h3>
+        <div class="form-row">
+            {{ form_row(form.transporteurs) }}
+        </div>
+        <h3>Choisissez votre adresse</h3>
+        <div class="form-row">
+            {{ form_row(form.adresses) }}
+        </div>
+    </div>
+
     <div class="panier_produit_container">
+        <h3>Votre Panier</h3>
         <table>
             <thead>
                 <tr>
@@ -50,15 +76,14 @@
         </table>
     </div>
 
-    <!-- Section pour le total et le bouton Payer, en bas à droite -->
     <div class="checkout-container">
         <div class="total-container">
             <span>Total:</span>
             <span class="total-price">€{{ cart_total_price }}</span>
         </div>
-        <button class="checkout-btn">Passez à la caisse</button>
+        <button type="submit" class="checkout-btn">Passer la commande</button>
     </div>
+
+    {{ form_end(form) }}
 </div>
-
-
 {% endblock %}

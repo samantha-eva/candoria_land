@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\CommandeDetails;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Service\CartService;
+use App\Form\CommandeFormType;
 
 class CartController extends AbstractController
 {
@@ -25,12 +27,17 @@ class CartController extends AbstractController
         $totalPrice = $this->cartService->getTotalPrice($request);
         $cart = $this->cartService->getCartContents($request);
         $totalItems = $this->cartService->getTotalItems($request);
-
+        $user = $this->getUser(); // Récupérer l'utilisateur connecté
+       
+        $form = $this->createForm(CommandeFormType::class, null, [
+            'user' => $user, // Passer l'utilisateur au formulaire
+        ]);
         return $this->render('cart/index.html.twig', [
             'controller_name' => 'CartController',
             'cart_total_price' => $totalPrice,
             'cart' => $cart,
             'cart_total_items' => $totalItems,
+            'form' => $form->createView(),
         ]);
     }
 

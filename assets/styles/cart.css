@@ -4,6 +4,26 @@
     padding: 40px 12%;
     justify-content: center;
     background-color: #feefef;
+    gap: 20px; /* Espace entre les divs */
+}
+
+.user-info-container, .address-transporteur-container {
+    width: 48%; /* Occupe 48% de la largeur, pour les aligner côte à côte */
+    background-color: #fff7f7;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    margin-bottom: 15px;
+}
+
+.form-row input, .form-row select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
 }
 
 .panier_produit_container {
@@ -12,6 +32,7 @@
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Ajout d'un espace entre les sections */
 }
 
 .panier_produit_container table {
@@ -67,7 +88,6 @@ input[type="number"]:focus {
     border-color: #fd2975ff;
 }
 
-/* Nouvelle section checkout */
 .checkout-container {
     width: 100%;
     display: flex;

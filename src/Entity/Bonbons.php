@@ -39,9 +39,16 @@ class Bonbons
     #[ORM\JoinTable(name: 'bonbon_categorie')]
     private Collection $categories;
 
+    /**
+     * @var Collection<int, CommandeDetails>
+     */
+    #[ORM\OneToMany(targetEntity: CommandeDetails::class, mappedBy: 'produit')]
+    private Collection $commandeDetails;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->commandeDetails = new ArrayCollection();
     }
 
 
@@ -155,6 +162,36 @@ class Bonbons
     {
         if ($this->categories->removeElement($categories)) {
             $categories->removeBonbons($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommandeDetails>
+     */
+    public function getCommandeDetails(): Collection
+    {
+        return $this->commandeDetails;
+    }
+
+    public function addCommandeDetail(CommandeDetails $commandeDetail): static
+    {
+        if (!$this->commandeDetails->contains($commandeDetail)) {
+            $this->commandeDetails->add($commandeDetail);
+            $commandeDetail->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeDetail(CommandeDetails $commandeDetail): static
+    {
+        if ($this->commandeDetails->removeElement($commandeDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeDetail->getProduit() === $this) {
+                $commandeDetail->setProduit(null);
+            }
         }
 
         return $this;
