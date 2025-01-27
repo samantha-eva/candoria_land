@@ -14,7 +14,7 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <a href="#"><i class="fa-regular fa-user"></i></a>
         <div class="cart_menu">
-            <i class="fa-solid fa-cart-shopping"><span id="cart_count">{{ cart_total_items|default(0) }}</span></i>
+             <a href="{{ path('app_checkout') }}"><i class="fa-solid fa-cart-shopping"><span id="cart_count">{{ cart_total_items|default(0) }}</span></i></a>
         </div>
         <h3>{{ cart_total_price|default(0)|number_format(2, '.', ',') }}€</h3>
     </div>
@@ -23,7 +23,7 @@
         <i class="fa-solid fa-bars"></i>
     </div>
 
-    <div class="cart_container">
+    {# <div class="cart_container">
         <div class="cart_heading">
             <i class="fa-solid fa-xmark close_cart"></i>
             <h1>Panier</h1>
@@ -58,5 +58,5 @@
         </div>
 
         <a href="{{ path('app_checkout') }}"><button type="submit" class="checkout_button">Accéder au panier</button></a>
-    </div>
+    </div> #}
 </nav>

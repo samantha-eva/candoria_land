@@ -69,9 +69,9 @@ class CommandeController extends AbstractController
             $entityManager->flush();
 
             // Rediriger vers la page de confirmation ou de paiement
-            // return $this->redirectToRoute('app_paiement', [
-            //     'commande_id' => $commande->getId(), // Passer l'ID de la commande en paramètre
-            // ]);
+            return $this->redirectToRoute('app_paiement', [
+                'commande_id' => $commande->getId(), // Passer l'ID de la commande en paramètre
+            ]);
         }
 
 
