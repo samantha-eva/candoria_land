@@ -5,14 +5,32 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\CartService;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
-    public function index(): Response
+
+    private $cartService;
+
+    public function __construct( CartService $cartService)
     {
+        $this->cartService = $cartService;
+    }
+
+
+    #[Route('/', name: 'app_home')]
+    public function index(Request $request): Response
+    {
+
+         // Récupérer les données du panier
+         $totalItems = $this->cartService->getTotalItems($request);
+         $totalPrice = $this->cartService->getTotalPrice($request);
+  
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'cart_total_items' => $totalItems,
+            'cart_total_price' => $totalPrice,
         ]);
     }
 }

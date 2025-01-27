@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+<div class="big-metro-site-container">
+    <header>
+        <div class="contain-shop">
+            <h1 class="main_header_text">Panier</h1>
+            <div class="our-site-link">
+                <a href="">Accueil</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <p>Boutique</p>
+            </div>
+        </div>
+    </header>
+</div>
+
+<div class="panier_container">
+    <div class="user-info-container">
+        <h3>Informations utilisateur</h3>
+        {{ form_start(form) }}
+        <div class="form-row">
+            {{ form_row(form.nom) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.prenom) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.email) }}
+        </div>
+    </div>
+
+    <div class="address-transporteur-container">
+        <h3>Choisissez votre transporteur</h3>
+        <div class="form-row">
+            {{ form_row(form.transporteurs) }}
+        </div>
+        <h3>Choisissez votre adresse</h3>
+        <div class="form-row">
+            {{ form_row(form.adresses) }}
+        </div>
+    </div>
+
+    <div class="panier_produit_container">
+        <h3>Votre Panier</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Supprimer</th>
+                    <th>Images</th>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                <tr>
+                    <td><button class="remove-btn" data-id="{{ item.id }}">X</button></td>
+                    <td><img src="{{ asset('uploads/' ~ item.image|lower) }}" alt="{{ item.name }}" class="product-image"></td>
+                    <td>{{ item.name }}</td>
+                    <td>€{{ item.price }}</td>
+                    <td>
+                        <input type="number" value="{{ item.quantity }}" min="1" data-id="{{ item.id }}" class="quantity-input">
+                    </td>
+                    <td>€{{ item.total }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">Votre panier est vide.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="checkout-container">
+        <div class="total-container">
+            <span>Total:</span>
+            <span class="total-price">€{{ cart_total_price }}</span>
+        </div>
+        <button type="submit" class="checkout-btn">Payer</button>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}
