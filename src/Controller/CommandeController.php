@@ -41,35 +41,37 @@ class CommandeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             //Créer une nouvelle commande
-            // $commande = new Commandes();
-            // $commande->setUser($user);
-            // $commande->setTransporteur($form->get('transporteurs')->getData());
-            // $commande->setStatut('à payer');
-            // $commande->setPrixTotal($totalPrice);
-            // $commande->setCreatedAt(new \DateTime());
-            // $commande->setUpdatedAt(new \DateTime());
+            $commande = new Commandes();
+            $commande->setUser($user);
+            $commande->setTransporteur($form->get('transporteurs')->getData());
+            $commande->setStatut('à payer');
+            $commande->setPrixTotal($totalPrice);
+            $commande->setCreatedAt(new \DateTime());
+            $commande->setUpdatedAt(new \DateTime());
 
-            // // Sauvegarder la commande en base de données
-            // $entityManager->persist($commande);
-            // $entityManager->flush();
+            // Sauvegarder la commande en base de données
+            $entityManager->persist($commande);
+            $entityManager->flush();
             
-            // foreach( $cart as $produit){
-            //     $bonbon = $entityManager->getRepository(Bonbons::class)->find($produit['id']);
+            foreach( $cart as $produit){
+                $bonbon = $entityManager->getRepository(Bonbons::class)->find($produit['id']);
 
                
-            //     $commande_detail  = new CommandeDetails();
-            //     $commande_detail->setCommande($commande);
-            //     $commande_detail->setProduit($bonbon);
-            //     $commande_detail->setQuantite($produit['quantity']);
-            //     $commande_detail->setPrix($produit['total']);
+                $commande_detail  = new CommandeDetails();
+                $commande_detail->setCommande($commande);
+                $commande_detail->setProduit($bonbon);
+                $commande_detail->setQuantite($produit['quantity']);
+                $commande_detail->setPrix($produit['total']);
 
-            //     $entityManager->persist($commande_detail);
-            // }
+                $entityManager->persist($commande_detail);
+            }
 
-            // $entityManager->flush();
+            $entityManager->flush();
 
             // Rediriger vers la page de confirmation ou de paiement
-            return $this->redirectToRoute('app_paiement');
+            return $this->redirectToRoute('app_paiement', [
+                'commande_id' => $commande->getId(), // Passer l'ID de la commande en paramètre
+            ]);
         }
 
 
