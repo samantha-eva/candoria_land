@@ -19,7 +19,7 @@
 <div class="panier_container">
     <div class="user-info-container">
         <h3>Informations utilisateur</h3>
-        {{ form_start(form) }}
+        {{ form_start(form, { 'attr': { 'id': 'checkout-form', 'data-turbo': 'false' } }) }}
         <div class="form-row">
             {{ form_row(form.nom) }}
         </div>
@@ -81,7 +81,7 @@
             <span>Total:</span>
             <span class="total-price">€{{ cart_total_price }}</span>
         </div>
-        <button type="submit" class="checkout-btn">Payer</button>
+      <button type="submit" class="checkout-btn">Payer</button>
     </div>
 
     {{ form_end(form) }}

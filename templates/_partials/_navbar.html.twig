@@ -14,7 +14,7 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <a href="#"><i class="fa-regular fa-user"></i></a>
         <div class="cart_menu">
-            <i class="fa-solid fa-cart-shopping"><span id="cart_count">{{ cart_total_items|default(0) }}</span></i>
+             <a href="{{ path('app_checkout') }}" data-turbo="false"><i class="fa-solid fa-cart-shopping"><span id="cart_count">{{ cart_total_items|default(0) }}</span></i></a>
         </div>
         <h3>{{ cart_total_price|default(0)|number_format(2, '.', ',') }}€</h3>
     </div>
@@ -23,40 +23,4 @@
         <i class="fa-solid fa-bars"></i>
     </div>
 
-    <div class="cart_container">
-        <div class="cart_heading">
-            <i class="fa-solid fa-xmark close_cart"></i>
-            <h1>Panier</h1>
-        </div>
-        <div class="cartInProduct">
-            <div class="Pcart1">
-                <img src="{{ asset('uploads/tagada.jpg') }}">
-                <div class="cart_detail">
-                    <h2>BAG</h2>
-                    <p>10€</p>
-                    <div class="quantity_control_cart">
-                        <button class="quantity_btn_cart decrease_cart">-</button>
-                        <span class="quantity_value_cart">1</span>
-                        <button class="quantity_btn_cart increase_cart">+</button>
-                    </div>
-                </div>
-                <i class="fa-solid fa-trash"></i>
-            </div>
-            <div class="Pcart1">
-                <img src="{{ asset('uploads/tagada.jpg') }}">
-                <div class="cart_detail">
-                    <h2>BAG</h2>
-                    <p>10€</p>
-                    <div class="quantity_control_cart">
-                        <button class="quantity_btn_cart decrease_cart">-</button>
-                        <span class="quantity_value_cart">1</span>
-                        <button class="quantity_btn_cart increase_cart">+</button>
-                    </div>
-                </div>
-                <i class="fa-solid fa-trash"></i>
-            </div>
-        </div>
-
-        <a href="{{ path('app_checkout') }}"><button type="submit" class="checkout_button">Accéder au panier</button></a>
-    </div>
 </nav>
