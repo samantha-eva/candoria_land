@@ -9,7 +9,8 @@ a:hover{
 }
 
 .login-container,
-.register-container{
+.register-container,
+.reset-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +21,8 @@ a:hover{
     
 }
 
-.wrapper_login{
+.wrapper_login,
+.wrapper_reset{
     position: relative;
     width: 430px;
     height: 500px;
@@ -31,6 +33,7 @@ a:hover{
     box-shadow: 0 8px 15px #fd2975ff;
     transition: .3s;
 }
+
 
 .wrapper_register{
     position: relative;
@@ -80,7 +83,9 @@ a:hover{
 .titles{
     position: relative;
 }
-.title-login{
+.title-login,
+.title-register,
+.title-reset{
     position: absolute;
     top: 50%;
     left: 50%;
