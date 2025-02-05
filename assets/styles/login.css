@@ -8,7 +8,8 @@ a:hover{
     text-decoration: underline;
 }
 
-.login-container{
+.login-container,
+.register-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,10 +20,22 @@ a:hover{
     
 }
 
-.wrapper{
+.wrapper_login{
     position: relative;
     width: 430px;
     height: 500px;
+    background-color: #feefef;
+    border-radius: 15px;
+    padding: 120px 32px 64px;
+    border: 1px solid  #fd2975ff;
+    box-shadow: 0 8px 15px #fd2975ff;
+    transition: .3s;
+}
+
+.wrapper_register{
+    position: relative;
+    width: 430px;
+    height: 800px;
     background-color: #feefef;
     border-radius: 15px;
     padding: 120px 32px 64px;
