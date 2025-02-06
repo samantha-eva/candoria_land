@@ -46,6 +46,38 @@ class BonbonsRepository extends ServiceEntityRepository
    
        return $qb->getQuery()->getResult();
    }
+
+   public function findBySearchTermAndCategoriesAndMarquesAndPromotion($searchTerm, $selectedCategories, $selectedMarques): array
+   {
+
+       $qb = $this->createQueryBuilder('b');
+       
+       if (!empty($searchTerm)) {
+           $qb->where('b.nom LIKE :searchTerm')
+               ->setParameter('searchTerm', '%' . $searchTerm . '%');
+        
+       }
+
+
+       if (!empty($selectedCategories)) {
+           $qb->innerJoin('b.categories', 'c')
+               ->andWhere('c.id IN (:categories)')
+               ->setParameter('categories', $selectedCategories);
+       }
+
+       if (!empty($selectedMarques)) {
+            $qb->innerJoin('b.marque', 'm')
+                ->andWhere('m.id IN (:marques)')
+                ->setParameter('marques', $selectedMarques);
+        }
+
+        // Filter where isPromotion is true
+    $qb->andWhere('b.isPromotion = :isPromotion')
+    ->setParameter('isPromotion', true);
+
+   
+       return $qb->getQuery()->getResult();
+   }
    
 
    public function findBonbonById(int $id): ?Bonbons
