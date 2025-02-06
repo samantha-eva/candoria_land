@@ -42,7 +42,9 @@
                 <div class="product"  data-id="{{ bonbon.id }}">
                     <div class="product_img">
                         <a href="{{ path('app_detail', { 'id': bonbon.id }) }}">
-                            <span class="sale-badge">-40%</span>
+                           {% if bonbon.isPromotion %}
+                                <span class="sale-badge">- {{ bonbon.pourcentage|number_format(0) }} %</span>
+                            {% endif %}
                             <img src="{{ asset('uploads/' ~ bonbon.image) }}" alt="Bonbons Fruités">
                         </a>
                     </div>
