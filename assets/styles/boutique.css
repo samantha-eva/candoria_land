@@ -409,3 +409,10 @@ header{
 .btn span {
     margin-left: 10px;
 }
+
+/*================== Pagination ==============*/
+
+.pagination-list{
+display: flex;
+justify-content: center;
+}
