@@ -55,7 +55,7 @@ class BonbonsRepository extends ServiceEntityRepository
     }
     
 
-   public function findBySearchTermAndCategoriesAndMarquesAndPromotion($searchTerm, $selectedCategories, $selectedMarques): array
+   public function findBySearchTermAndCategoriesAndMarquesAndPromotion($searchTerm, $selectedCategories, $selectedMarques, $page = 1, $limit = 1): Paginator
    {
 
        $qb = $this->createQueryBuilder('b');
@@ -84,7 +84,12 @@ class BonbonsRepository extends ServiceEntityRepository
     ->setParameter('isPromotion', true);
 
    
-       return $qb->getQuery()->getResult();
+     // Gestion de la pagination
+     $qb->setFirstResult(($page - 1) * $limit) 
+     ->setMaxResults($limit);
+
+    return new Paginator($qb->getQuery(), true);
+
    }
    
 

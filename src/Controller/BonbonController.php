@@ -107,8 +107,14 @@ class BonbonController extends AbstractController
         $marquesJson = $request->query->get('marques', '[]');
         $selectedMarques = json_decode($marquesJson, true) ?? []; // Cela renvoie un tableau des IDs des marques sélectionnées
       
-        // Récupération des bonbons
-        $bonbons = $this->bonbonsRepository->findBySearchTermAndCategoriesAndMarquesAndPromotion($searchTerm, $selectedCategories, $selectedMarques);
+        $page = max(1, $request->query->getInt('page', 1));
+        $limit = 2; // Nombre d'éléments par page
+
+        $paginator = $this->bonbonsRepository->findBySearchTermAndCategoriesAndMarquesAndPromotion($searchTerm, $selectedCategories, $selectedMarques, $page, $limit);
+        
+        $bonbons = iterator_to_array($paginator); // Convertir en tableau pour l'affichage
+        $totalBonbons = count($paginator); // Nombre total d'éléments trouvés
+        $totalPages = ceil($totalBonbons / $limit); // Calcul du nombre total de pages
 
         // Récupération des autres données
         $marques = $this->marquesRepository->findAll();
@@ -126,6 +132,9 @@ class BonbonController extends AbstractController
             'categories' => $categories,
             'cart_total_items' => $totalItems,
             'cart_total_price' => $totalPrice,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'totalBonbon' => $totalBonbons
         ]);
     }
 

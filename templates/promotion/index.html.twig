@@ -21,7 +21,7 @@
     <div class="shop_product_container">
         <!-- Entête de la section produits -->
         <div class="shop_header_contain">
-            <h3>Affichage 1 - 9 sur 100 résultats</h3>
+            <h3>Affichage 1 - 9 sur {{totalBonbon}} résultats</h3>
             <div class="shop_filter">
                 <select id="shop_filter_select" onchange="submitForm()">
                     <option value="last">Derniers</option>
@@ -60,6 +60,38 @@
             {% endfor %}
           
         </div>
+
+         <!-- Pagination -->
+        <div class="pagination">
+            {% if totalPages > 1 %}
+                <ul class="pagination-list">
+                    {% if currentPage > 1 %}
+                        <li>
+                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage - 1 }) }}">
+                                &laquo; Précédent
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for i in 1..totalPages %}
+                        <li class="{% if i == currentPage %}active{% endif %}">
+                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: i }) }}">
+                                {{ i }}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                    {% if currentPage < totalPages %}
+                        <li>
+                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage + 1 }) }}">
+                                Suivant &raquo;
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+
     </div>
 
     <!-- Menu de filtrage et recherche -->
