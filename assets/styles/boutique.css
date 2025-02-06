@@ -96,7 +96,7 @@ header{
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    padding: 0 4%;
+    padding: 10px 4%;
     gap: 10px;
 }
 

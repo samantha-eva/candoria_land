@@ -13,7 +13,7 @@ class ResetPasswordFormType extends AbstractType
     {
         $builder
             ->add('password', PasswordType::class,[
-                'label'=> ' Entrer votre Mot de passe'
+                'label'=> ' Entrer votre nouveau Mot de passe'
             ])
         ;
     }

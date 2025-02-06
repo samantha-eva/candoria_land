@@ -3,8 +3,44 @@
 {% block body %}
 
 <!-- Formulaire de Connexion -->
+<div class="login-container">
+    <div class="wrapper_login">
+        <div class="form-header">
+            <div class="titles">
+                <div class="title-login">Login</div>
+            </div>
+        </div>
+        <form action="" class="login-form" method="POST" autocomplete="off">
+            <div class="input-box">
+                <input type="text" class="input-field" value="{{ last_username }}" name="username" id="inputUsername">
+                <label for="log-user"  class="label"> Nom Utilisateur</label>
+                <i class="fa-solid fa-envelope icon"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" class="input-field" name="password" id="inputPassword">
+                <label for="log-password"  class="label">Mot de passe </label>
+                <i class="fa-solid fa-lock icon"></i>
+            </div>
+            <div class="form-cols">
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <a href="{{ path('app_forgotten_password') }}">Mot de passe oublié ? </a>
+                </div>
+            </div>
+            <div class="input-box">
+             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <button class="btn-submit" id="login">Se connecter <i class="fa-solid fa-right-to-bracket"></i></button>
+            </div>
+            <div class="switch-form">
+                <span>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">S'inscire</a></span>
+            </div>
+        </form>
 
-    <div class="login-container">
+
+    </div>
+</div>
+
+    {# <div class="login-container">
         <div class="login-card">
             <h2>Se connecter</h2>
             <form action="#" method="POST" class="login-form">
@@ -24,7 +60,7 @@
                 <p>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">S'inscrire</a></p>
             </div>
         </div>
-    </div>
+    </div> #}
 
 
 {% endblock %}

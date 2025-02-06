@@ -1,0 +1,200 @@
+a{
+    text-decoration: none;
+    color:black;
+    transition: .3s;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.login-container,
+.register-container,
+.reset-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/../assets/images/font_login.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.wrapper_login,
+.wrapper_reset{
+    position: relative;
+    width: 430px;
+    height: 500px;
+    background-color: #feefef;
+    border-radius: 15px;
+    padding: 120px 32px 64px;
+    border: 1px solid  #fd2975ff;
+    box-shadow: 0 8px 15px #fd2975ff;
+    transition: .3s;
+}
+
+
+.wrapper_register{
+    position: relative;
+    width: 430px;
+    height: 800px;
+    background-color: #feefef;
+    border-radius: 15px;
+    padding: 120px 32px 64px;
+    border: 1px solid  #fd2975ff;
+    box-shadow: 0 8px 15px #fd2975ff;
+    transition: .3s;
+}
+
+.form-header{
+    position: absolute;
+    top:0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 70px;
+    background-color: black;
+    border-radius: 0 0 20px 20px;
+}
+
+.form-header::before, .form-header::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 30px;
+}
+.form-header::before{
+    left: -30px;
+    border-top-right-radius: 50%;
+    box-shadow: 15px 0 0 black;
+}
+
+.form-header::after{
+    right: -30px;
+    border-top-left-radius: 50%;
+    box-shadow: -15px 0 0 black;
+}
+
+.titles{
+    position: relative;
+}
+.title-login,
+.title-register,
+.title-reset{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:white;
+    font-size: 24px;
+    transition: .3s;
+    
+}
+
+.login-form{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 85%;
+    transition: .3s;
+
+}
+
+.input-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.input-field{
+    width: 100%;
+    height: 55px;
+    font-size: 16px;
+    background: transparent;
+    color: black;
+    padding: 0 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    outline: none;
+    transition: .3s;
+}
+
+.input-field:focus{
+    border: 1px solid black;
+}
+
+.label{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color:black;
+    transition: 0.2s;
+    cursor: text;
+}
+
+.input-field:focus ~ .label,
+.input-field:valid ~ .label{
+    top: 0;
+    font-size: 14px;
+    background-color: #feefef;
+    color:black;
+    padding: 0 10px;
+}
+
+.icon{
+    position: absolute;
+    top:50%;
+    right: 25px;
+    transform: translateY(-50%);
+}
+
+.form-cols{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.col-1{
+    display: flex;
+    align-items: center;
+    gap:6px;
+}
+
+.btn-submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    color:white;
+    font-size: 16px;
+    font-weight: 500;
+    border:none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition:  .3s;
+}
+
+.btn-submit:hover{
+    gap:15px;
+}
+
+.btn-submit i{
+    font-size: 20px;
+}
+
+.switch-form{
+    text-align: center;
+}
+.switch-form a {
+    font-weight: 500;
+}
