@@ -43,6 +43,9 @@ class BonbonsRepository extends ServiceEntityRepository
                 ->andWhere('m.id IN (:marques)')
                 ->setParameter('marques', $selectedMarques);
         }
+        $qb->andWhere('b.isPromotion = :isPromotion')
+        ->setParameter('isPromotion', false);
+    
    
        return $qb->getQuery()->getResult();
    }
