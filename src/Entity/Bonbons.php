@@ -45,6 +45,12 @@ class Bonbons
     #[ORM\OneToMany(targetEntity: CommandeDetails::class, mappedBy: 'produit')]
     private Collection $commandeDetails;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isPromotion = false;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
+    private ?string $pourcentage = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -132,6 +138,29 @@ class Bonbons
 
         return $this;
     }
+
+    public function isPromotion(): bool
+    {
+        return $this->isPromotion;
+    }
+
+    public function setIsPromotion(bool $isPromotion): static
+    {
+        $this->isPromotion = $isPromotion;
+        return $this;
+    }
+
+    public function getPourcentage(): ?string
+    {
+        return $this->pourcentage;
+    }
+
+    public function setPourcentage(?string $pourcentage): static
+    {
+        $this->pourcentage = $pourcentage;
+        return $this;
+    }
+    
     /**
     * @return Collection<int, Categories>
     */

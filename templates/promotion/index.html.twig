@@ -6,7 +6,7 @@
 <div class="big-metro-site-container">
     <header>
         <div class="contain-shop">
-            <h1 class="main_header_text">Boutique</h1>
+            <h1 class="main_header_text">Promotions</h1>
             <div class="our-site-link">
                 <a href="">Accueil</a>
                 <i class="fa-solid fa-chevron-right"></i>
@@ -21,7 +21,7 @@
     <div class="shop_product_container">
         <!-- Entête de la section produits -->
         <div class="shop_header_contain">
-            <h3>Affichage {{currentPage}} - 8 sur {{totalBonbon}} résultats</h3>
+            <h3>Affichage 1 - 9 sur {{totalBonbon}} résultats</h3>
             <div class="shop_filter">
                 <select id="shop_filter_select" onchange="submitForm()">
                     <option value="last">Derniers</option>
@@ -61,13 +61,13 @@
           
         </div>
 
-     <!-- Pagination -->
+         <!-- Pagination -->
         <div class="pagination">
             {% if totalPages > 1 %}
                 <ul class="pagination-list">
                     {% if currentPage > 1 %}
                         <li>
-                            <a href="{{ path('app_shop', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage - 1 }) }}">
+                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage - 1 }) }}">
                                 &laquo; Précédent
                             </a>
                         </li>
@@ -75,7 +75,7 @@
 
                     {% for i in 1..totalPages %}
                         <li class="{% if i == currentPage %}active{% endif %}">
-                            <a href="{{ path('app_shop', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: i }) }}">
+                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: i }) }}">
                                 {{ i }}
                             </a>
                         </li>
@@ -83,7 +83,7 @@
 
                     {% if currentPage < totalPages %}
                         <li>
-                            <a href="{{ path('app_shop', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage + 1 }) }}">
+                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage + 1 }) }}">
                                 Suivant &raquo;
                             </a>
                         </li>
@@ -91,8 +91,8 @@
                 </ul>
             {% endif %}
         </div>
-    </div>
 
+    </div>
 
     <!-- Menu de filtrage et recherche -->
      

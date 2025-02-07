@@ -11,6 +11,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 
 class BonbonsCrudController extends AbstractCrudController
 {
@@ -22,6 +24,10 @@ class BonbonsCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
+        $isPromotion = BooleanField::new('isPromotion', 'En promotion ?');
+
+        $pourcentage = NumberField::new('pourcentage', 'Réduction (%)');
+
         return [
             //IdField::new('id'),
             TextField::new('nom'),
@@ -33,8 +39,18 @@ class BonbonsCrudController extends AbstractCrudController
             TextField::new('poids'),
             TextEditorField::new('description'),
             AssociationField::new('categories', 'Catégorie')->setFormTypeOption('by_reference', false),
-            AssociationField::new('marque', 'Marque')
+            AssociationField::new('marque', 'Marque'),
+            $isPromotion,
+            $pourcentage,
         ];
+    }
+
+    
+    public function configureAssets(Assets $assets): Assets
+    {
+        return $assets
+           
+            ->addJsFile('assets/js/admin/bonbon.js');
     }
 
     
