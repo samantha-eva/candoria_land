@@ -108,7 +108,7 @@ class BonbonController extends AbstractController
         $selectedMarques = json_decode($marquesJson, true) ?? []; // Cela renvoie un tableau des IDs des marques sélectionnées
       
         $page = max(1, $request->query->getInt('page', 1));
-        $limit = 2; // Nombre d'éléments par page
+        $limit = 8; // Nombre d'éléments par page
 
         $paginator = $this->bonbonsRepository->findBySearchTermAndCategoriesAndMarquesAndPromotion($searchTerm, $selectedCategories, $selectedMarques, $page, $limit);
         
