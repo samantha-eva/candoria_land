@@ -13,9 +13,19 @@
     <div class="icons_sec">
         <i class="fa-solid fa-magnifying-glass"></i>
         <a href="{{ path('app_login') }}"><i class="fa-regular fa-user"></i></a>
-        <div class="cart_menu">
-             <a href="{{ path('app_checkout') }}" data-turbo="false"><i class="fa-solid fa-cart-shopping"><span id="cart_count">{{ cart_total_items|default(0) }}</span></i></a>
-        </div>
+          {% if app.user %}
+            <a href="{{ path('app_checkout') }}" data-turbo="false">
+                <i class="fa-solid fa-cart-shopping">
+                    <span id="cart_count">{{ cart_total_items|default(0) }}</span>
+                </i>
+            </a>
+            {% else %}
+                <a href="{{ path('app_login') }}" data-turbo="false">
+                    <i class="fa-solid fa-cart-shopping">
+                        <span id="cart_count">{{ cart_total_items|default(0) }}</span>
+                    </i>
+                </a>
+            {% endif %}
         <h3>{{ cart_total_price|default(0)|number_format(2, '.', ',') }}€</h3>
     </div>
 
