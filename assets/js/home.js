@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener('turbo:load',function() {
     $('.customer-logos').slick({
         dots: false,
         infinite: true,
