@@ -15,3 +15,4 @@ import './styles/boutique.css';
 import './styles/footer.css';
 import './styles/cart.css';
 import './styles/login.css';
+import './styles/contact.css';
