@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès refusé{% endblock %}
+
+{% block body %}
+
+<div class="big-metro-site-container">
+    <header>
+        <div class="contain-shop">
+            <h1 class="main_header_text"></h1>
+            <div class="our-site-link">
+                <h1 class="text-danger display-4"><i class="fas fa-ban"></i></h1>
+                 <h2 class="text-dark">Accès refusé</h2>
+            <p class="text-muted">
+                Désolé, vous n'avez pas les droits nécessaires pour accéder à cette page.
+            </p>
+            </div>
+        </div>
+    </header>
+
+      <section>
+       <div class="card shadow-lg p-4 text-center" style="max-width: 500px;">
+            <h1 class="text-danger display-4"><i class="fas fa-ban"></i></h1>
+            <h2 class="text-dark">Accès refusé</h2>
+            <p class="text-muted">
+                Désolé, vous n'avez pas les droits nécessaires pour accéder à cette page.
+            </p>
+            <a href="{{ path('app_home') }}" class="btn btn-primary">
+                <i class="fas fa-home"></i> Retour à l'accueil
+            </a>
+        </div>
+    </section>
+
+</div>
+
+    {# <div class="error-container d-flex flex-column align-items-center justify-content-center vh-100">
+        <div class="card shadow-lg p-4 text-center" style="max-width: 500px;">
+            <h1 class="text-danger display-4"><i class="fas fa-ban"></i></h1>
+            <h2 class="text-dark">Accès refusé</h2>
+            <p class="text-muted">
+                Désolé, vous n'avez pas les droits nécessaires pour accéder à cette page.
+            </p>
+            <a href="{{ path('app_home') }}" class="btn btn-primary">
+                <i class="fas fa-home"></i> Retour à l'accueil
+            </a>
+        </div>
+    </div> #}
+
+
+{% endblock %}
