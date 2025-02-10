@@ -168,7 +168,7 @@ class BonbonController extends AbstractController
         $totalPrice = $this->cartService->getTotalPrice($request);
 
 
-        return $this->render('promotion/index.html.twig', [
+        return $this->render('nouveau/index.html.twig', [
             'controller_name' => 'BonbonController',
             'bonbons' => $bonbons,
             'marques' => $marques,

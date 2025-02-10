@@ -42,8 +42,8 @@
                 <div class="product"  data-id="{{ bonbon.id }}">
                     <div class="product_img">
                         <a href="{{ path('app_detail', { 'id': bonbon.id }) }}">
-                           {% if bonbon.isPromotion %}
-                                <span class="sale-badge">- {{ bonbon.pourcentage|number_format(0) }} %</span>
+                           {% if bonbon.isNouveau %}
+                                <span class="sale-badge">Nouveau</span>
                             {% endif %}
                             <img src="{{ asset('uploads/' ~ bonbon.image) }}" alt="Bonbons Fruités">
                         </a>
@@ -67,7 +67,7 @@
                 <ul class="pagination-list">
                     {% if currentPage > 1 %}
                         <li>
-                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage - 1 }) }}">
+                            <a href="{{ path('app_new', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage - 1 }) }}">
                                 &laquo; Précédent
                             </a>
                         </li>
@@ -75,7 +75,7 @@
 
                     {% for i in 1..totalPages %}
                         <li class="{% if i == currentPage %}active{% endif %}">
-                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: i }) }}">
+                            <a href="{{ path('app_new', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: i }) }}">
                                 {{ i }}
                             </a>
                         </li>
@@ -83,7 +83,7 @@
 
                     {% if currentPage < totalPages %}
                         <li>
-                            <a href="{{ path('app_promo', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage + 1 }) }}">
+                            <a href="{{ path('app_new', { search: app.request.get('search', ''), categories: app.request.get('categories', []), marques: app.request.get('marques', []), page: currentPage + 1 }) }}">
                                 Suivant &raquo;
                             </a>
                         </li>

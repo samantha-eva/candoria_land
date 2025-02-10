@@ -117,8 +117,8 @@ class BonbonsRepository extends ServiceEntityRepository
         }
 
         // Filter where isPromotion is true
-    $qb->andWhere('b.isPromotion = :isPromotion')
-    ->setParameter('isPromotion', true);
+    $qb->andWhere('b.isNouveau = :isNouveau')
+    ->setParameter('isNouveau', true);
 
    
      // Gestion de la pagination
