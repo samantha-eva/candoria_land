@@ -1,5 +1,9 @@
-header{
+.header_shop{
     background-image: url(/../assets/images/banner_shop.jpg);
+    height: 30vh;
+}
+.header_promo{
+    background-image: url(/../assets/images/banner_promo.jpg);
     height: 30vh;
 }
 
@@ -11,10 +15,35 @@ header{
     align-items: center;
     height: 100%;
 }
+.contain-promo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 
 .contain-shop h1{
     font-size: 4rem;
     line-height: 3rem;
+}
+
+.contain-promo h1{
+    font-size: 80px;
+    line-height: 3rem;
+    color:#fff;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+
+}
+@-webkit-keyframes glow{
+    from{
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    top{
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6; 
+    }
 }
 .our-site-link{
     display: flex;
