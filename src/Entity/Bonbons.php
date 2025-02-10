@@ -48,6 +48,10 @@ class Bonbons
     #[ORM\Column(type: 'boolean')]
     private bool $isPromotion = false;
 
+    
+    #[ORM\Column(type: 'boolean')]
+    private bool $isNouveau = false;
+
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
     private ?string $pourcentage = null;
 
@@ -147,6 +151,17 @@ class Bonbons
     public function setIsPromotion(bool $isPromotion): static
     {
         $this->isPromotion = $isPromotion;
+        return $this;
+    }
+
+    public function isNouveau(): bool
+    {
+        return $this->isNouveau;
+    }
+
+    public function setIsNouveau(bool $isNouveau): static
+    {
+        $this->isNouveau = $isNouveau;
         return $this;
     }
 

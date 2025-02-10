@@ -25,6 +25,8 @@ class BonbonsCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $isPromotion = BooleanField::new('isPromotion', 'En promotion ?');
+        $isNouveau = BooleanField::new('isNouveau', 'Nouveauté ?');
+
 
         $pourcentage = NumberField::new('pourcentage', 'Réduction (%)');
 
@@ -42,6 +44,7 @@ class BonbonsCrudController extends AbstractCrudController
             AssociationField::new('marque', 'Marque'),
             $isPromotion,
             $pourcentage,
+            $isNouveau
         ];
     }
 

@@ -6,15 +6,14 @@
     background-image: url(/../assets/images/banner_promo.jpg);
     height: 30vh;
 }
-
-
-.contain-shop{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+.header_new{
+    background-image: url(/../assets/images/banner_shop.jpg);
+    height: 30vh;
 }
+
+
+.contain-shop,
+.contain-new,
 .contain-promo{
     display: flex;
     flex-direction: column;
@@ -22,6 +21,7 @@
     align-items: center;
     height: 100%;
 }
+
 
 .contain-shop h1{
     font-size: 4rem;
