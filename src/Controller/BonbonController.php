@@ -138,5 +138,49 @@ class BonbonController extends AbstractController
         ]);
     }
 
+    #[Route('/nouveautés', name: 'app_new')]
+    public function nouveau(Request $request): Response
+    {
+        $searchTerm = $request->query->get('search', '');
+
+        // Décoder le tableau JSON des catégories
+        $categoriesJson = $request->query->get('categories', '[]');
+        $selectedCategories = json_decode($categoriesJson, true) ?? [];
+
+        $marquesJson = $request->query->get('marques', '[]');
+        $selectedMarques = json_decode($marquesJson, true) ?? []; // Cela renvoie un tableau des IDs des marques sélectionnées
+      
+        $page = max(1, $request->query->getInt('page', 1));
+        $limit = 8; // Nombre d'éléments par page
+
+        $paginator = $this->bonbonsRepository->findBySearchTermAndCategoriesAndMarquesAndNew($searchTerm, $selectedCategories, $selectedMarques, $page, $limit);
+        
+        $bonbons = iterator_to_array($paginator); // Convertir en tableau pour l'affichage
+        $totalBonbons = count($paginator); // Nombre total d'éléments trouvés
+        $totalPages = ceil($totalBonbons / $limit); // Calcul du nombre total de pages
+
+        // Récupération des autres données
+        $marques = $this->marquesRepository->findAll();
+        $categories = $this->categoriesRepository->findAllCategories();
+
+         // Récupérer les données du panier
+        $totalItems = $this->cartService->getTotalItems($request);
+        $totalPrice = $this->cartService->getTotalPrice($request);
+
+
+        return $this->render('promotion/index.html.twig', [
+            'controller_name' => 'BonbonController',
+            'bonbons' => $bonbons,
+            'marques' => $marques,
+            'categories' => $categories,
+            'cart_total_items' => $totalItems,
+            'cart_total_price' => $totalPrice,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'totalBonbon' => $totalBonbons
+        ]);
+    }
+
+
 
 }

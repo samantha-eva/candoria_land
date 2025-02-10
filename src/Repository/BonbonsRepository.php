@@ -91,6 +91,43 @@ class BonbonsRepository extends ServiceEntityRepository
     return new Paginator($qb->getQuery(), true);
 
    }
+
+   public function findBySearchTermAndCategoriesAndMarquesAndNew($searchTerm, $selectedCategories, $selectedMarques, $page = 1, $limit = 1): Paginator
+   {
+
+       $qb = $this->createQueryBuilder('b');
+       
+       if (!empty($searchTerm)) {
+           $qb->where('b.nom LIKE :searchTerm')
+               ->setParameter('searchTerm', '%' . $searchTerm . '%');
+        
+       }
+
+
+       if (!empty($selectedCategories)) {
+           $qb->innerJoin('b.categories', 'c')
+               ->andWhere('c.id IN (:categories)')
+               ->setParameter('categories', $selectedCategories);
+       }
+
+       if (!empty($selectedMarques)) {
+            $qb->innerJoin('b.marque', 'm')
+                ->andWhere('m.id IN (:marques)')
+                ->setParameter('marques', $selectedMarques);
+        }
+
+        // Filter where isPromotion is true
+    $qb->andWhere('b.isPromotion = :isPromotion')
+    ->setParameter('isPromotion', true);
+
+   
+     // Gestion de la pagination
+     $qb->setFirstResult(($page - 1) * $limit) 
+     ->setMaxResults($limit);
+
+    return new Paginator($qb->getQuery(), true);
+
+   }
    
 
    public function findBonbonById(int $id): ?Bonbons
