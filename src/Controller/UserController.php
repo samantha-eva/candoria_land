@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+use App\Repository\UsersRepository;
 class UserController extends AbstractController
 {
     #[Route('/user/edit/{id}', name: 'app_profile')]
@@ -41,6 +41,28 @@ class UserController extends AbstractController
 
         return $this->render('user/edit.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/user/commande/{id}', name: 'app_historique')]
+    public function user_commande( Users $user, Request $request, UsersRepository $usersRepository): Response
+    {
+      
+
+        if(!$this->getUser()) { //check si le user est connecté
+            return $this->redirectToRoute('app_login');
+        }
+
+        if($this->getUser() !== $user){
+            return $this->redirectToRoute('app_home');
+        }
+    
+    
+        $user = $usersRepository->findUserWithCommandes($user->getId());
+        $commandes= $user->getCommandes()->toArray();
+
+        return $this->render('user/historique_commande.html.twig', [
+            'commandes' => $commandes,
         ]);
     }
 }

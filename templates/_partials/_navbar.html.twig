@@ -12,7 +12,12 @@
 
     <div class="icons_sec">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <a href="{{ path('app_login') }}"><i class="fa-regular fa-user"></i></a>
+        {% if app.user %}
+            <a href="{{ path('app_profile', { 'id': app.user.id }) }}"><i class="fa-regular fa-user"></i></a>
+        {% else %}
+            <a href="{{ path('app_login') }}"><i class="fa-regular fa-user"></i></a>
+        {% endif %}
+
           {% if app.user %}
             <a href="{{ path('app_checkout') }}" data-turbo="false">
                 <i class="fa-solid fa-cart-shopping">

@@ -1,0 +1,46 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block body %}
+
+<div class="big-metro-site-container">
+    <header class="header_new">
+        <div class="contain-new">
+            <h1 class="main_header_text">Informations utilisateurs</h1>
+            <div class="our-site-link">
+                <a href="{{ path('app_profile', {'id': app.user.id}) }}">Informations</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <a href="{{ path('app_historique', {'id': app.user.id}) }}"><p>Histoirique de commandes</p></a>
+            </div>
+        </div>
+    </header>
+</div>
+
+ 
+ <div class="panier_produit_container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Num</th>
+                    <th>Nom</th>
+                    <th>Statut</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in commandes %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{item.getUser}}</td>
+                    <td>{{ item.statut }}</td>
+                    <td>€{{ item.getPrixTotal() }}</td>
+                    
+                   
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
