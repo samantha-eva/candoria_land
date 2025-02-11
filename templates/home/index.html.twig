@@ -76,10 +76,14 @@
             <a href="">
                 <img src="{{ asset('uploads/' ~ bonbon.image) }}">
                 <p>{{bonbon.nom}}</p>
-                <span><strike>€{{bonbon.prix}}</strike></span>
-                <span>40E</span>
+        
                 {% if bonbon.isPromotion %}
-                    <span class="product-off">-{{ bonbon.pourcentage|number_format(0) }} %</span>
+                <span class="strikethrough"><strike>€{{bonbon.prix}}</strike></span>
+                {% set prixReduit = bonbon.prix * (1 - (bonbon.pourcentage / 100)) %}
+                <span>€{{ prixReduit|number_format(2, ',', ' ') }}</span>
+                <span class="product-off">-{{ bonbon.pourcentage|number_format(0) }} %</span>
+                {% else %}
+                 <span><strike>€{{bonbon.prix}}</strike></span>
                 {% endif %}
             </a>
         </div>
