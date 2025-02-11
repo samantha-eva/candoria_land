@@ -70,104 +70,22 @@
 
 <div class="product-wrapper">
     <div class="product-container">
-        {# produit 1 #}
+
+        {% for bonbon in bonbons_original %}
         <div class="product-box item retro">
             <a href="">
-                <img src="{{ asset('assets/images/bubble.png') }}">
-                <p>Daily cream</p>
-                <span><strike>€16.00</strike></span>
-                <span>40E</span>      
-            </a>
-        </div>
-         {# produit 2 #}
-        <div class="product-box item internationaux">
-            <a href="">
-                <img src="{{ asset('assets/images/reglisse.jpg') }}">
-                <p>Daily cream</p>
-                <span><strike>€16.00</strike></span>
+                <img src="{{ asset('uploads/' ~ bonbon.image) }}">
+                <p>{{bonbon.nom}}</p>
+                <span><strike>€{{bonbon.prix}}</strike></span>
                 <span>40E</span>
-                    <div class="after-addcart-boxs">
-                        <div class="quantity-control">
-                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
-                            <input type="number" class="quantity-input" value="1" min="1">
-                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fa fa-shopping-cart"></i>
-                        </button>        
-                    </div>
+                {% if bonbon.isPromotion %}
+                    <span class="product-off">-{{ bonbon.pourcentage|number_format(0) }} %</span>
+                {% endif %}
             </a>
         </div>
-         {# produit 3 #}
-        <div class="product-box item filant">
-            <a href="">
-                <img src="{{ asset('assets/images/barbappa.jpg') }}">
-                <p>Daily cream</p>
-                <span><strike>€16.00</strike></span>
-                <span>40E</span>
-                <span class="product-off">-29%</span>
-                    <div class="after-addcart-boxs">
-                        <div class="quantity-control">
-                            <button class="quantity-btn minus"><i class="fa fa-minus"></i></button>
-                            <input type="number" class="quantity-input" value="1" min="1">
-                            <button class="quantity-btn plus"><i class="fa fa-plus"></i></button>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fa fa-shopping-cart"></i>
-                        </button>        
-                    </div>
-            </a>
-        </div>
-         {# produit 4 #}
-        <div class="product-box item internationaux">
-            <a href="">
-                <img src="{{ asset('assets/images/skitlles.jpg') }}">
-                <p>Daily cream</p>
-                <span><strike>€16.00</strike></span>
-                <span>40E</span>
-                <span class="product-off">-29%</span>          
-            </a>
-        </div>
-         {# produit 5 #}
-        <div class="product-box item macher">
-            <a href="">
-                <img src="{{ asset('assets/images/nougat.jpg') }}">
-                <p>Daily cream</p>
-                <span><strike>€16.00</strike></span>
-                <span>40E</span>
-                <span class="product-off">-29%</span>
-            </a>
-        </div>
-         {# produit 6 #}
-        <div class="product-box item internationaux">
-            <a href="">
-                <img src="{{ asset('assets/images/mochi.jpg') }}">
-                <p>Daily cream</p>
-                <span><strike>€16.00</strike></span>
-                <span>40E</span>
-                <span class="product-off">-29%</span>
-            </a>
-        </div>
-         {# produit 7 #}
-        <div class="product-box item retro">
-            <a href="">
-                <img src="{{ asset('assets/images/popcorn.png') }}">
-                <p>Daily cream</p>
-                <span><strike>€16.00</strike></span>
-                <span>40E</span>
-                <span class="product-off">-29%</span>
-            </a>
-        </div>
-         {# produit 8 #}
-        <div class="product-box item retro">
-            <a href="">
-                <img src="{{ asset('assets/images/roudoudou.jpg') }}">
-                <p>Daily cream</p>
-                <span><strike>€16.00</strike></span>
-                <span>40E</span>
-                <span class="product-off">-29%</span>
-            </a>
-        </div>
+        
+        {% endfor %}
+
     </div>
 </div>
 
