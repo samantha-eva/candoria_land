@@ -44,9 +44,21 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findUserWithCommandesAndDetail(int $userId): ?Users
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.commandes', 'c')
+            ->leftJoin('c.commandeDetails', 'd') 
+            ->leftJoin('d.produit', 'b')
+            ->addSelect('c', 'd', 'b') // Charge aussi les commandes et les détails
+            ->where('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
     
-
-
+    
     //    /**
     //     * @return Users[] Returns an array of Users objects
     //     */

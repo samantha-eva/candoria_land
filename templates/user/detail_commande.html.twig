@@ -1,0 +1,62 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block body %}
+
+<div class="big-metro-site-container">
+    <header class="header_new">
+        <div class="contain-new">
+            <h1 class="main_header_text">Commande</h1>
+            <div class="our-site-link">
+                <a href="{{ path('app_profile', {'id': app.user.id}) }}">Informations</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <a href="{{ path('app_historique', {'id': app.user.id}) }}"><p>Histoirique de commandes</p></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="order-details-container">
+    <header class="order-header">
+        <h1 class="main-title">Détails de la Commande</h1>
+        <p class="intro-text">Voici les produits que vous avez sélectionnés.</p>
+    </header>
+
+    <div class="order-list">
+        {% for order in orders %}
+        <div class="order-card">
+            <div class="order-card-header">
+                <h2>Commande #{{ order.id }} <span class="order-status">({{ order.statut }})</span></h2>
+                <p><strong>Prix Total:</strong> {{ order.getPrixTotal()}} €</p>
+                <p><strong>Date de Création: {{ order.getCreatedAt()|date('d/m/Y') }}</strong> </p>
+            </div>
+
+            <div class="order-items">
+                <h3>Produits dans cette commande :</h3>
+                <ul>
+                    {% for detail in order.commandeDetails %}
+                    <li class="product-item">
+                        <div class="product-info">
+                            <img src="{{ asset('uploads/' ~ detail.produit.image) }}" alt="{{ detail.produit.nom }}" class="product-image">
+                            <div class="product-text">
+                                <strong>{{ detail.produit.nom }}</strong>
+                                <p><span class="quantity">Quantité:</span> {{ detail.quantite }}</p>
+                                <p><span class="unit-price">Prix Unitaire:</span> {{ detail.produit.prix }} €</p>
+                            </div>
+                        </div>
+                        <div class="product-total">
+                            <p><strong>Total:</strong> {{ detail.prix }} €</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+
+</div>
+{% endblock %}

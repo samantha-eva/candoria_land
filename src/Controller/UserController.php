@@ -65,4 +65,20 @@ class UserController extends AbstractController
             'commandes' => $commandes,
         ]);
     }
+
+    #[Route('/user/detail_commande/{id}', name: 'app_detail_commande')]
+    public function detail_commande(Users $user, UsersRepository $usersRepository): Response
+    {
+        // $totalPrice = $this->cartService->getTotalPrice($request);
+        // $cart = $this->cartService->getCartContents($request);
+        // $totalItems = $this->cartService->getTotalItems($request);
+        $user = $usersRepository->findUserWithCommandesAndDetail($user->getId());
+        $orders= $user->getCommandes()->toArray();
+
+        return $this->render('user/detail_commande.html.twig', [
+            'orders' => $orders,
+        ]);
+
+    }
+
 }
