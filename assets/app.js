@@ -16,3 +16,4 @@ import './styles/footer.css';
 import './styles/cart.css';
 import './styles/login.css';
 import './styles/contact.css';
+import './styles/detail_commande.css';

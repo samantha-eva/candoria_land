@@ -1,0 +1,71 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block body %}
+
+<div class="big-metro-site-container">
+    <header class="header_new">
+        <div class="contain-new">
+            <h1 class="main_header_text">Commande</h1>
+            <div class="our-site-link">
+                <a href="{{ path('app_profile', {'id': app.user.id}) }}">Informations</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <a href="{{ path('app_historique', {'id': app.user.id}) }}"><p>Histoirique de commandes</p></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="invoice-container">
+        <header class="invoice-header">
+            <h1>Facture</h1>
+            <p>Commande #{{ orders[0].id }}</p>
+            <p>Date : {{ orders[0].getCreatedAt()|date('d/m/Y') }}</p>
+        </header>
+
+        <section class="customer-info">
+            <h2>Informations Client</h2>
+            <p><strong>Nom :</strong> {{ app.user.nom }}</p>
+            <p><strong>Email :</strong> {{ app.user.email }}</p>
+        </section>
+
+        <section class="order-details">
+            <table class="order-summary">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th>Prix Unitaire</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        {% for detail in order.commandeDetails %}
+                            <tr>
+                                <td>{{ detail.produit.nom }}</td>
+                                <td>{{ detail.quantite }}</td>
+                                <td>{{ detail.produit.prix }} €</td>
+                                <td>{{ detail.prix }} €</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <section class="totals">
+            <div class="total">
+                <strong>Total Commande :</strong> {{ orders[0].getPrixTotal() }} €
+            </div>
+            <div class="status">
+                <strong>Statut :</strong> {{ orders[0].statut }}
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Merci pour votre achat !</p>
+        </footer>
+    </div>
+
+</div>
+{% endblock %}

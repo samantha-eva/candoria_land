@@ -252,7 +252,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      // Add the __toString() method
      public function __toString(): string
      {
-         return $this->nom ?? '';
+         return $this->nom. ' '.$this->prenom ?? '';
      }
 
      /**
