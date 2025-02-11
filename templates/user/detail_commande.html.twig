@@ -15,48 +15,57 @@
         </div>
     </header>
 
-    <div class="order-details-container">
-    <header class="order-header">
-        <h1 class="main-title">Détails de la Commande</h1>
-        <p class="intro-text">Voici les produits que vous avez sélectionnés.</p>
-    </header>
+    <div class="invoice-container">
+        <header class="invoice-header">
+            <h1>Facture</h1>
+            <p>Commande #{{ orders[0].id }}</p>
+            <p>Date : {{ orders[0].getCreatedAt()|date('d/m/Y') }}</p>
+        </header>
 
-    <div class="order-list">
-        {% for order in orders %}
-        <div class="order-card">
-            <div class="order-card-header">
-                <h2>Commande #{{ order.id }} <span class="order-status">({{ order.statut }})</span></h2>
-                <p><strong>Prix Total:</strong> {{ order.getPrixTotal()}} €</p>
-                <p><strong>Date de Création: {{ order.getCreatedAt()|date('d/m/Y') }}</strong> </p>
-            </div>
+        <section class="customer-info">
+            <h2>Informations Client</h2>
+            <p><strong>Nom :</strong> {{ app.user.nom }}</p>
+            <p><strong>Email :</strong> {{ app.user.email }}</p>
+        </section>
 
-            <div class="order-items">
-                <h3>Produits dans cette commande :</h3>
-                <ul>
-                    {% for detail in order.commandeDetails %}
-                    <li class="product-item">
-                        <div class="product-info">
-                            <img src="{{ asset('uploads/' ~ detail.produit.image) }}" alt="{{ detail.produit.nom }}" class="product-image">
-                            <div class="product-text">
-                                <strong>{{ detail.produit.nom }}</strong>
-                                <p><span class="quantity">Quantité:</span> {{ detail.quantite }}</p>
-                                <p><span class="unit-price">Prix Unitaire:</span> {{ detail.produit.prix }} €</p>
-                            </div>
-                        </div>
-                        <div class="product-total">
-                            <p><strong>Total:</strong> {{ detail.prix }} €</p>
-                        </div>
-                    </li>
+        <section class="order-details">
+            <table class="order-summary">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th>Prix Unitaire</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        {% for detail in order.commandeDetails %}
+                            <tr>
+                                <td>{{ detail.produit.nom }}</td>
+                                <td>{{ detail.quantite }}</td>
+                                <td>{{ detail.produit.prix }} €</td>
+                                <td>{{ detail.prix }} €</td>
+                            </tr>
+                        {% endfor %}
                     {% endfor %}
-                </ul>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="totals">
+            <div class="total">
+                <strong>Total Commande :</strong> {{ orders[0].getPrixTotal() }} €
             </div>
-        </div>
-        {% endfor %}
+            <div class="status">
+                <strong>Statut :</strong> {{ orders[0].statut }}
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Merci pour votre achat !</p>
+        </footer>
     </div>
-
-
-</div>
-
 
 </div>
 {% endblock %}
