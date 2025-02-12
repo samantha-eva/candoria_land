@@ -52,6 +52,10 @@ class Bonbons
     #[ORM\Column(type: 'boolean')]
     private bool $isNouveau = false;
 
+    #[ORM\Column (type: 'boolean')]
+    private bool $isOriginal = false;
+
+
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
     private ?string $pourcentage = null;
 
@@ -164,6 +168,19 @@ class Bonbons
         $this->isNouveau = $isNouveau;
         return $this;
     }
+
+    public function isOriginal(): bool
+    {
+        return $this->isOriginal;
+    }
+
+    public function setIsOriginal(bool $isOriginal): static
+    {
+        $this->isOriginal = $isOriginal;
+        return $this;
+    }
+   
+
 
     public function getPourcentage(): ?string
     {

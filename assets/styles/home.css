@@ -356,6 +356,10 @@ color:#feefef;
  .product-box span strike{
     color:#aa0340;
  }
+ .product-box span.strikethrough {
+    text-decoration: line-through;
+    color: rgb(0, 0, 0); /* Optionnel, pour rendre le prix barré plus discret */
+}
  
  .product-off{
     position: absolute;
@@ -363,8 +367,8 @@ color:#feefef;
     left: 10%;
     background-color: #fd2975ff;
     color:#feefef !important;
-    width: 45px;
-    height: 25px;
+    width: 70px;
+    height: 35px;
     border-radius: 5px;
     padding: 5px;
  }

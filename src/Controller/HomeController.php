@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\CartService;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\BonbonsRepository;
 
 class HomeController extends AbstractController
 {
@@ -20,8 +21,9 @@ class HomeController extends AbstractController
 
 
     #[Route('/', name: 'app_home')]
-    public function index(Request $request): Response
+    public function index(Request $request , BonbonsRepository $bonbonsRepository): Response
     {
+        $bonbons = $bonbonsRepository->findBonbonIsOriginal();
 
          // Récupérer les données du panier
          $totalItems = $this->cartService->getTotalItems($request);
@@ -31,6 +33,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
             'cart_total_items' => $totalItems,
             'cart_total_price' => $totalPrice,
+            'bonbons_original' =>$bonbons
         ]);
     }
 }

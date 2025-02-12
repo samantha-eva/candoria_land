@@ -134,5 +134,14 @@ class BonbonsRepository extends ServiceEntityRepository
    {
        return $this->find($id);
    }
+
+   public function findBonbonIsOriginal(): array
+   {
+        return $this->createQueryBuilder('b')
+        ->where('b.isOriginal = :original')
+        ->setParameter('original', true)
+        ->getQuery()
+        ->getResult();
+   }
    
 }
