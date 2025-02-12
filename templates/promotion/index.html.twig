@@ -49,7 +49,8 @@
                         </a>
                     </div>
                     <p class="product-name">{{ bonbon.nom }} - {{bonbon.poids}}</p>
-                    <p class="product-price">{{ bonbon.prix }}</p>
+                    {% set prixReduit = (bonbon.prix * (1 - (bonbon.pourcentage / 100)))|number_format(2, ',', ' ') %}
+                    <p class="product-price">{{bonbon.prix}}      -     {{prixReduit}}</p>
                     <div class="quantity-control">
                         <button class="decrease">-</button>
                         <span class="quantity">1</span>
