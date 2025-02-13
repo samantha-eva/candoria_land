@@ -1,25 +1,50 @@
+version: '3.8'
 
 services:
 ###> doctrine/doctrine-bundle ###
   database:
-    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    container_name: database
+    image: mysql:8.0.31
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
-    healthcheck:
-      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
-      timeout: 5s
-      retries: 5
-      start_period: 60s
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: candoria
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+    ports:
+      - '4306:3306'
     volumes:
-      - database_data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+      - ./docker/mysql:/var/lib/mysql
 
-volumes:
-###> doctrine/doctrine-bundle ###
-  database_data:
+  php:
+    container_name: php
+    build:
+      context: ./docker/php
+    ports:
+      - 8080:80
+    volumes:
+      - ./docker/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./public:/var/www/html/public  # Monte le dossier public de la racine du projet
+      - ./:/var/www/html  # Monte l'ensemble du projet (tout ce qui est à la racine)
+    depends_on:
+      - database
+
+  phpma:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: secret
+      UPLOAD_LIMIT: 20M
+    ports:
+      - 8899:80
+    
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - 1025:1025 #SMTP
+      - 8025:8025 #Boite mail
 ###< doctrine/doctrine-bundle ###
