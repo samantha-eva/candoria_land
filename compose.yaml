@@ -23,10 +23,12 @@ services:
       - 8080:80
     volumes:
       - ./docker/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
-      - ./public:/var/www/html/public  # Monte le dossier public de la racine du projet
-      - ./:/var/www/html  # Monte l'ensemble du projet (tout ce qui est à la racine)
+      - .:/var/www/html
     depends_on:
       - database
+
+    mem_limit: 4g  # Limite de mémoire à 4 Go
+    cpus: 2        # Limite à 2 cœurs CPU
 
   phpma:
     image: phpmyadmin/phpmyadmin
@@ -47,4 +49,6 @@ services:
     ports:
       - 1025:1025 #SMTP
       - 8025:8025 #Boite mail
+
+ 
 ###< doctrine/doctrine-bundle ###
