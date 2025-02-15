@@ -1,46 +1,55 @@
-version: "3"
-
+version: '3.8'
 services:
-  web:
-    build: ./docker
+  nginx:
+    image: nginx:latest
+    container_name: symfony_nginx
+    restart: always
     ports:
-      - "8080:80"
+      - "8080:80"  # Nginx accessible via http://localhost:8080
     volumes:
-      - .:/var/www:delegated
+      - .:/var/www
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - database
+
+  php:
+    build: ./docker
+    container_name: symfony_php
+    restart: always
+    volumes:
+      - .:/var/www
+    environment:
+      APP_ENV: dev
     depends_on:
       - database
-    networks:
-      - app_network
-    restart: unless-stopped
 
   database:
-    image: mysql:8.0.31
+    image: mysql:8.0
+    container_name: symfony_db
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: candoria
       MYSQL_USER: symfony
       MYSQL_PASSWORD: symfony
+    ports:
+      - "3306:3306"  # MySQL accessible via http://localhost:3306
     volumes:
-      - db-data:/var/lib/mysql
-    networks:
-      - app_network
-    restart: unless-stopped
+      - db_data:/var/lib/mysql
 
   phpmyadmin:
-    image: phpmyadmin:5.2.1-apache
-    ports:
-      - '8099:80'
+    image: phpmyadmin/phpmyadmin
+    container_name: symfony_phpmyadmin
+    restart: always
     environment:
-      PMA_HOST: database
-      MYSQL_ROOT_PASSWORD: '123456'
-    networks:
-      - app_network
-    restart: unless-stopped
+      PMA_HOST: database   # Nom du service "database" dans le compose
+      PMA_PORT: 3306       # Port de MySQL
+      MYSQL_ROOT_PASSWORD: root  # Le mot de passe root de MySQL
+    ports:
+      - "8081:80"          # phpMyAdmin accessible via http://localhost:8081
     depends_on:
       - database
 
 volumes:
-  db-data:
-
-networks:
-  app_network:
+  db_data:

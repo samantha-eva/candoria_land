@@ -1,26 +1,22 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
+# Installer les dépendances
 RUN apt-get update && apt-get install -y \
-  git zip unzip libpng-dev \
-  libzip-dev default-mysql-client
+    git zip unzip libpng-dev libzip-dev default-mysql-client
 
-RUN docker-php-ext-install pdo pdo_mysql zip gd
+# Installer les extensions PHP nécessaires
+RUN docker-php-ext-install pdo pdo_mysql zip gd opcache
 
-RUN a2enmod rewrite
-
+# Définir le répertoire de travail
 WORKDIR /var/www
 
+# Copier le code de l'application dans le conteneur
 COPY . /var/www
 
+# Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
-   mv composer.phar /usr/local/bin/composer
+# Copier la configuration PHP (opcache)
+COPY opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
-EXPOSE 80
-
-COPY default.conf /etc/apache2/sites-available/000-default.conf
-
-
-CMD ["apache2-foreground"]
-
+CMD ["php-fpm"]
