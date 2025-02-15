@@ -1,54 +1,46 @@
-version: '3.8'
+version: "3"
 
 services:
-###> doctrine/doctrine-bundle ###
+  web:
+    build: ./docker
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www:delegated
+    depends_on:
+      - database
+    networks:
+      - app_network
+    restart: unless-stopped
+
   database:
-    container_name: database
     image: mysql:8.0.31
     environment:
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: '123456'
       MYSQL_DATABASE: candoria
       MYSQL_USER: symfony
       MYSQL_PASSWORD: symfony
-    ports:
-      - '4306:3306'
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - db-data:/var/lib/mysql
+    networks:
+      - app_network
+    restart: unless-stopped
 
-  php:
-    container_name: php
-    build:
-      context: ./docker/php
+  phpmyadmin:
+    image: phpmyadmin:5.2.1-apache
     ports:
-      - 8080:80
-    volumes:
-      - ./docker/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
-      - .:/var/www/html
+      - '8099:80'
+    environment:
+      PMA_HOST: database
+      MYSQL_ROOT_PASSWORD: '123456'
+    networks:
+      - app_network
+    restart: unless-stopped
     depends_on:
       - database
 
-    mem_limit: 4g  # Limite de mémoire à 4 Go
-    cpus: 2        # Limite à 2 cœurs CPU
+volumes:
+  db-data:
 
-  phpma:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    environment:
-      PMA_ARBITRARY: 1
-      PMA_HOST: database
-      PMA_USER: root
-      PMA_PASSWORD: secret
-      UPLOAD_LIMIT: 20M
-    ports:
-      - 8899:80
-    
-  mailhog:
-    image: mailhog/mailhog
-    logging:
-      driver: 'none'
-    ports:
-      - 1025:1025 #SMTP
-      - 8025:8025 #Boite mail
-
- 
-###< doctrine/doctrine-bundle ###
+networks:
+  app_network:
