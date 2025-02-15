@@ -19,4 +19,5 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copier la configuration PHP (opcache)
 COPY opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
+
 CMD ["php-fpm"]
